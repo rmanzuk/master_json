@@ -1,0 +1,2150 @@
+{
+    "sample_name": "smg_08a",
+    "slab_image_sd": [
+        295,
+        86
+    ],
+    "local_sd": [
+        214,
+        50
+    ],
+    "field_lithology": "Upper patch reefs",
+    "latitude": 37.43024911,
+    "longitude": -117.4599798,
+    "msl": 1795.349,
+    "hae": 1768.396,
+    "gnss_height": 1795.349,
+    "path_to_ims": "/Volumes/ryan_ims/sms_images",
+    "images": [
+        {
+            "file_name": "/color_corrected_tifs/365nm/smg_08a.tif",
+            "light_source": "fluorescence",
+            "wavelength": 365,
+            "tag": "image"
+        },
+        {
+            "file_name": "/color_corrected_tifs/470nm/smg_08a.tif",
+            "light_source": "reflectance",
+            "wavelength": 470,
+            "tag": "image"
+        },
+        {
+            "file_name": "/color_corrected_tifs/505nm/smg_08a.tif",
+            "light_source": "reflectance",
+            "wavelength": 505,
+            "tag": "image"
+        },
+        {
+            "file_name": "/color_corrected_tifs/530nm/smg_08a.tif",
+            "light_source": "reflectance",
+            "wavelength": 530,
+            "tag": "image"
+        },
+        {
+            "file_name": "/color_corrected_tifs/590nm/smg_08a.tif",
+            "light_source": "reflectance",
+            "wavelength": 590,
+            "tag": "image"
+        },
+        {
+            "file_name": "/color_corrected_tifs/625nm/smg_08a.tif",
+            "light_source": "reflectance",
+            "wavelength": 625,
+            "tag": "image"
+        },
+        {
+            "file_name": "/color_corrected_tifs/760nm/smg_08a.tif",
+            "light_source": "reflectance",
+            "wavelength": 760,
+            "tag": "image"
+        },
+        {
+            "file_name": "/color_corrected_tifs/940nm/smg_08a.tif",
+            "light_source": "reflectance",
+            "wavelength": 940,
+            "tag": "image"
+        },
+        {
+            "file_name": "/masks/smg_08a.tif",
+            "light_source": null,
+            "wavelength": null,
+            "tag": "boundary_mask"
+        },
+        {
+            "file_name": "/superpixel_inds/1000/smg_08a.tif",
+            "light_source": null,
+            "wavelength": null,
+            "tag": "1000_superpixels"
+        },
+        {
+            "file_name": "/superpixel_inds/5000/smg_08a.tif",
+            "light_source": null,
+            "wavelength": null,
+            "tag": "5000_superpixels"
+        },
+        {
+            "file_name": "/superpixel_inds/10000/smg_08a.tif",
+            "light_source": null,
+            "wavelength": null,
+            "tag": "10000_superpixels"
+        },
+        {
+            "file_name": "/superpixel_inds/25000/smg_08a.tif",
+            "light_source": null,
+            "wavelength": null,
+            "tag": "25000_superpixels"
+        },
+        {
+            "file_name": "/superpixel_inds/50000/smg_08a.tif",
+            "light_source": null,
+            "wavelength": null,
+            "tag": "50000_superpixels"
+        }
+    ],
+    "geochem_measurements": [
+        [
+            {
+                "measurement_name": "delta13c",
+                "unit": "permil",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": -0.487458743
+            },
+            {
+                "measurement_name": "sigma_delta13c",
+                "unit": "",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": 0.051594359
+            },
+            {
+                "measurement_name": "delta18o",
+                "unit": "permil",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": -11.65226853
+            },
+            {
+                "measurement_name": "sigma_delta18o",
+                "unit": "",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": 0.116429111
+            },
+            {
+                "measurement_name": "Li_Ca",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": 7.65621736
+            },
+            {
+                "measurement_name": "B_Ca",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Na_Ca",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": 1088.438155
+            },
+            {
+                "measurement_name": "Mg_Ca",
+                "unit": "mmol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": 19.36965957
+            },
+            {
+                "measurement_name": "Al_Ca",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": 1544.798256
+            },
+            {
+                "measurement_name": "P_Ca",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": 197.2472822
+            },
+            {
+                "measurement_name": "K_Ca",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": 564.6841921
+            },
+            {
+                "measurement_name": "Mn_Ca",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": 693.9720131
+            },
+            {
+                "measurement_name": "Fe_Ca",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": 4135.331331
+            },
+            {
+                "measurement_name": "Rb_Ca",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Sr_Ca",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": 0.711019234
+            },
+            {
+                "measurement_name": "U_Ca",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Ca_Mg",
+                "unit": "mol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": 51.62713348
+            },
+            {
+                "measurement_name": "Li_CaMg",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": 7.503716275
+            },
+            {
+                "measurement_name": "B_CaMg",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Na_CaMg",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": 1067.518978
+            },
+            {
+                "measurement_name": "Mg_CaMg",
+                "unit": "percent",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": 1.900074619
+            },
+            {
+                "measurement_name": "Al_CaMg",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": 1514.859482
+            },
+            {
+                "measurement_name": "P_CaMg",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": 193.3183936
+            },
+            {
+                "measurement_name": "K_CaMg",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": 553.4364769
+            },
+            {
+                "measurement_name": "Mn_CaMg",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": 680.7988095
+            },
+            {
+                "measurement_name": "Fe_CaMg",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": 4056.017739
+            },
+            {
+                "measurement_name": "Rb_CaMg",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Sr_CaMg",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": 0.69750333
+            },
+            {
+                "measurement_name": "U_CaMg",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.29543747653022906,
+                    0.3781329203041397
+                ],
+                "value": null
+            }
+        ],
+        [
+            {
+                "measurement_name": "delta13c",
+                "unit": "permil",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": -0.437892353
+            },
+            {
+                "measurement_name": "sigma_delta13c",
+                "unit": "",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": 0.032126437
+            },
+            {
+                "measurement_name": "delta18o",
+                "unit": "permil",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": -11.50554522
+            },
+            {
+                "measurement_name": "sigma_delta18o",
+                "unit": "",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": 0.152464849
+            },
+            {
+                "measurement_name": "Li_Ca",
+                "unit": "umol_mol",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "B_Ca",
+                "unit": "umol_mol",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Na_Ca",
+                "unit": "umol_mol",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": 1680.650719
+            },
+            {
+                "measurement_name": "Mg_Ca",
+                "unit": "mmol_mol",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": 22.13839674
+            },
+            {
+                "measurement_name": "Al_Ca",
+                "unit": "umol_mol",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": 2797.987301
+            },
+            {
+                "measurement_name": "P_Ca",
+                "unit": "umol_mol",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": 223.1733258
+            },
+            {
+                "measurement_name": "K_Ca",
+                "unit": "umol_mol",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Mn_Ca",
+                "unit": "umol_mol",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": 556.1037738
+            },
+            {
+                "measurement_name": "Fe_Ca",
+                "unit": "umol_mol",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": 3993.367437
+            },
+            {
+                "measurement_name": "Rb_Ca",
+                "unit": "umol_mol",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Sr_Ca",
+                "unit": "umol_mol",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": 0.629559659
+            },
+            {
+                "measurement_name": "U_Ca",
+                "unit": "umol_mol",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Ca_Mg",
+                "unit": "mol_mol",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": 45.17038933
+            },
+            {
+                "measurement_name": "Li_CaMg",
+                "unit": "umol_mol",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "B_CaMg",
+                "unit": "umol_mol",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Na_CaMg",
+                "unit": "umol_mol",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": 1644.805819
+            },
+            {
+                "measurement_name": "Mg_CaMg",
+                "unit": "percent",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": 2.165775189
+            },
+            {
+                "measurement_name": "Al_CaMg",
+                "unit": "umol_mol",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": 2736.655227
+            },
+            {
+                "measurement_name": "P_CaMg",
+                "unit": "umol_mol",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": 218.5767639
+            },
+            {
+                "measurement_name": "K_CaMg",
+                "unit": "umol_mol",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Mn_CaMg",
+                "unit": "umol_mol",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": 544.0835046
+            },
+            {
+                "measurement_name": "Fe_CaMg",
+                "unit": "umol_mol",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": 3911.118536
+            },
+            {
+                "measurement_name": "Rb_CaMg",
+                "unit": "umol_mol",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Sr_CaMg",
+                "unit": "umol_mol",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": 0.615934639
+            },
+            {
+                "measurement_name": "U_CaMg",
+                "unit": "umol_mol",
+                "phase": "I",
+                "im_loc": [
+                    0.5101389410439354,
+                    0.34546606589693046
+                ],
+                "value": null
+            }
+        ],
+        [
+            {
+                "measurement_name": "delta13c",
+                "unit": "permil",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": -0.434733181
+            },
+            {
+                "measurement_name": "sigma_delta13c",
+                "unit": "",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": 0.06620801
+            },
+            {
+                "measurement_name": "delta18o",
+                "unit": "permil",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": -11.67424525
+            },
+            {
+                "measurement_name": "sigma_delta18o",
+                "unit": "",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": 0.113865016
+            },
+            {
+                "measurement_name": "Li_Ca",
+                "unit": "umol_mol",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": 9.051567493
+            },
+            {
+                "measurement_name": "B_Ca",
+                "unit": "umol_mol",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Na_Ca",
+                "unit": "umol_mol",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": 576.2655091
+            },
+            {
+                "measurement_name": "Mg_Ca",
+                "unit": "mmol_mol",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": 38.874838
+            },
+            {
+                "measurement_name": "Al_Ca",
+                "unit": "umol_mol",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": 1697.22147
+            },
+            {
+                "measurement_name": "P_Ca",
+                "unit": "umol_mol",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": 156.9073886
+            },
+            {
+                "measurement_name": "K_Ca",
+                "unit": "umol_mol",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": 1316.666687
+            },
+            {
+                "measurement_name": "Mn_Ca",
+                "unit": "umol_mol",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": 554.2763895
+            },
+            {
+                "measurement_name": "Fe_Ca",
+                "unit": "umol_mol",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": 5846.390495
+            },
+            {
+                "measurement_name": "Rb_Ca",
+                "unit": "umol_mol",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Sr_Ca",
+                "unit": "umol_mol",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": 0.775996019
+            },
+            {
+                "measurement_name": "U_Ca",
+                "unit": "umol_mol",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": 0.073576928
+            },
+            {
+                "measurement_name": "Ca_Mg",
+                "unit": "mol_mol",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": 25.72357987
+            },
+            {
+                "measurement_name": "Li_CaMg",
+                "unit": "umol_mol",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": 8.70886051
+            },
+            {
+                "measurement_name": "B_CaMg",
+                "unit": "umol_mol",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Na_CaMg",
+                "unit": "umol_mol",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": 554.6489655
+            },
+            {
+                "measurement_name": "Mg_CaMg",
+                "unit": "percent",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": 3.741993359
+            },
+            {
+                "measurement_name": "Al_CaMg",
+                "unit": "umol_mol",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": 1633.536279
+            },
+            {
+                "measurement_name": "P_CaMg",
+                "unit": "umol_mol",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": 150.9666211
+            },
+            {
+                "measurement_name": "K_CaMg",
+                "unit": "umol_mol",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": 1267.357739
+            },
+            {
+                "measurement_name": "Mn_CaMg",
+                "unit": "umol_mol",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": 533.5399317
+            },
+            {
+                "measurement_name": "Fe_CaMg",
+                "unit": "umol_mol",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": 5627.31597
+            },
+            {
+                "measurement_name": "Rb_CaMg",
+                "unit": "umol_mol",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Sr_CaMg",
+                "unit": "umol_mol",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": 0.746957529
+            },
+            {
+                "measurement_name": "U_CaMg",
+                "unit": "umol_mol",
+                "phase": "J",
+                "im_loc": [
+                    0.6212917761922644,
+                    0.44346662911855816
+                ],
+                "value": 0.070824228
+            }
+        ],
+        [
+            {
+                "measurement_name": "delta13c",
+                "unit": "permil",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": -0.164726578
+            },
+            {
+                "measurement_name": "sigma_delta13c",
+                "unit": "",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": 0.07137776
+            },
+            {
+                "measurement_name": "delta18o",
+                "unit": "permil",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": -10.82555559
+            },
+            {
+                "measurement_name": "sigma_delta18o",
+                "unit": "",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": 0.222717328
+            },
+            {
+                "measurement_name": "Li_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": 25.1062363
+            },
+            {
+                "measurement_name": "B_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Na_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": 2036.752951
+            },
+            {
+                "measurement_name": "Mg_Ca",
+                "unit": "mmol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": 75.73219772
+            },
+            {
+                "measurement_name": "Al_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": 8602.591465
+            },
+            {
+                "measurement_name": "P_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": 155.5698774
+            },
+            {
+                "measurement_name": "K_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": 12505.31414
+            },
+            {
+                "measurement_name": "Mn_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": 629.9996091
+            },
+            {
+                "measurement_name": "Fe_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": 7821.441391
+            },
+            {
+                "measurement_name": "Rb_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": 21.21732095
+            },
+            {
+                "measurement_name": "Sr_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": 0.933731958
+            },
+            {
+                "measurement_name": "U_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": 0.088265431
+            },
+            {
+                "measurement_name": "Ca_Mg",
+                "unit": "mol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": 13.20442335
+            },
+            {
+                "measurement_name": "Li_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": 23.33854156
+            },
+            {
+                "measurement_name": "B_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Na_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": 1893.722784
+            },
+            {
+                "measurement_name": "Mg_CaMg",
+                "unit": "percent",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": 7.039823455
+            },
+            {
+                "measurement_name": "Al_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": 7997.480578
+            },
+            {
+                "measurement_name": "P_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": 144.6307027
+            },
+            {
+                "measurement_name": "K_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": 11625.36202
+            },
+            {
+                "measurement_name": "Mn_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": 585.6278735
+            },
+            {
+                "measurement_name": "Fe_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": 7272.143209
+            },
+            {
+                "measurement_name": "Rb_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": 19.72496169
+            },
+            {
+                "measurement_name": "Sr_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": 0.868013597
+            },
+            {
+                "measurement_name": "U_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.592752534735261,
+                    0.6934666291185582
+                ],
+                "value": 0.082055732
+            }
+        ],
+        [
+            {
+                "measurement_name": "delta13c",
+                "unit": "permil",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": -0.494583049
+            },
+            {
+                "measurement_name": "sigma_delta13c",
+                "unit": "",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": 0.040397531
+            },
+            {
+                "measurement_name": "delta18o",
+                "unit": "permil",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": -11.66764574
+            },
+            {
+                "measurement_name": "sigma_delta18o",
+                "unit": "",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": 0.112821536
+            },
+            {
+                "measurement_name": "Li_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": 4.619006702
+            },
+            {
+                "measurement_name": "B_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Na_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": 515.3557994
+            },
+            {
+                "measurement_name": "Mg_Ca",
+                "unit": "mmol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": 19.80853715
+            },
+            {
+                "measurement_name": "Al_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": 905.4206613
+            },
+            {
+                "measurement_name": "P_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": 156.4424028
+            },
+            {
+                "measurement_name": "K_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": 908.3652499
+            },
+            {
+                "measurement_name": "Mn_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": 598.3186236
+            },
+            {
+                "measurement_name": "Fe_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": 5005.657121
+            },
+            {
+                "measurement_name": "Rb_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Sr_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": 0.657507562
+            },
+            {
+                "measurement_name": "U_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": 0.042084489
+            },
+            {
+                "measurement_name": "Ca_Mg",
+                "unit": "mol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": 50.48328367
+            },
+            {
+                "measurement_name": "Li_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": 4.528343183
+            },
+            {
+                "measurement_name": "B_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Na_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": 505.3320884
+            },
+            {
+                "measurement_name": "Mg_CaMg",
+                "unit": "percent",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": 1.942373777
+            },
+            {
+                "measurement_name": "Al_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": 887.8265913
+            },
+            {
+                "measurement_name": "P_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": 153.4055794
+            },
+            {
+                "measurement_name": "K_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": 890.6866751
+            },
+            {
+                "measurement_name": "Mn_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": 586.6997329
+            },
+            {
+                "measurement_name": "Fe_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": 4908.289616
+            },
+            {
+                "measurement_name": "Rb_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Sr_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": 0.64473567
+            },
+            {
+                "measurement_name": "U_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.9336274877957191,
+                    0.3015347789355111
+                ],
+                "value": 0.041258439
+            }
+        ],
+        [
+            {
+                "measurement_name": "delta13c",
+                "unit": "permil",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": -0.616198218
+            },
+            {
+                "measurement_name": "sigma_delta13c",
+                "unit": "",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": 0.068284208
+            },
+            {
+                "measurement_name": "delta18o",
+                "unit": "permil",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": -11.56839722
+            },
+            {
+                "measurement_name": "sigma_delta18o",
+                "unit": "",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": 0.058469177
+            },
+            {
+                "measurement_name": "Li_Ca",
+                "unit": "umol_mol",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "B_Ca",
+                "unit": "umol_mol",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": 38.02483846
+            },
+            {
+                "measurement_name": "Na_Ca",
+                "unit": "umol_mol",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": 878.5438239
+            },
+            {
+                "measurement_name": "Mg_Ca",
+                "unit": "mmol_mol",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": 12.01047656
+            },
+            {
+                "measurement_name": "Al_Ca",
+                "unit": "umol_mol",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "P_Ca",
+                "unit": "umol_mol",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "K_Ca",
+                "unit": "umol_mol",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Mn_Ca",
+                "unit": "umol_mol",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": 461.1819967
+            },
+            {
+                "measurement_name": "Fe_Ca",
+                "unit": "umol_mol",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": 4382.503386
+            },
+            {
+                "measurement_name": "Rb_Ca",
+                "unit": "umol_mol",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Sr_Ca",
+                "unit": "umol_mol",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": 0.571962211
+            },
+            {
+                "measurement_name": "U_Ca",
+                "unit": "umol_mol",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Ca_Mg",
+                "unit": "mol_mol",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": 83.26064291
+            },
+            {
+                "measurement_name": "Li_CaMg",
+                "unit": "umol_mol",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "B_CaMg",
+                "unit": "umol_mol",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": 37.56458934
+            },
+            {
+                "measurement_name": "Na_CaMg",
+                "unit": "umol_mol",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": 868.1333785
+            },
+            {
+                "measurement_name": "Mg_CaMg",
+                "unit": "percent",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": 1.18678806
+            },
+            {
+                "measurement_name": "Al_CaMg",
+                "unit": "umol_mol",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "P_CaMg",
+                "unit": "umol_mol",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "K_CaMg",
+                "unit": "umol_mol",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Mn_CaMg",
+                "unit": "umol_mol",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": 455.7106415
+            },
+            {
+                "measurement_name": "Fe_CaMg",
+                "unit": "umol_mol",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": 4330.328039
+            },
+            {
+                "measurement_name": "Rb_CaMg",
+                "unit": "umol_mol",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Sr_CaMg",
+                "unit": "umol_mol",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": 0.565175878
+            },
+            {
+                "measurement_name": "U_CaMg",
+                "unit": "umol_mol",
+                "phase": "D",
+                "im_loc": [
+                    0.39307172361997744,
+                    0.9029146719234019
+                ],
+                "value": null
+            }
+        ],
+        [
+            {
+                "measurement_name": "delta13c",
+                "unit": "permil",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": -0.585119271
+            },
+            {
+                "measurement_name": "sigma_delta13c",
+                "unit": "",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": 0.036819787
+            },
+            {
+                "measurement_name": "delta18o",
+                "unit": "permil",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": -11.62891085
+            },
+            {
+                "measurement_name": "sigma_delta18o",
+                "unit": "",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": 0.132844584
+            },
+            {
+                "measurement_name": "Li_Ca",
+                "unit": "umol_mol",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "B_Ca",
+                "unit": "umol_mol",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Na_Ca",
+                "unit": "umol_mol",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": 261.616672
+            },
+            {
+                "measurement_name": "Mg_Ca",
+                "unit": "mmol_mol",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": 17.60752213
+            },
+            {
+                "measurement_name": "Al_Ca",
+                "unit": "umol_mol",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": 576.8804103
+            },
+            {
+                "measurement_name": "P_Ca",
+                "unit": "umol_mol",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": 104.1106243
+            },
+            {
+                "measurement_name": "K_Ca",
+                "unit": "umol_mol",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": 111.3622718
+            },
+            {
+                "measurement_name": "Mn_Ca",
+                "unit": "umol_mol",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": 489.5188691
+            },
+            {
+                "measurement_name": "Fe_Ca",
+                "unit": "umol_mol",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": 5438.488167
+            },
+            {
+                "measurement_name": "Rb_Ca",
+                "unit": "umol_mol",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Sr_Ca",
+                "unit": "umol_mol",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": 0.643484346
+            },
+            {
+                "measurement_name": "U_Ca",
+                "unit": "umol_mol",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": 0.026960158
+            },
+            {
+                "measurement_name": "Ca_Mg",
+                "unit": "mol_mol",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": 56.79390846
+            },
+            {
+                "measurement_name": "Li_CaMg",
+                "unit": "umol_mol",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "B_CaMg",
+                "unit": "umol_mol",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Na_CaMg",
+                "unit": "umol_mol",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": 257.1040402
+            },
+            {
+                "measurement_name": "Mg_CaMg",
+                "unit": "percent",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": 1.730232159
+            },
+            {
+                "measurement_name": "Al_CaMg",
+                "unit": "umol_mol",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": 566.4787956
+            },
+            {
+                "measurement_name": "P_CaMg",
+                "unit": "umol_mol",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": 102.3151514
+            },
+            {
+                "measurement_name": "K_CaMg",
+                "unit": "umol_mol",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": 109.5165709
+            },
+            {
+                "measurement_name": "Mn_CaMg",
+                "unit": "umol_mol",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": 481.043933
+            },
+            {
+                "measurement_name": "Fe_CaMg",
+                "unit": "umol_mol",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": 5344.773983
+            },
+            {
+                "measurement_name": "Rb_CaMg",
+                "unit": "umol_mol",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Sr_CaMg",
+                "unit": "umol_mol",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": 0.632345444
+            },
+            {
+                "measurement_name": "U_CaMg",
+                "unit": "umol_mol",
+                "phase": "B",
+                "im_loc": [
+                    0.4741832519714608,
+                    0.9074204449450859
+                ],
+                "value": 0.026513325
+            }
+        ]
+    ]
+}

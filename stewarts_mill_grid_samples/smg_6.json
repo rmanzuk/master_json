@@ -1,0 +1,3318 @@
+{
+    "sample_name": "smg_6",
+    "slab_image_sd": [
+        200,
+        35
+    ],
+    "local_sd": [
+        null,
+        null
+    ],
+    "field_lithology": "Upper patch reefs",
+    "latitude": 37.430046,
+    "longitude": -117.4599409,
+    "msl": 1787.933,
+    "hae": 1760.98,
+    "gnss_height": 1787.933,
+    "path_to_ims": "/Volumes/ryan_ims/sms_images",
+    "images": [
+        {
+            "file_name": "/color_corrected_tifs/365nm/smg_6.tif",
+            "light_source": "fluorescence",
+            "wavelength": 365,
+            "tag": "image"
+        },
+        {
+            "file_name": "/color_corrected_tifs/470nm/smg_6.tif",
+            "light_source": "reflectance",
+            "wavelength": 470,
+            "tag": "image"
+        },
+        {
+            "file_name": "/color_corrected_tifs/505nm/smg_6.tif",
+            "light_source": "reflectance",
+            "wavelength": 505,
+            "tag": "image"
+        },
+        {
+            "file_name": "/color_corrected_tifs/530nm/smg_6.tif",
+            "light_source": "reflectance",
+            "wavelength": 530,
+            "tag": "image"
+        },
+        {
+            "file_name": "/color_corrected_tifs/590nm/smg_6.tif",
+            "light_source": "reflectance",
+            "wavelength": 590,
+            "tag": "image"
+        },
+        {
+            "file_name": "/color_corrected_tifs/625nm/smg_6.tif",
+            "light_source": "reflectance",
+            "wavelength": 625,
+            "tag": "image"
+        },
+        {
+            "file_name": "/color_corrected_tifs/760nm/smg_6.tif",
+            "light_source": "reflectance",
+            "wavelength": 760,
+            "tag": "image"
+        },
+        {
+            "file_name": "/color_corrected_tifs/940nm/smg_6.tif",
+            "light_source": "reflectance",
+            "wavelength": 940,
+            "tag": "image"
+        },
+        {
+            "file_name": "/masks/smg_6.tif",
+            "light_source": null,
+            "wavelength": null,
+            "tag": "boundary_mask"
+        },
+        {
+            "file_name": "/superpixel_inds/1000/smg_6.tif",
+            "light_source": null,
+            "wavelength": null,
+            "tag": "1000_superpixels"
+        },
+        {
+            "file_name": "/superpixel_inds/5000/smg_6.tif",
+            "light_source": null,
+            "wavelength": null,
+            "tag": "5000_superpixels"
+        },
+        {
+            "file_name": "/superpixel_inds/10000/smg_6.tif",
+            "light_source": null,
+            "wavelength": null,
+            "tag": "10000_superpixels"
+        },
+        {
+            "file_name": "/superpixel_inds/25000/smg_6.tif",
+            "light_source": null,
+            "wavelength": null,
+            "tag": "25000_superpixels"
+        },
+        {
+            "file_name": "/superpixel_inds/50000/smg_6.tif",
+            "light_source": null,
+            "wavelength": null,
+            "tag": "50000_superpixels"
+        }
+    ],
+    "geochem_measurements": [
+        [
+            {
+                "measurement_name": "delta13c",
+                "unit": "permil",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": -0.764484809
+            },
+            {
+                "measurement_name": "sigma_delta13c",
+                "unit": "",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": 0.108512716
+            },
+            {
+                "measurement_name": "delta18o",
+                "unit": "permil",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": -15.07938476
+            },
+            {
+                "measurement_name": "sigma_delta18o",
+                "unit": "",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": 0.211936175
+            },
+            {
+                "measurement_name": "Li_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": 24.83948262
+            },
+            {
+                "measurement_name": "B_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": 235.067218
+            },
+            {
+                "measurement_name": "Na_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Mg_Ca",
+                "unit": "mmol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": 18.56660759
+            },
+            {
+                "measurement_name": "Al_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": 21929.06177
+            },
+            {
+                "measurement_name": "P_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": 447.0960622
+            },
+            {
+                "measurement_name": "K_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": 13776.08715
+            },
+            {
+                "measurement_name": "Mn_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": 790.59752
+            },
+            {
+                "measurement_name": "Fe_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": 9603.214256
+            },
+            {
+                "measurement_name": "Rb_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": 24.77480466
+            },
+            {
+                "measurement_name": "Sr_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": 0.518192225
+            },
+            {
+                "measurement_name": "U_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": 0.178538561
+            },
+            {
+                "measurement_name": "Ca_Mg",
+                "unit": "mol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": 53.86013546
+            },
+            {
+                "measurement_name": "Li_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": 24.3900385
+            },
+            {
+                "measurement_name": "B_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": 230.4963145
+            },
+            {
+                "measurement_name": "Na_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Mg_CaMg",
+                "unit": "percent",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": 1.822666014
+            },
+            {
+                "measurement_name": "Al_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": 21556.08726
+            },
+            {
+                "measurement_name": "P_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": 438.4022385
+            },
+            {
+                "measurement_name": "K_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": 13525.99061
+            },
+            {
+                "measurement_name": "Mn_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": 776.1907452
+            },
+            {
+                "measurement_name": "Fe_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": 9426.168655
+            },
+            {
+                "measurement_name": "Rb_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": 24.32365669
+            },
+            {
+                "measurement_name": "Sr_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": 0.508752031
+            },
+            {
+                "measurement_name": "U_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.04018024784078107,
+                    0.3702478175161926
+                ],
+                "value": 0.175308502
+            }
+        ],
+        [
+            {
+                "measurement_name": "delta13c",
+                "unit": "permil",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": -0.246200332
+            },
+            {
+                "measurement_name": "sigma_delta13c",
+                "unit": "",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": 0.030976228
+            },
+            {
+                "measurement_name": "delta18o",
+                "unit": "permil",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": -13.56245437
+            },
+            {
+                "measurement_name": "sigma_delta18o",
+                "unit": "",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": 0.094279544
+            },
+            {
+                "measurement_name": "Li_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "B_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Na_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Mg_Ca",
+                "unit": "mmol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": 17.63939891
+            },
+            {
+                "measurement_name": "Al_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "P_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "K_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Mn_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": 1434.741257
+            },
+            {
+                "measurement_name": "Fe_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": 3688.454518
+            },
+            {
+                "measurement_name": "Rb_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Sr_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": 0.7562307
+            },
+            {
+                "measurement_name": "U_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": 0.044275813
+            },
+            {
+                "measurement_name": "Ca_Mg",
+                "unit": "mol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": 56.69127417
+            },
+            {
+                "measurement_name": "Li_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "B_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Na_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Mg_CaMg",
+                "unit": "percent",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": 1.733145049
+            },
+            {
+                "measurement_name": "Al_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "P_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "K_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Mn_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": 1409.916572
+            },
+            {
+                "measurement_name": "Fe_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": 3623.491673
+            },
+            {
+                "measurement_name": "Rb_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Sr_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": 0.743140389
+            },
+            {
+                "measurement_name": "U_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.19179496808111152,
+                    0.2733736975499859
+                ],
+                "value": 0.043443447
+            }
+        ],
+        [
+            {
+                "measurement_name": "delta13c",
+                "unit": "permil",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": -0.427573792
+            },
+            {
+                "measurement_name": "sigma_delta13c",
+                "unit": "",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": 0.038403234
+            },
+            {
+                "measurement_name": "delta18o",
+                "unit": "permil",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": -16.18263864
+            },
+            {
+                "measurement_name": "sigma_delta18o",
+                "unit": "",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": 0.203113948
+            },
+            {
+                "measurement_name": "Li_Ca",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": 10.0497861
+            },
+            {
+                "measurement_name": "B_Ca",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Na_Ca",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Mg_Ca",
+                "unit": "mmol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": 19.8989306
+            },
+            {
+                "measurement_name": "Al_Ca",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "P_Ca",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "K_Ca",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Mn_Ca",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": 904.3049613
+            },
+            {
+                "measurement_name": "Fe_Ca",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": 5506.37531
+            },
+            {
+                "measurement_name": "Rb_Ca",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Sr_Ca",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": 0.630734409
+            },
+            {
+                "measurement_name": "U_Ca",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": 0.053331657
+            },
+            {
+                "measurement_name": "Ca_Mg",
+                "unit": "mol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": 50.25395687
+            },
+            {
+                "measurement_name": "Li_CaMg",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": 9.844989104
+            },
+            {
+                "measurement_name": "B_CaMg",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Na_CaMg",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Mg_CaMg",
+                "unit": "percent",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": 1.950991976
+            },
+            {
+                "measurement_name": "Al_CaMg",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "P_CaMg",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "K_CaMg",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Mn_CaMg",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": 886.671835
+            },
+            {
+                "measurement_name": "Fe_CaMg",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": 5398.414033
+            },
+            {
+                "measurement_name": "Rb_CaMg",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Sr_CaMg",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": 0.618437924
+            },
+            {
+                "measurement_name": "U_CaMg",
+                "unit": "umol_mol",
+                "phase": "E",
+                "im_loc": [
+                    0.5582050319188885,
+                    0.11574204449450859
+                ],
+                "value": 0.052244852
+            }
+        ],
+        [
+            {
+                "measurement_name": "delta13c",
+                "unit": "permil",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": -0.53093049
+            },
+            {
+                "measurement_name": "sigma_delta13c",
+                "unit": "",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": 0.044983016
+            },
+            {
+                "measurement_name": "delta18o",
+                "unit": "permil",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": -13.85865317
+            },
+            {
+                "measurement_name": "sigma_delta18o",
+                "unit": "",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": 0.096713021
+            },
+            {
+                "measurement_name": "Li_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": 5.311289495
+            },
+            {
+                "measurement_name": "B_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Na_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Mg_Ca",
+                "unit": "mmol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": 20.53921972
+            },
+            {
+                "measurement_name": "Al_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "P_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "K_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Mn_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": 2253.144588
+            },
+            {
+                "measurement_name": "Fe_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": 5064.152648
+            },
+            {
+                "measurement_name": "Rb_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Sr_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": 0.791841247
+            },
+            {
+                "measurement_name": "U_Ca",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": 0.38781496
+            },
+            {
+                "measurement_name": "Ca_Mg",
+                "unit": "mol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": 48.68734128
+            },
+            {
+                "measurement_name": "Li_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": 5.200668959
+            },
+            {
+                "measurement_name": "B_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Na_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Mg_CaMg",
+                "unit": "percent",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": 2.01253474
+            },
+            {
+                "measurement_name": "Al_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "P_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "K_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Mn_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": 2207.815213
+            },
+            {
+                "measurement_name": "Fe_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": 4961.760902
+            },
+            {
+                "measurement_name": "Rb_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Sr_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": 0.775910344
+            },
+            {
+                "measurement_name": "U_CaMg",
+                "unit": "umol_mol",
+                "phase": "G",
+                "im_loc": [
+                    0.5416823131806233,
+                    0.2441565756125035
+                ],
+                "value": 0.380022405
+            }
+        ],
+        [
+            {
+                "measurement_name": "delta13c",
+                "unit": "permil",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": -0.802633287
+            },
+            {
+                "measurement_name": "sigma_delta13c",
+                "unit": "",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": 0.041505361
+            },
+            {
+                "measurement_name": "delta18o",
+                "unit": "permil",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": -15.94638458
+            },
+            {
+                "measurement_name": "sigma_delta18o",
+                "unit": "",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": 0.150684303
+            },
+            {
+                "measurement_name": "Li_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": 12.03056281
+            },
+            {
+                "measurement_name": "B_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Na_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": 1346.403166
+            },
+            {
+                "measurement_name": "Mg_Ca",
+                "unit": "mmol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": 22.76895886
+            },
+            {
+                "measurement_name": "Al_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": 935.1075331
+            },
+            {
+                "measurement_name": "P_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "K_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": 3336.805229
+            },
+            {
+                "measurement_name": "Mn_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": 775.6912099
+            },
+            {
+                "measurement_name": "Fe_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": 6692.094957
+            },
+            {
+                "measurement_name": "Rb_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": 5.953970885
+            },
+            {
+                "measurement_name": "Sr_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": 0.526833142
+            },
+            {
+                "measurement_name": "U_Ca",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": 0.099456191
+            },
+            {
+                "measurement_name": "Ca_Mg",
+                "unit": "mol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": 43.9194434
+            },
+            {
+                "measurement_name": "Li_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": 11.7626762
+            },
+            {
+                "measurement_name": "B_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "Na_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": 1316.483419
+            },
+            {
+                "measurement_name": "Mg_CaMg",
+                "unit": "percent",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": 2.226180693
+            },
+            {
+                "measurement_name": "Al_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": 914.2178314
+            },
+            {
+                "measurement_name": "P_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": null
+            },
+            {
+                "measurement_name": "K_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": 3264.228944
+            },
+            {
+                "measurement_name": "Mn_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": 758.4180763
+            },
+            {
+                "measurement_name": "Fe_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": 6543.353578
+            },
+            {
+                "measurement_name": "Rb_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": 5.821518073
+            },
+            {
+                "measurement_name": "Sr_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": 0.515107086
+            },
+            {
+                "measurement_name": "U_CaMg",
+                "unit": "umol_mol",
+                "phase": "C",
+                "im_loc": [
+                    0.6543372136687946,
+                    0.5695578710222473
+                ],
+                "value": 0.097236788
+            }
+        ]
+    ],
+    "point_counts": [
+        {
+            "class": "Mi",
+            "x_position": 0.09990143558585028,
+            "y_position": 0.08430341666760299
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.18079414135621105,
+            "y_position": 0.48629365071067204
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.18593353867669526,
+            "y_position": 0.2029665777676589
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.1936074333059114,
+            "y_position": 0.17883965339842284
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.5706843106828065,
+            "y_position": 0.6728313889272947
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.8190650469385357,
+            "y_position": 0.40189635495992027
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.38665164498766014,
+            "y_position": 0.2581674786591406
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.9890171720296158,
+            "y_position": 0.8522343168246101
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.18896085490656955,
+            "y_position": 0.5064776535876594
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.6365108380068163,
+            "y_position": 0.040837401169718596
+        },
+        {
+            "class": null,
+            "x_position": 0.6373556704430603,
+            "y_position": 0.9720240269224514
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.9846522044423552,
+            "y_position": 0.22211791073000964
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.3500422394170878,
+            "y_position": 0.17818249981638137
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.7761898007991538,
+            "y_position": 0.43128050798548795
+        },
+        {
+            "class": null,
+            "x_position": 0.24169247946879774,
+            "y_position": 0.9951182813770508
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.6401717785638735,
+            "y_position": 0.4543747624400874
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.21712193611470207,
+            "y_position": 0.1595005622697745
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.05688538404042778,
+            "y_position": 0.10936913186832682
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.8968600337760019,
+            "y_position": 0.8420953758445422
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.9324133988012694,
+            "y_position": 0.6119038639637375
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.6384117109883652,
+            "y_position": 0.8754224503623584
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.48197690487718886,
+            "y_position": 0.16034547401811347
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.7146578383593842,
+            "y_position": 0.13950431755908468
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.10863137076037138,
+            "y_position": 0.6539616932143902
+        },
+        {
+            "class": null,
+            "x_position": 0.3762320449406511,
+            "y_position": 0.011265489977853406
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.9497324637442708,
+            "y_position": 0.13424708890275308
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.5158406050299683,
+            "y_position": 0.22934660013246558
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.8177273955811494,
+            "y_position": 0.1120916252796414
+        },
+        {
+            "class": "Spar",
+            "x_position": 0.3596874097308732,
+            "y_position": 0.5425272215167902
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.9728245503349394,
+            "y_position": 0.9430153902294789
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.28386369857797633,
+            "y_position": 0.3227562878655001
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.5437904781290399,
+            "y_position": 0.22427712964243157
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.6009574729815489,
+            "y_position": 0.6753661241723117
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.17171219266658833,
+            "y_position": 0.52102891147572
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.33575049070396046,
+            "y_position": 0.8985167048169579
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.8699662012222353,
+            "y_position": 0.33355238242760965
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.8480005578798919,
+            "y_position": 0.2045625221811881
+        },
+        {
+            "class": "Spar",
+            "x_position": 0.10518163831237513,
+            "y_position": 0.8763612411938462
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.8689101606769303,
+            "y_position": 0.6472962783108269
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.5735004188036197,
+            "y_position": 0.8608711924742978
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.9792311963097896,
+            "y_position": 0.22474652505817547
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.4355815235867905,
+            "y_position": 0.30858054631003456
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.9950718044893642,
+            "y_position": 0.18231317947492764
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.9755702557527325,
+            "y_position": 0.6539616932143902
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.7564066412504408,
+            "y_position": 0.3633120517857723
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.6598845354095664,
+            "y_position": 0.5845850507674429
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.8551112308849453,
+            "y_position": 0.5561396885733632
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.7493663709484075,
+            "y_position": 0.7240893683265277
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.030695578516864497,
+            "y_position": 0.5083552352506349
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.3790481530614643,
+            "y_position": 0.7848291351237874
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.8089974604066283,
+            "y_position": 0.9197333776085819
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.10567445723351745,
+            "y_position": 0.36453247986670645
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.3837651341638265,
+            "y_position": 0.8441607156738152
+        },
+        {
+            "class": "UnID fos",
+            "x_position": 0.006829062192972147,
+            "y_position": 0.29562523283550307
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.2111377063579739,
+            "y_position": 0.39232068847874485
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.16403829803737222,
+            "y_position": 0.14447990896596993
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.7510560358208955,
+            "y_position": 0.6334960530879565
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.37454238006816315,
+            "y_position": 0.2950619583366105
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.11905097080738043,
+            "y_position": 0.007510326651902271
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.35877217459160893,
+            "y_position": 0.5106083332462057
+        },
+        {
+            "class": "Fe",
+            "x_position": 0.2805547715360207,
+            "y_position": 0.9683627426796491
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.38334271794570457,
+            "y_position": 0.37335711368269164
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.23697549836643553,
+            "y_position": 0.6836274834894042
+        },
+        {
+            "class": null,
+            "x_position": 0.6566460110706311,
+            "y_position": 0.9694892916774345
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.04942269752027266,
+            "y_position": 0.11706721668652663
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.6814277625337877,
+            "y_position": 0.6300225270114517
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.8132920252908684,
+            "y_position": 0.25159594283872605
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.8929174824068633,
+            "y_position": 0.3027600431548103
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.19656434683276536,
+            "y_position": 0.8919451689965434
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.44093212901633566,
+            "y_position": 0.11753661210227054
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.9303717204136797,
+            "y_position": 0.44536237045780463
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.6434807056058292,
+            "y_position": 0.8140255299830573
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.40460433425784464,
+            "y_position": 0.8770183947758876
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.37186707735339053,
+            "y_position": 0.881524590767029
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.8956631878246563,
+            "y_position": 0.22878332563357293
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.5442832970501822,
+            "y_position": 0.15565151986067455
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.30646296624750263,
+            "y_position": 0.6910439310581576
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.8387778037842284,
+            "y_position": 0.0820503186720323
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.5074626833705489,
+            "y_position": 0.19038678062572256
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.697197968010342,
+            "y_position": 0.59096882842156
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.4750070372781761,
+            "y_position": 0.27609838354055727
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.379611374685627,
+            "y_position": 0.10692827570645859
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.4053083612880479,
+            "y_position": 0.638377765411693
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.24084764703255376,
+            "y_position": 0.45343597160859955
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.5014080509108003,
+            "y_position": 0.9317499002516255
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.7766826197202962,
+            "y_position": 0.6091813705524229
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.3401858609942414,
+            "y_position": 0.2436162207710799
+        },
+        {
+            "class": null,
+            "x_position": 0.9306533312257609,
+            "y_position": 0.0777318808471885
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.7064911248090258,
+            "y_position": 0.25920014857377716
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.7383835492772358,
+            "y_position": 0.57482162611997
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.6199662027970384,
+            "y_position": 0.10260983788161476
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.1371444654836056,
+            "y_position": 0.0234697707871946
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.3206139095545893,
+            "y_position": 0.015396169636399655
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.4633201885768011,
+            "y_position": 0.7558204984308148
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.7550689898930545,
+            "y_position": 0.38321441741331336
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.364756404348337,
+            "y_position": 0.7939354061892189
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.747324692560818,
+            "y_position": 0.9412316876496521
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.26689664715007644,
+            "y_position": 0.2101952671701148
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.7514080493359973,
+            "y_position": 0.1998685680237492
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.8694029795980727,
+            "y_position": 0.34481787240546297
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.5463249754377718,
+            "y_position": 0.5159594409856859
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.43037172356328596,
+            "y_position": 0.5872136650956089
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.24598704435303795,
+            "y_position": 0.6658843367742852
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.09722613287107769,
+            "y_position": 0.8585242153955783
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.09497324637442708,
+            "y_position": 0.1367818241477701
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.3524359313197791,
+            "y_position": 0.7614532434197415
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.19621233331766366,
+            "y_position": 0.1963950419472444
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.8381441794570456,
+            "y_position": 0.3442545979065703
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.45430864259019865,
+            "y_position": 0.5520090089148169
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.05329484618639088,
+            "y_position": 0.3304543726836999
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.9096733257257021,
+            "y_position": 0.4009575641284325
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.4540270317781173,
+            "y_position": 0.7962823832679383
+        },
+        {
+            "class": null,
+            "x_position": 0.0007744297332236455,
+            "y_position": 0.12927149749586783
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.08568008957574333,
+            "y_position": 0.3691325549409966
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.1490425222940416,
+            "y_position": 0.5507885808338827
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.354548012410389,
+            "y_position": 0.7030604537012013
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.5261898023739571,
+            "y_position": 0.42799474007528066
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.13299070600540602,
+            "y_position": 0.8572099082314955
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.05695578674344811,
+            "y_position": 0.19001126429312745
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.28386369857797633,
+            "y_position": 0.051257979399232996
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.8247676658831825,
+            "y_position": 0.4616034518425433
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.9840185801151722,
+            "y_position": 0.9419827203148423
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.895381577012575,
+            "y_position": 0.19160720870665668
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.6661503759783759,
+            "y_position": 0.23967329927883121
+        },
+        {
+            "class": null,
+            "x_position": 0.6689664840991891,
+            "y_position": 0.9742771249180222
+        },
+        {
+            "class": null,
+            "x_position": 0.9184736636032437,
+            "y_position": 0.07622981551680805
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.0990566031496063,
+            "y_position": 0.298629363496264
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.8522951227641321,
+            "y_position": 0.8858430285918728
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.09919740855564697,
+            "y_position": 0.11809988660116322
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.22761193886473138,
+            "y_position": 0.569376639297341
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.06561531921494887,
+            "y_position": 0.6888847121457358
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.9721909260077566,
+            "y_position": 0.8110213993222964
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.9309349420378423,
+            "y_position": 0.8540180194044369
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.44269219659184394,
+            "y_position": 0.8187194841404963
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.4975359022446821,
+            "y_position": 0.23479158695509472
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.6768515868374663,
+            "y_position": 0.9296845604223524
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.930019706898578,
+            "y_position": 0.4169170082637248
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.4082652748149019,
+            "y_position": 0.46366879167181646
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.42009292892231753,
+            "y_position": 0.05538865905777925
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.8967192283699612,
+            "y_position": 0.9365377334922131
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.5768797485485957,
+            "y_position": 0.19095005512461524
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.9155167500763898,
+            "y_position": 0.7243710055759741
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.15115460338465153,
+            "y_position": 0.22174239439741456
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.3941143315078153,
+            "y_position": 0.7533796422689466
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.9616305205547068,
+            "y_position": 0.45906871659752635
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.26161644442355153,
+            "y_position": 0.5169921109003226
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.1936778360089317,
+            "y_position": 0.8085805431604283
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.3499014340110471,
+            "y_position": 0.747277501864276
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.1115882842872253,
+            "y_position": 0.11894479834950221
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.3367361285462452,
+            "y_position": 0.7300976296480495
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.9171360122458574,
+            "y_position": 0.7859556841215727
+        },
+        {
+            "class": null,
+            "x_position": 0.4764150913385826,
+            "y_position": 0.007885842984497383
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.42065615054648026,
+            "y_position": 0.976436343830444
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.3642635854271947,
+            "y_position": 0.12495305967102402
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.4053083612880479,
+            "y_position": 0.27506571362592064
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.8085046414854861,
+            "y_position": 0.1720803594117108
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.02471134876013633,
+            "y_position": 0.640067588908371
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.32666854201433776,
+            "y_position": 0.6488922227243562
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.8207547118110238,
+            "y_position": 0.8441607156738152
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.06864263544482313,
+            "y_position": 0.8501689769953371
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.43107575059348924,
+            "y_position": 0.9032106589743969
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.5587158511693501,
+            "y_position": 0.42001501800763447
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.5968037135033494,
+            "y_position": 0.3310176471825926
+        },
+        {
+            "class": null,
+            "x_position": 0.5449873240803855,
+            "y_position": 0.9813180561541803
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.6991692436949113,
+            "y_position": 0.7506571488576319
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.1941002522270537,
+            "y_position": 0.12561021325306548
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.19846521981431428,
+            "y_position": 0.3951370609732082
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.27182483636149957,
+            "y_position": 0.2547878316657845
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.36947338545069924,
+            "y_position": 0.9907998435522071
+        },
+        {
+            "class": "Spar",
+            "x_position": 0.33920022315195675,
+            "y_position": 0.4939917355288718
+        },
+        {
+            "class": null,
+            "x_position": 0.8812306337054883,
+            "y_position": 0.02816372494463351
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.14728245471853332,
+            "y_position": 0.17780698348378626
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.1662911845340228,
+            "y_position": 0.6730191470935923
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.7640805358796569,
+            "y_position": 0.7172361952566669
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.16164460613468093,
+            "y_position": 0.3151520821304491
+        },
+        {
+            "class": null,
+            "x_position": 0.9086172851803973,
+            "y_position": 0.03501689801449434
+        },
+        {
+            "class": null,
+            "x_position": 0.052309208344106246,
+            "y_position": 0.9651708538525905
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.7450718060641675,
+            "y_position": 0.8397483987658226
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.8351872659301917,
+            "y_position": 0.8031355563377991
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.8574345200846163,
+            "y_position": 0.2527224918365114
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.44079132361029494,
+            "y_position": 0.3113030397213491
+        },
+        {
+            "class": "UnID fos",
+            "x_position": 0.6225007001057704,
+            "y_position": 0.7172361952566669
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.4110813829357151,
+            "y_position": 0.05811115246909382
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.6791044733341168,
+            "y_position": 0.7347915838054885
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.6893128652720649,
+            "y_position": 0.18287645397382027
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.05104195968974028,
+            "y_position": 0.6795906829140067
+        },
+        {
+            "class": null,
+            "x_position": 0.5535060511458456,
+            "y_position": 0.024502440701831163
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.12510560326712894,
+            "y_position": 0.6392226771600321
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.40777245589375954,
+            "y_position": 0.8276379970396303
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.8098422928428723,
+            "y_position": 0.9800037489900976
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.0788510273827712,
+            "y_position": 0.8477281208334688
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.5775133728757785,
+            "y_position": 0.4078107371982933
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.8113911523093196,
+            "y_position": 0.18512955196939096
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.2880878607591962,
+            "y_position": 0.5383026627750952
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.14538158173698437,
+            "y_position": 0.447333831203929
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.7969585981901516,
+            "y_position": 0.6337776903374029
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.27112080933129623,
+            "y_position": 0.13781449406240667
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.7652773818310025,
+            "y_position": 0.4349417922282903
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.9177696365730404,
+            "y_position": 0.6826886926579164
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.8056181306616523,
+            "y_position": 0.6302102851777494
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.035623767728287695,
+            "y_position": 0.45371760885804596
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.24985919301915618,
+            "y_position": 0.614250841042457
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.6272176812081326,
+            "y_position": 0.09369132498248083
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.4088284964390645,
+            "y_position": 0.20550131301267588
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.8413827037959807,
+            "y_position": 0.7871761122025068
+        },
+        {
+            "class": "UnID fos",
+            "x_position": 0.3361729069220825,
+            "y_position": 0.46273000084032867
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.5713179350099895,
+            "y_position": 0.8305482486172423
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.2554914092607827,
+            "y_position": 0.2565715342456113
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.710996897802327,
+            "y_position": 0.4188884690098491
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.5651928998472207,
+            "y_position": 0.8000375465938894
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.054773302949817845,
+            "y_position": 0.7691513282379413
+        },
+        {
+            "class": "Spar",
+            "x_position": 0.1297521816664708,
+            "y_position": 0.8468832090851297
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.8736271417792925,
+            "y_position": 0.45690949768510436
+        },
+        {
+            "class": "UnID fos",
+            "x_position": 0.598845391890939,
+            "y_position": 0.9368193707416594
+        },
+        {
+            "class": null,
+            "x_position": 0.9158687635914914,
+            "y_position": 0.029571911191865193
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.5215432239746152,
+            "y_position": 0.09453623673081984
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.708462400493595,
+            "y_position": 0.14006759205797736
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.1797381008109061,
+            "y_position": 0.005444986822629146
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.21240495501233989,
+            "y_position": 0.2419263972744019
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.5711771296039487,
+            "y_position": 0.8139316508999086
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.4430442101069456,
+            "y_position": 0.4588809584312287
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.9794424044188507,
+            "y_position": 0.7690574491547926
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.5361869862028441,
+            "y_position": 0.37739391425808905
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.6432694974967681,
+            "y_position": 0.4082801326140372
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.9985215369373606,
+            "y_position": 0.4342846386462488
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.1026471410036432,
+            "y_position": 0.5617724335622898
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.9043931229991773,
+            "y_position": 0.2197709336512902
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.35271754213186035,
+            "y_position": 0.3738265090984355
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.022176851451404397,
+            "y_position": 0.20747277375880022
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.4376936046774004,
+            "y_position": 0.6922643591390918
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.5057026157950406,
+            "y_position": 0.6349042393351881
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.6308786217651898,
+            "y_position": 0.6486105854749098
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.025415375790339638,
+            "y_position": 0.13349605623756286
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.24992959572217655,
+            "y_position": 0.4073413417825494
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.8912278175343754,
+            "y_position": 0.644292147650066
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.05977189486426138,
+            "y_position": 0.14570033704690405
+        },
+        {
+            "class": "UnID fos",
+            "x_position": 0.5584342403572687,
+            "y_position": 0.8982350675675116
+        },
+        {
+            "class": null,
+            "x_position": 0.5673049809378305,
+            "y_position": 0.001689823496678011
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.8817234526266308,
+            "y_position": 0.4011453222947301
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.19093213059113878,
+            "y_position": 0.2592940276569259
+        },
+        {
+            "class": "UnID fos",
+            "x_position": 0.5755420971912093,
+            "y_position": 0.5508824599170316
+        },
+        {
+            "class": null,
+            "x_position": 0.9145311122341051,
+            "y_position": 0.0020653398292731244
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.6070121054412975,
+            "y_position": 0.12110401726192413
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.9374119907157127,
+            "y_position": 0.6319001086744273
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.48556744273122576,
+            "y_position": 0.264739014479555
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.6293297622987425,
+            "y_position": 0.3045437457346371
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.08377921659419439,
+            "y_position": 0.8149643208145452
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.268727117428605,
+            "y_position": 0.8418137385950958
+        },
+        {
+            "class": null,
+            "x_position": 0.4944381833117875,
+            "y_position": 0.9801915071563951
+        },
+        {
+            "class": "Spar",
+            "x_position": 0.8587721714420027,
+            "y_position": 0.9199211357748793
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.1389749357621342,
+            "y_position": 0.7138565482633108
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.8271613577858737,
+            "y_position": 0.5039429183426424
+        },
+        {
+            "class": null,
+            "x_position": 0.08011827603713714,
+            "y_position": 0.9907059644690583
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.6995916599130333,
+            "y_position": 0.482069091968977
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.6571388299917734,
+            "y_position": 0.71930153508594
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.789847925185098,
+            "y_position": 0.42714982832694165
+        },
+        {
+            "class": null,
+            "x_position": 0.09673331394993537,
+            "y_position": 0.9629177558570199
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.012109264919497003,
+            "y_position": 0.7502816325250369
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.512390872581972,
+            "y_position": 0.22530979955706815
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.31110954464684454,
+            "y_position": 0.9126924463724235
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.7124049518627337,
+            "y_position": 0.721836270330957
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.1479160790457163,
+            "y_position": 0.21582801215904152
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.027105040662827595,
+            "y_position": 0.6513330788862245
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.36060264487013755,
+            "y_position": 0.4553135532715752
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.9300901096015983,
+            "y_position": 0.2479346585959237
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.6259504325537666,
+            "y_position": 0.44095005354981204
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.053154040780350215,
+            "y_position": 0.9031167798912481
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.09722613287107769,
+            "y_position": 0.20090123793838574
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.6041255946174638,
+            "y_position": 0.15321066369880632
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.31864263387001995,
+            "y_position": 0.5990424295723549
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.3446212312845223,
+            "y_position": 0.6979909832111673
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.4551534750264426,
+            "y_position": 0.28389034744190583
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.8309631037489718,
+            "y_position": 0.7134810319307158
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.6674880273357621,
+            "y_position": 0.1366879450646213
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.6179245244094488,
+            "y_position": 0.5642132897241581
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.7539425466447292,
+            "y_position": 0.2280322929683827
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.35123908536843346,
+            "y_position": 0.6152835109570935
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.14150943307086614,
+            "y_position": 0.2617348838187941
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.011898056810436009,
+            "y_position": 0.2609838511536039
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.03506054610412504,
+            "y_position": 0.5508824599170316
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.4049563477729463,
+            "y_position": 0.8446301110895591
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.5416079943354096,
+            "y_position": 0.35702215321480424
+        },
+        {
+            "class": null,
+            "x_position": 0.13552520331413798,
+            "y_position": 0.9885467455566362
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.939383266400282,
+            "y_position": 0.5987607923229086
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.586524918862381,
+            "y_position": 0.19827262361021994
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.014643762228228933,
+            "y_position": 0.2517837010050236
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.93255420420731,
+            "y_position": 0.50797971891804
+        },
+        {
+            "class": null,
+            "x_position": 0.9414249447878716,
+            "y_position": 0.09688321380953929
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.9039707067810553,
+            "y_position": 0.5554825349913217
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.6485497002232931,
+            "y_position": 0.08787082182725657
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.8501830416735222,
+            "y_position": 0.9066841850509016
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.46768515616406164,
+            "y_position": 0.8897859500841215
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.6608701732518509,
+            "y_position": 0.2874577526015594
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.9598704529791985,
+            "y_position": 0.3911002603978107
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.24056603622047246,
+            "y_position": 0.4258355211628587
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.20881441715830296,
+            "y_position": 0.07651145276625439
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.9826105260547655,
+            "y_position": 0.2280322929683827
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.48676428868257143,
+            "y_position": 0.9479909816363641
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.7643621466917382,
+            "y_position": 0.47915884039136486
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.9046043311082383,
+            "y_position": 0.8476342417503201
+        },
+        {
+            "class": "UnID fos",
+            "x_position": 0.17051534671524268,
+            "y_position": 0.4353173085608854
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.12158546811611234,
+            "y_position": 0.4233946650009905
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.11433398970501821,
+            "y_position": 0.1363124287320262
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.15023936824538722,
+            "y_position": 0.26868193597180373
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.06617854083911152,
+            "y_position": 0.6666353694394753
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.3343424366435539,
+            "y_position": 0.051164100316084225
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.3090678662592549,
+            "y_position": 0.1268306413339996
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.01598141358561523,
+            "y_position": 0.18616222188402753
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.33715854476436713,
+            "y_position": 0.39673300538673745
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.4447338749794335,
+            "y_position": 0.8432219248423274
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.031047592031966154,
+            "y_position": 0.9397296223192716
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.32420444740862614,
+            "y_position": 0.3167480265439782
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.13996057360441885,
+            "y_position": 0.5659969923039848
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.671923397626043,
+            "y_position": 0.0564213289724158
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.7562658358443999,
+            "y_position": 0.7101952640205085
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.7429597249735574,
+            "y_position": 0.6549943631290268
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.3224443798331179,
+            "y_position": 0.10965076911777316
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.8206139064049829,
+            "y_position": 0.14598197429635038
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.8862996283229521,
+            "y_position": 0.6034547464803475
+        },
+        {
+            "class": null,
+            "x_position": 0.5444241024562227,
+            "y_position": 0.9807547816552877
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.3142072635797391,
+            "y_position": 0.6421329287376442
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.9115741987072512,
+            "y_position": 0.14438602988282115
+        },
+        {
+            "class": "Stylo",
+            "x_position": 0.6929738058291222,
+            "y_position": 0.18062335597824963
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.009715573016805736,
+            "y_position": 0.6446676639826612
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.538932691620637,
+            "y_position": 0.17245587574430588
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.4646578399341873,
+            "y_position": 0.707378891526045
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.24155167406275713,
+            "y_position": 0.8950431787404531
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.6043368027265249,
+            "y_position": 0.08871573357559556
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.8966488256669408,
+            "y_position": 0.5713481000434653
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.06350323812433893,
+            "y_position": 0.6723619935115509
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.5449873240803855,
+            "y_position": 0.6695456210170875
+        },
+        {
+            "class": null,
+            "x_position": 0.983103344975908,
+            "y_position": 0.9975591375389191
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.6750211165589376,
+            "y_position": 0.48328952004991116
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.6146155973674933,
+            "y_position": 0.39194517214614977
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.41734722350452463,
+            "y_position": 0.5314494897052345
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.17072655482430368,
+            "y_position": 0.5168043527340249
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.9118558095193324,
+            "y_position": 0.34171986266155335
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.8334271983546834,
+            "y_position": 0.3758918489277086
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.5770909566576565,
+            "y_position": 0.3720428065186087
+        },
+        {
+            "class": "Microb",
+            "x_position": 0.671923397626043,
+            "y_position": 0.1328389026555214
+        },
+        {
+            "class": "Spar",
+            "x_position": 0.7858349711129393,
+            "y_position": 0.8982350675675116
+        },
+        {
+            "class": "UnID fos",
+            "x_position": 0.9846522044423552,
+            "y_position": 0.5064776535876594
+        },
+        {
+            "class": "UnID fos",
+            "x_position": 0.51196845636385,
+            "y_position": 0.28201276577893025
+        },
+        {
+            "class": null,
+            "x_position": 0.5342157105182748,
+            "y_position": 0.00037551633259511356
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.8175865901751088,
+            "y_position": 0.7067217379440036
+        },
+        {
+            "class": "Dol",
+            "x_position": 0.4565615290868492,
+            "y_position": 0.5664663877197288
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.17755561701727585,
+            "y_position": 0.901896351810314
+        },
+        {
+            "class": "Mi",
+            "x_position": 0.13834131143495124,
+            "y_position": 0.4303417171540001
+        },
+        {
+            "class": null,
+            "x_position": 0.9879611314843108,
+            "y_position": 0.07942170434386651
+        },
+        {
+            "class": "Arch",
+            "x_position": 0.22958321454930075,
+            "y_position": 0.16954562416669375
+        }
+    ]
+}
