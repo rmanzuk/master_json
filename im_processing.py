@@ -8,6 +8,8 @@
 import numpy as np # for array handling
 from scipy.interpolate import interp1d # for making transfer functions
 import skimage.io as io # for image reading
+from sklearn.decomposition import PCA # for PCA
+import pdb # for debugging
 ##########################################################################################
 # function definitions
 ##########################################################################################
@@ -100,3 +102,49 @@ def sample_3channel(sample_dict, light_source='reflectance', wavelengths=[625,53
 
     # stack into 3 channel image
     return np.dstack(images)
+
+# ----------------------------------------------------------------------------------------
+def im_pca(image):
+    """
+    A function to perform PCA on an image, returnign the multichannel PCA image
+
+    Keyword arguments:
+    image -- the image to perform PCA on, any format is fine, we'll normalize within the function
+
+    Returns:
+    pca_image -- the image after PCA has been performed
+    """
+    # get the shape of the image
+    shape = image.shape
+
+    # reshape the image to be 2D
+    reshaped_image = np.reshape(image, (shape[0]*shape[1], shape[2]))
+
+    # normalize with 0 center and std 1
+    reshaped_image = (reshaped_image - np.mean(reshaped_image, axis=0)) / np.std(reshaped_image, axis=0)
+
+    # the SVD of the PCA can be pretty inefficient, so if we have greater than 10000 pixels, randomly sample 10000
+    too_big = False
+    if reshaped_image.shape[0] > 10000:
+        reshaped_image = reshaped_image[np.random.choice(reshaped_image.shape[0], 10000, replace=False),:]
+        too_big = True
+
+    # perform PCA
+    pca = PCA(svd_solver='randomized')
+    pca_image = pca.fit_transform(reshaped_image)
+
+    # if we randomly subsampleed, we need to get the loadings to project the image back to the original space
+    loadings = pca.components_
+    explained_variance = pca.explained_variance_ratio_
+    if too_big:
+        original_cols = np.reshape(image, (shape[0]*shape[1], shape[2]))
+        original_cols = (original_cols - np.mean(original_cols, axis=0)) / np.std(original_cols, axis=0)
+        pca_image = np.dot(original_cols, loadings.T)
+
+    # rescale to 0-1
+    pca_image = (pca_image - np.min(pca_image, axis=0)) / (np.max(pca_image, axis=0) - np.min(pca_image, axis=0))
+
+    # reshape back to 3D
+    pca_image = np.reshape(pca_image, (shape[0], shape[1], shape[2]))
+
+    return pca_image, loadings, explained_variance
