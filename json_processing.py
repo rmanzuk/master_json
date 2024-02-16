@@ -235,6 +235,7 @@ def get_point_count_fracs(point_counts_list):
     # return the list of dictionaries
     return point_count_fracs
 
+
 # ----------------------------------------------------------------------------------------
 def select_geospatial_data(outcrop_json, desired_metrics=None):
     """
