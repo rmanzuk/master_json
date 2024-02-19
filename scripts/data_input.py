@@ -15,7 +15,8 @@ import json # for json handling
 ##########################################################################################
 # %% 
 from file_handing import get_file_list
-from json_processing import get_point_count_fracs, give_geochem_ids
+from json_processing import get_point_count_fracs
+from im_processing import calc_fill_im_metric
 # %% 
 ##########################################################################################
 # script lines
@@ -85,3 +86,38 @@ out_file = os.path.join(outcrop_json.split('/')[-1])
 with open(out_file, 'w') as outfile:
     json.dump(data_copy, outfile,indent=4)
 
+# %% section to calculate an image metric, and store it in the jsons
+    
+# SET THE light_source, wavelengths, scales, and metrics to use
+light_source = 'reflectance'
+wavelengths = [530]
+scales = [1, 0.5, 0.25, 0.125, 0.0625, 0.03125, 0.015625, 0.0078125, 0.00390625]
+metrics = ['rayleigh_anisotropy']
+masking = True
+
+# get a list of all the json files
+input_json_dir = '/Users/ryan/Dropbox (Princeton)/code/master_json/stewarts_mill_grid_samples/'
+json_files = get_file_list(input_json_dir, '*.json')
+
+# output directory for the json files (can be the same as the input)
+output_json_dir = input_json_dir
+
+# iterate through the json files
+for json_file in json_files:
+
+    # load in the json file
+    with open(json_file, 'r') as f:
+
+        original_data = json.load(f)
+
+        # make a copy of the data
+        data_copy = original_data.copy()
+
+        # and run the function to calculate the metric
+        data_copy = calc_fill_im_metric(data_copy, light_source, wavelengths, scales, metrics, to_mask=masking)
+
+        # write the data_copy to a new json file
+        out_file = os.path.join(output_json_dir,json_file.split('/')[-1])
+        with open(out_file, 'w') as outfile:
+            json.dump(data_copy, outfile,indent=4)
+            
