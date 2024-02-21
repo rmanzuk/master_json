@@ -1,6 +1,6 @@
 # set of functions for working with json files for analysis
 # written by R. A. Manzuk 12/15/2023
-# last updated 12/15/2023
+# last updated 12/19/2023
 
 ##########################################################################################
 # package imports
@@ -238,9 +238,9 @@ def get_point_count_fracs(point_counts_list):
 
 
 # ----------------------------------------------------------------------------------------
-def select_geospatial_data(outcrop_json, desired_metrics=None):
+def select_gridded_geochem(outcrop_json, desired_metrics=None):
     """
-    A function to go through an outcrop json and select only data with gps coordinates, 
+    A function to go through an outcrop json and select only geochem data with gps coordinates, 
     returning them in a datframe
 
     Keyword arguments:
@@ -260,26 +260,34 @@ def select_geospatial_data(outcrop_json, desired_metrics=None):
         # loop through all the strat data 
         for strat in outcrop_json['strat_data']:
             for samp in strat['samples']:
-                # go into the geochem_measurements and add all the metrics to the list
-                for meas in samp['geochem_measurements']:
-                    if meas['measurement_name'] not in all_metrics:
-                        all_metrics.append(meas['measurement_name'])
-
-                # do the same for point count percents
-                # WRITE THIS PART ONCE POINT COUNT PERCENTS ARE IN THE JSON
-                # for meas in samp['point_count_percent']:
+                # only continue with sample if it has geochem measurements
+                if 'geochem_measurements' in samp.keys() and len(samp['geochem_measurements']) > 0:
+                    # if there's another list nested in the geochem measurements, we need to go deeper
+                    if type(samp['geochem_measurements'][0]) == list:
+                        for sub_meas in samp['geochem_measurements']:
+                            for meas in sub_meas:
+                                if meas['measurement_name'] not in all_metrics:
+                                    all_metrics.append(meas['measurement_name'])
+                    elif type(samp['geochem_measurements'][0]) == dict:
+                        for meas in samp['geochem_measurements']:
+                            if meas['measurement_name'] not in all_metrics:
+                                all_metrics.append(meas['measurement_name'])
         
         # loop through all the grid data
         for grid in outcrop_json['grid_data']:
             for samp in grid['samples']:
-                # go into the geochem_measurements and add all the metrics to the list
-                for meas in samp['geochem_measurements']:
-                    if meas['measurement_name'] not in all_metrics:
-                        all_metrics.append(meas['measurement_name'])
-
-                # do the same for point count percents
-                # WRITE THIS PART ONCE POINT COUNT PERCENTS ARE IN THE JSON
-                # for meas in samp['point_count_percent']:
+                # only continue with sample if it has geochem measurements
+                if 'geochem_measurements' in samp.keys() and len(samp['geochem_measurements']) > 0:
+                    # if there's another list nested in the geochem measurements, we need to go deeper
+                    if type(samp['geochem_measurements'][0]) == list:
+                        for sub_meas in samp['geochem_measurements']:
+                            for meas in sub_meas:
+                                if meas['measurement_name'] not in all_metrics:
+                                    all_metrics.append(meas['measurement_name'])
+                    elif type(samp['geochem_measurements'][0]) == dict:
+                        for meas in samp['geochem_measurements']:
+                            if meas['measurement_name'] not in all_metrics:
+                                all_metrics.append(meas['measurement_name'])
                         
         # ask for input
         print('The available metrics are:')
@@ -317,25 +325,245 @@ def select_geospatial_data(outcrop_json, desired_metrics=None):
     for strat in outcrop_json['strat_data']:
         for samp in strat['samples']:
 
-            # if the sample has gps coordinates
-            if 'latitude' in samp.keys():
+            # if the sample has gps coordinates and geochem measurements
+            if 'latitude' in samp.keys() and 'geochem_measurements' in samp.keys() and len(samp['geochem_measurements']) > 0:
 
-                # only proceed if the sample has at least one of the desired metrics
-                if len([sub for sub in samp['geochem_measurements'] if sub['measurement_name'] in desired_metrics]) > 0:
+                # again need to check if there's another list nested in the geochem measurements
+                if type(samp['geochem_measurements'][0]) == list:
+                    for sub_meas in samp['geochem_measurements']:
+                        for meas in sub_meas:
+                            if meas['measurement_name'] in desired_metrics:
+                                # make a new dataframe to concatenate
+                                new_df = pd.DataFrame({'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'phase': meas['phase'], meas['measurement_name']: meas['value']}, index=[0])
+                                out_df = pd.concat([out_df, new_df], ignore_index=True)
+                elif type(samp['geochem_measurements'][0]) == dict:
+                    for meas in samp['geochem_measurements']:
+                        if meas['measurement_name'] in desired_metrics:
+                            # make a new dataframe to concatenate
+                            new_df = pd.DataFrame({'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'phase': meas['phase'], meas['measurement_name']: meas['value']}, index=[0])
+                            out_df = pd.concat([out_df, new_df], ignore_index=True)
+    # loop through all the grid data
+    for grid in outcrop_json['grid_data']:
+        for samp in grid['samples']:
+
+            # if the sample has gps coordinates and geochem measurements
+            if 'latitude' in samp.keys() and 'geochem_measurements' in samp.keys() and len(samp['geochem_measurements']) > 0:
+
+                # again need to check if there's another list nested in the geochem measurements
+                if type(samp['geochem_measurements'][0]) == list:
+                    for sub_meas in samp['geochem_measurements']:
+                        for meas in sub_meas:
+                            if meas['measurement_name'] in desired_metrics:
+                                # make a new dataframe to concatenate
+                                new_df = pd.DataFrame({'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'phase': meas['phase'], meas['measurement_name']: meas['value']}, index=[0])
+                                out_df = pd.concat([out_df, new_df], ignore_index=True)
+                elif type(samp['geochem_measurements'][0]) == dict:
+                    for meas in samp['geochem_measurements']:
+                        if meas['measurement_name'] in desired_metrics:
+                            # make a new dataframe to concatenate
+                            new_df = pd.DataFrame({'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'phase': meas['phase'], meas['measurement_name']: meas['value']}, index=[0])
+                            out_df = pd.concat([out_df, new_df], ignore_index=True)
+    # return the dataframe
+    return out_df
                     
-                    # now we need to determine if the any of the geochem measeaurements have image locations
-                    # these will serve as unique identifiers for the sub-samples. Otherwise, phase will be used
-                    # set up a vector to catch measurements with image locations
-                    image_locations = [sub for sub in samp['geochem_measurements'] if 'image_location' in sub.keys()]
+# ----------------------------------------------------------------------------------------
+def select_gridded_point_counts(outcrop_json):
+    """
+    A function to go through an outcrop json and select only point count percentages with gps coordinates,
+    returning them in a datframe
+    
+    Keyword arguments:
+    outcrop_json -- the json file to fill in, as a dictionary
+    
+    Returns:
+    out_df -- a dataframe containing the point count data
+    """
 
-                    # and those without
-                    no_image_locations = [sub for sub in samp['geochem_measurements'] if 'image_location' not in sub.keys()]
+    # first, we need to know all the classes available to input
+    all_classes = []
 
-                    # for those with image locations, get all the image locations so we can make a unique list
-                    if len(image_locations) > 0:
-                        all_image_locations = []
-                        for meas in image_locations:
-                            all_image_locations.append(meas['im_loc'][0])
+    # find them by looping through all samples, and if they have gps coordinates and point count fractions, 
+    # add new classes to the list
+    for strat in outcrop_json['strat_data']:
+        for samp in strat['samples']:
+            if 'latitude' in samp.keys() and 'point_count_fracs' in samp.keys():
+                for frac in samp['point_count_fracs']:
+                    if frac['class'] not in all_classes:
+                        all_classes.append(frac['class'])
 
-                        # make a unique list
-                        unique_image_locations = list(set(all_image_locations))
+    for grid in outcrop_json['grid_data']:
+        for samp in grid['samples']:
+            if 'latitude' in samp.keys() and 'point_count_fracs' in samp.keys():
+                for frac in samp['point_count_fracs']:
+                    if frac['class'] not in all_classes:
+                        all_classes.append(frac['class'])
+
+    # set up an empty dataframe to catch the data with classes sample name, latitude, longitude, msl, and the classes
+    out_df = pd.DataFrame()
+    out_df['sample_name'] = []
+    out_df['latitude'] = []
+    out_df['longitude'] = []
+    out_df['msl'] = []
+    for class_name in all_classes:
+        out_df[class_name] = []
+
+    # now loop through all the strat data and grid data, and add the data to the dataframe 
+    for strat in outcrop_json['strat_data']:
+        for samp in strat['samples']:
+            if 'latitude' in samp.keys() and 'point_count_fracs' in samp.keys() and len(samp['point_count_fracs']) > 0:
+                new_row = {'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl']}
+                for frac in samp['point_count_fracs']:
+                    new_row[frac['class']] = frac['value']
+                new_df = pd.DataFrame(new_row, index=[0])
+                out_df = pd.concat([out_df, new_df], ignore_index=True)
+
+    for grid in outcrop_json['grid_data']:
+        for samp in grid['samples']:
+            if 'latitude' in samp.keys() and 'point_count_fracs' in samp.keys() and len(samp['point_count_fracs']) > 0:
+                new_row = {'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl']}
+                for frac in samp['point_count_fracs']:
+                    new_row[frac['class']] = frac['value']
+                new_df = pd.DataFrame(new_row, index=[0])
+                out_df = pd.concat([out_df, new_df], ignore_index=True)
+                
+    # return the dataframe
+    return out_df
+
+# ----------------------------------------------------------------------------------------
+def select_gridded_im_metrics(outcrop_json, desired_metrics=None, desired_scales=None):
+    """
+    A function to go through an outcrop json and select only image metrics with gps coordinates,
+    returning them in a datframe
+    
+    Keyword arguments:
+    outcrop_json -- the json file to fill in, as a dictionary
+    
+    Returns:
+    out_df -- a dataframe containing the image metrics
+    """
+
+    # if metrics and scales are not specified, we will ask for input
+    if desired_metrics is None:
+        # first, we need to know all the metrics available to input, and all the scales
+        all_metrics = []
+
+        # find them by looping through all samples, and if they have gps coordinates and image metrics, 
+        # add new metrics and scales to the lists
+        for strat in outcrop_json['strat_data']:
+            for samp in strat['samples']:
+                if 'latitude' in samp.keys() and 'images' in samp.keys() and len(samp['images']) > 0:
+                    for im in samp['images']:
+                        if 'metrics' in im.keys() and len(im['metrics']) > 0:
+                            for metric in im['metrics']:
+                                if metric['metric'] not in all_metrics:
+                                    all_metrics.append(metric['metric'])
+
+        for grid in outcrop_json['grid_data']:
+            for samp in grid['samples']:
+                if 'latitude' in samp.keys() and 'images' in samp.keys() and len(samp['images']) > 0:
+                    for im in samp['images']:
+                        if 'metrics' in im.keys() and len(im['metrics']) > 0:
+                            for metric in im['metrics']:
+                                if metric['metric'] not in all_metrics:
+                                    all_metrics.append(metric['metric'])
+
+        # ask for input
+        print('The available metrics are:')
+
+        # print each metric on a new line with an index
+        for i in range(len(all_metrics)):
+            print(str(i) + ': ' + all_metrics[i])
+
+        # get the input
+        desired_metrics = input('Please enter the indices of the metrics you would like to select, separated by commas: ')
+
+        # split the input into a list of indices
+        desired_metrics = desired_metrics.split(',')
+
+        # convert the indices to integers
+        desired_metrics = [int(sub) for sub in desired_metrics]
+
+        # use the indices to get the desired metrics
+        desired_metrics = [all_metrics[sub] for sub in desired_metrics]
+
+    # do the same for scales
+    if desired_scales is None:
+        # first, we need to know all the scales available to input
+        all_scales = []
+
+        # find them by looping through all samples, and if they have gps coordinates and image metrics, 
+        # add new metrics and scales to the lists
+        for strat in outcrop_json['strat_data']:
+            for samp in strat['samples']:
+                if 'latitude' in samp.keys() and 'images' in samp.keys() and len(samp['images']) > 0:
+                    for im in samp['images']:
+                        if len(im['metrics']) > 0:
+                            for metric in im['metrics']:
+                                if metric['metric'] in desired_metrics and metric['scale'] not in all_scales:
+                                    all_scales.append(metric['scale'])
+
+        for grid in outcrop_json['grid_data']:
+            for samp in grid['samples']:
+                if 'latitude' in samp.keys() and 'images' in samp.keys() and len(samp['images']) > 0:
+                    for im in samp['images']:
+                        if 'metrics' in im.keys() and len(im['metrics']) > 0:
+                            for metric in im['metrics']:
+                                if metric['metric'] in desired_metrics and metric['scale'] not in all_scales:
+                                    all_scales.append(metric['scale'])
+
+        # ask for input
+        print('The available scales are:')
+
+        # print each scale on a new line with an index
+        for i in range(len(all_scales)):
+            print(str(i) + ': ' + str(all_scales[i]))
+
+        # get the input
+        desired_scales = input('Please enter the indices of the scales you would like to select, separated by commas: ')
+
+        # split the input into a list of indices
+        desired_scales = desired_scales.split(',')
+
+        # convert the indices to integers
+        desired_scales = [int(sub) for sub in desired_scales]
+
+        # use the indices to get the desired scales
+        desired_scales = [all_scales[sub] for sub in desired_scales]
+
+    # ready to go, set up an empty dataframe to catch the data with classes sample name, latitude, longitude, msl, wavelength, metric_name, scale, and the values
+    out_df = pd.DataFrame()
+    out_df['sample_name'] = []
+    out_df['latitude'] = []
+    out_df['longitude'] = []
+    out_df['msl'] = []
+    out_df['wavelength'] = []
+    out_df['metric_name'] = []
+    out_df['scale'] = []
+    out_df['value'] = []
+
+    # now loop through all the strat data and grid data, and add the data to the dataframe
+    for strat in outcrop_json['strat_data']:
+        for samp in strat['samples']:
+            if 'latitude' in samp.keys() and 'images' in samp.keys() and len(samp['images']) > 0:
+                for im in samp['images']:
+                    if 'metrics' in im.keys() and len(im['metrics']) > 0:
+                        for metric in im['metrics']:
+                            if metric['metric'] in desired_metrics and metric['scale'] in desired_scales:
+                                new_row = {'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'wavelength': im['wavelength'], 'metric_name': metric['metric'], 'scale': metric['scale'], 'value': metric['value']}
+                                new_df = pd.DataFrame(new_row, index=[0])
+                                out_df = pd.concat([out_df, new_df], ignore_index=True)
+
+    for grid in outcrop_json['grid_data']:
+        for samp in grid['samples']:
+            if 'latitude' in samp.keys() and 'images' in samp.keys() and len(samp['images']) > 0:
+                for im in samp['images']:
+                    if 'metrics' in im.keys() and len(im['metrics']) > 0:
+                        for metric in im['metrics']:
+                            if metric['metric'] in desired_metrics and metric['scale'] in desired_scales:
+                                new_row = {'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'wavelength': im['wavelength'], 'metric_name': metric['metric'], 'scale': metric['scale'], 'value': metric['value']}
+                                new_df = pd.DataFrame(new_row, index=[0])
+                                out_df = pd.concat([out_df, new_df], ignore_index=True)
+
+    # return the dataframe
+    return out_df
+
