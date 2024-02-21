@@ -1,6 +1,6 @@
 # script with sections to handle all little data input/updata tasks for jsons
 # written by R. A. Manzuk 02/16/2024
-# last updated 02/16/2024
+# last updated 02/19/2024
 
 ##########################################################################################
 # package imports
