@@ -1,6 +1,6 @@
 # set of functions for getting data from images
 # written by R. A. Manzuk 12/15/2023
-# last updated 12/15/2023
+# last updated 12/19/2023
 
 ##########################################################################################
 # package imports
@@ -12,6 +12,7 @@ import skimage.io as io # for image reading
 from sklearn.decomposition import PCA # for PCA
 from skimage.transform import rescale # for rescaling images
 from skimage import filters # for image processing
+from skimage.morphology import ellipse # for making structuring elements
 import bottleneck as bn # for fast nan functions
 from datetime import date # for getting today's date
 import pdb # for debugging
@@ -104,6 +105,11 @@ def calc_fill_im_metric(sample_json, light_source, wavelengths, scales, metrics,
             for m in metrics:
                 print('Calculating metric ' + m)
 
+                # if the sample json already has this metric at this scale , we don't want to recalculate it
+                if any(d['metric'] == m for d in sample_json['images'][indices[0]]['metrics']) and any(d['scale'] == s for d in sample_json['images'][indices[0]]['metrics']):
+                    print('Metric ' + m + ' already calculated, skipping')
+                    continue
+
                 # check which metric we're calculating
                 if m == 'rayleigh_anisotropy':
                     
@@ -126,7 +132,7 @@ def calc_fill_im_metric(sample_json, light_source, wavelengths, scales, metrics,
                     return sample_json
 
     # all done, return the sample json
-    return sample_json, normed_im, scaled_im
+    return sample_json
 
 # ----------------------------------------------------------------------------------------
 def normalize_band(band_im, method='0to1'):
