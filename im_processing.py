@@ -1,6 +1,6 @@
 # set of functions for getting data from images
 # written by R. A. Manzuk 12/15/2023
-# last updated 12/19/2023
+# last updated 12/29/2023
 
 ##########################################################################################
 # package imports
@@ -12,6 +12,7 @@ import skimage.io as io # for image reading
 from sklearn.decomposition import PCA # for PCA
 from skimage.transform import rescale # for rescaling images
 from skimage import filters # for image processing
+import skimage.measure # for entropy
 from skimage.morphology import ellipse # for making structuring elements
 import bottleneck as bn # for fast nan functions
 from datetime import date # for getting today's date
@@ -32,6 +33,10 @@ def calc_fill_im_metric(sample_json, light_source, wavelengths, scales, metrics,
     scales -- list of scales for the image desired, as decimal fractions
     metric -- list of metrics to calculate, as strings, options are:
         'rayleigh_anisotropy' -- the anisotropy of image, according to the Rayleigh criterion
+        'entropy' -- the entropy of the image
+        'percentile_n' -- the percentile of the image the n after the underscore should be 
+        replaced with the desired percentile. multiple percentiles can be calculated, just
+        list them all separated by underscores
 
     Returns:
     sample_json -- the sample json with the metric filled in
@@ -106,8 +111,13 @@ def calc_fill_im_metric(sample_json, light_source, wavelengths, scales, metrics,
                 print('Calculating metric ' + m)
 
                 # if the sample json already has this metric at this scale , we don't want to recalculate it
-                if any(d['metric'] == m for d in sample_json['images'][indices[0]]['metrics']) and any(d['scale'] == s for d in sample_json['images'][indices[0]]['metrics']):
-                    print('Metric ' + m + ' already calculated, skipping')
+                # frist check if any metrics match
+                metric_match = [d for d in sample_json['images'][indices[0]]['metrics'] if d['metric'] == m]
+                # and then check if any of those matches have the same scale
+                scale_match = [d for d in metric_match if d['scale'] == s]
+                # if there is a match, we don't want to recalculate
+                if len(scale_match) > 0:
+                    print('Metric ' + m + ' already calculated at scale ' + str(s))
                     continue
 
                 # check which metric we're calculating
@@ -124,6 +134,38 @@ def calc_fill_im_metric(sample_json, light_source, wavelengths, scales, metrics,
 
                     # add the metric to the image entry
                     sample_json['images'][indices[0]]['metrics'].append(metric_dict)
+
+                elif m == 'entropy':
+
+                    # calculate the entropy
+                    ent = skimage.measure.shannon_entropy(scaled_im)
+
+                    # now make a dictionary for this measurement that we can add to the sample json
+                    metric_dict = {'metric': m, 'value': ent, 'scale': s}
+
+                    # also add today's date to the dictionary, because that might be good metatdata to compare to code version
+                    metric_dict['date_calculated'] = date.today().strftime("%m/%d/%Y")
+
+                    # add the metric to the image entry
+                    sample_json['images'][indices[0]]['metrics'].append(metric_dict)
+
+                elif 'percentile' in m:
+
+                    # get the list of percentiles asked for
+                    percentiles = m.split('_')[1:]
+
+                    # calculate the percentiles
+                    perc_vals = np.percentile(scaled_im, [int(i) for i in percentiles])
+
+                    # make a dictionary for each percentile measurement that we can add to the sample json
+                    for p, pv in zip(percentiles, perc_vals):
+                        metric_dict = {'metric': 'percentile', 'value': pv, 'scale': s, 'percentile': p}
+
+                        # also add today's date to the dictionary, because that might be good metatdata to compare to code version
+                        metric_dict['date_calculated'] = date.today().strftime("%m/%d/%Y")
+
+                        # add the metric to the image entry
+                        sample_json['images'][indices[0]]['metrics'].append(metric_dict)
 
 
                 # if the metric isn't recognized, throw an error
