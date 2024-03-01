@@ -15,7 +15,7 @@ import json # for json handling
 ##########################################################################################
 # %% 
 from file_handing import jmicro_to_dict, get_file_list
-from json_processing import get_point_count_fracs
+
 # %% 
 ##########################################################################################
 # script lines
