@@ -331,17 +331,23 @@ def select_gridded_geochem(outcrop_json, desired_metrics=None):
                 # again need to check if there's another list nested in the geochem measurements
                 if type(samp['geochem_measurements'][0]) == list:
                     for sub_meas in samp['geochem_measurements']:
+                        # make a new dataframe to hold the data
+                        new_df = pd.DataFrame({'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'phase': sub_meas[0]['phase']}, index=[0])
                         for meas in sub_meas:
                             if meas['measurement_name'] in desired_metrics:
-                                # make a new dataframe to concatenate
-                                new_df = pd.DataFrame({'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'phase': meas['phase'], meas['measurement_name']: meas['value']}, index=[0])
-                                out_df = pd.concat([out_df, new_df], ignore_index=True)
+                                # add the measurement to the dataframe
+                                new_df[meas['measurement_name']] = meas['value']
+                        # concatenate the new dataframe to the output dataframe        
+                        out_df = pd.concat([out_df, new_df], ignore_index=True)
                 elif type(samp['geochem_measurements'][0]) == dict:
+                    # make a new dataframe to hold the data
+                    new_df = pd.DataFrame({'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'phase': samp['geochem_measurements'][0]['phase']}, index=[0])
                     for meas in samp['geochem_measurements']:
                         if meas['measurement_name'] in desired_metrics:
-                            # make a new dataframe to concatenate
-                            new_df = pd.DataFrame({'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'phase': meas['phase'], meas['measurement_name']: meas['value']}, index=[0])
-                            out_df = pd.concat([out_df, new_df], ignore_index=True)
+                            # add the measurement to the dataframe
+                            new_df[meas['measurement_name']] = meas['value']
+                    # concatenate the new dataframe to the output dataframe
+                    out_df = pd.concat([out_df, new_df], ignore_index=True)
     # loop through all the grid data
     for grid in outcrop_json['grid_data']:
         for samp in grid['samples']:
@@ -352,17 +358,23 @@ def select_gridded_geochem(outcrop_json, desired_metrics=None):
                 # again need to check if there's another list nested in the geochem measurements
                 if type(samp['geochem_measurements'][0]) == list:
                     for sub_meas in samp['geochem_measurements']:
+                        # make a new dataframe to hold the data
+                        new_df = pd.DataFrame({'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'phase': sub_meas[0]['phase']}, index=[0])
                         for meas in sub_meas:
                             if meas['measurement_name'] in desired_metrics:
-                                # make a new dataframe to concatenate
-                                new_df = pd.DataFrame({'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'phase': meas['phase'], meas['measurement_name']: meas['value']}, index=[0])
-                                out_df = pd.concat([out_df, new_df], ignore_index=True)
+                                # add the measurement to the dataframe
+                                new_df[meas['measurement_name']] = meas['value']
+                        # concatenate the new dataframe to the output dataframe        
+                        out_df = pd.concat([out_df, new_df], ignore_index=True)
                 elif type(samp['geochem_measurements'][0]) == dict:
+                    # make a new dataframe to hold the data
+                    new_df = pd.DataFrame({'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'phase': samp['geochem_measurements'][0]['phase']}, index=[0])
                     for meas in samp['geochem_measurements']:
                         if meas['measurement_name'] in desired_metrics:
-                            # make a new dataframe to concatenate
-                            new_df = pd.DataFrame({'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'phase': meas['phase'], meas['measurement_name']: meas['value']}, index=[0])
-                            out_df = pd.concat([out_df, new_df], ignore_index=True)
+                            # add the measurement to the dataframe
+                            new_df[meas['measurement_name']] = meas['value']
+                    # concatenate the new dataframe to the output dataframe
+                    out_df = pd.concat([out_df, new_df], ignore_index=True)
     # return the dataframe
     return out_df
                     
@@ -567,3 +579,70 @@ def select_gridded_im_metrics(outcrop_json, desired_metrics=None, desired_scales
     # return the dataframe
     return out_df
 
+# ----------------------------------------------------------------------------------------
+def data_audit(outcrop_json, sample_set):
+    """
+    A simple function to go through the samples in an outcrop json and check for missing data
+
+    Keyword arguments:
+    outcrop_json -- the json file to look through, as a dictionary
+    sample_set -- indicating which types of samples to look at, options are:
+        'strat_data'
+        'grid_data'
+        'all'
+
+    Returns:
+    None, but prints out the names of samples missing data
+    """
+
+    # we'll look for missing images, geochem, and point count data, set up empty lists to catch the names
+    missing_images = []
+    missing_geochem = []
+    missing_point_count_fracs = []
+    missing_point_counts = []
+
+    # loop through the strat data if we are looking at it
+    if sample_set == 'strat_data' or sample_set == 'all':
+        for strat in outcrop_json['strat_data']:
+            for samp in strat['samples']:
+                if 'images' not in samp.keys() or len(samp['images']) == 0:
+                    missing_images.append(samp['sample_name'])
+                if 'geochem_measurements' not in samp.keys() or len(samp['geochem_measurements']) == 0:
+                    missing_geochem.append(samp['sample_name'])
+                if 'point_count_fracs' not in samp.keys() or len(samp['point_count_fracs']) == 0:
+                    missing_point_count_fracs.append(samp['sample_name'])
+                if 'point_counts' not in samp.keys() or len(samp['point_counts']) == 0:
+                    missing_point_counts.append(samp['sample_name'])
+    
+    # loop through the grid data if we are looking at it
+    if sample_set == 'grid_data' or sample_set == 'all':
+        for grid in outcrop_json['grid_data']:
+            for samp in grid['samples']:
+                if 'images' not in samp.keys() or len(samp['images']) == 0:
+                    missing_images.append(samp['sample_name'])
+                if 'geochem_measurements' not in samp.keys() or len(samp['geochem_measurements']) == 0:
+                    missing_geochem.append(samp['sample_name'])
+                if 'point_count_fracs' not in samp.keys() or len(samp['point_count_fracs']) == 0:
+                    missing_point_count_fracs.append(samp['sample_name'])
+                if 'point_counts' not in samp.keys() or len(samp['point_counts']) == 0:
+                    missing_point_counts.append(samp['sample_name'])
+
+    # before printing results, refine point count output.
+    # the set difference between missing_point_counts and missing_point_count_fracs will give us 
+    # the samples that have point counts but no point count fractions and just need to be updated
+    just_update = list(set(missing_point_counts) - set(missing_point_count_fracs))
+        
+
+    # print out the results, in a nice format
+    print('The following samples are missing images:')
+    for name in missing_images:
+        print(name)
+    print('The following samples are missing geochem data:')
+    for name in missing_geochem:
+        print(name)
+    print('The following samples are missing point counts altogether:')
+    for name in missing_point_counts:
+        print(name)
+    print('The following samples are missing point count fractions, but have point counts:')
+    for name in just_update:
+        print(name)
