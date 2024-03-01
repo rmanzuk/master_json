@@ -14,7 +14,7 @@ import json # for json handling
 # local function imports
 ##########################################################################################
 # %% 
-from json_processing import assemble_samples, select_gridded_geochem, select_gridded_im_metrics, select_gridded_point_counts
+from json_processing import assemble_samples, select_gridded_geochem, select_gridded_im_metrics, select_gridded_point_counts, data_audit
 # %% 
 ##########################################################################################
 # script lines
@@ -31,6 +31,9 @@ with open(outcrop_json_file, 'r') as f:
 # %% assemble the missing samples into the outcrop json
 
 outcrop_data = assemble_samples(outcrop_data, sample_json_dir, data_type=['grid_data'], data_name=["Stewart's Mill Grid"])
+
+# and audit the data, but just the grid samples
+data_audit(outcrop_data, 'grid_data')
 
 # %% select the gridded geochem data, im metrics, and point counts
 geochem_df = select_gridded_geochem(outcrop_data)
