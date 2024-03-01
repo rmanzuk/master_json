@@ -1,6 +1,6 @@
 # script with sections to handle all little data input/updata tasks for jsons
 # written by R. A. Manzuk 02/16/2024
-# last updated 02/19/2024
+# last updated 02/29/2024
 
 ##########################################################################################
 # package imports
@@ -91,8 +91,8 @@ with open(out_file, 'w') as outfile:
 # SET THE light_source, wavelengths, scales, and metrics to use
 light_source = 'reflectance'
 wavelengths = [530]
-scales = [1, 0.5, 0.25, 0.125, 0.0625, 0.03125, 0.015625, 0.0078125, 0.00390625]
-metrics = ['rayleigh_anisotropy']
+scales = [1]
+metrics = ['percentile_5_10_15_20_25_30_35_40_45_50_55_60_65_70_75_80_85_90_95_100']
 masking = True
 
 # get a list of all the json files
