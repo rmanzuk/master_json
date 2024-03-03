@@ -89,8 +89,8 @@ with open(out_file, 'w') as outfile:
 # %% section to calculate an image metric, and store it in the jsons
     
 # SET THE light_source, wavelengths, scales, and metrics to use
-light_source = 'reflectance'
-wavelengths = [530]
+light_source = 'fluorescence'
+wavelengths = [365]
 scales = [1]
 metrics = ['percentile_5_10_15_20_25_30_35_40_45_50_55_60_65_70_75_80_85_90_95_100']
 masking = True
