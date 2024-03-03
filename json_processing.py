@@ -236,7 +236,6 @@ def get_point_count_fracs(point_counts_list):
     # return the list of dictionaries
     return point_count_fracs
 
-
 # ----------------------------------------------------------------------------------------
 def select_gridded_geochem(outcrop_json, desired_metrics=None):
     """
@@ -561,7 +560,11 @@ def select_gridded_im_metrics(outcrop_json, desired_metrics=None, desired_scales
                     if 'metrics' in im.keys() and len(im['metrics']) > 0:
                         for metric in im['metrics']:
                             if metric['metric'] in desired_metrics and metric['scale'] in desired_scales:
-                                new_row = {'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'wavelength': im['wavelength'], 'metric_name': metric['metric'], 'scale': metric['scale'], 'value': metric['value']}
+                                # slitghly different case if the metric is percentile, because then we need the percentile value
+                                if metric['metric'] == 'percentile':
+                                    new_row = {'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'wavelength': im['wavelength'], 'metric_name': [metric['metric']+'_'+metric['percentile']], 'scale': metric['scale'], 'value': metric['value']}
+                                else:
+                                    new_row = {'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'wavelength': im['wavelength'], 'metric_name': metric['metric'], 'scale': metric['scale'], 'value': metric['value']}
                                 new_df = pd.DataFrame(new_row, index=[0])
                                 out_df = pd.concat([out_df, new_df], ignore_index=True)
 
@@ -572,7 +575,11 @@ def select_gridded_im_metrics(outcrop_json, desired_metrics=None, desired_scales
                     if 'metrics' in im.keys() and len(im['metrics']) > 0:
                         for metric in im['metrics']:
                             if metric['metric'] in desired_metrics and metric['scale'] in desired_scales:
-                                new_row = {'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'wavelength': im['wavelength'], 'metric_name': metric['metric'], 'scale': metric['scale'], 'value': metric['value']}
+                                # slitghly different case if the metric is percentile, because then we need the percentile value
+                                if metric['metric'] == 'percentile':
+                                    new_row = {'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'wavelength': im['wavelength'], 'metric_name': [metric['metric']+'_'+metric['percentile']], 'scale': metric['scale'], 'value': metric['value']}
+                                else:
+                                    new_row = {'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'wavelength': im['wavelength'], 'metric_name': metric['metric'], 'scale': metric['scale'], 'value': metric['value']}
                                 new_df = pd.DataFrame(new_row, index=[0])
                                 out_df = pd.concat([out_df, new_df], ignore_index=True)
 
