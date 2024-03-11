@@ -602,11 +602,12 @@ def data_audit(outcrop_json, sample_set):
     None, but prints out the names of samples missing data
     """
 
-    # we'll look for missing images, geochem, and point count data, set up empty lists to catch the names
+    # we'll look for missing images, geochem, bag of words and point count data, set up empty lists to catch the names
     missing_images = []
     missing_geochem = []
     missing_point_count_fracs = []
     missing_point_counts = []
+    missing_bow = []
 
     # loop through the strat data if we are looking at it
     if sample_set == 'strat_data' or sample_set == 'all':
@@ -620,6 +621,8 @@ def data_audit(outcrop_json, sample_set):
                     missing_point_count_fracs.append(samp['sample_name'])
                 if 'point_counts' not in samp.keys() or len(samp['point_counts']) == 0:
                     missing_point_counts.append(samp['sample_name'])
+                if 'bag_of_words' not in samp.keys() or len(samp['bag_of_words']) == 0:
+                    missing_bow.append(samp['sample_name'])
     
     # loop through the grid data if we are looking at it
     if sample_set == 'grid_data' or sample_set == 'all':
@@ -633,6 +636,8 @@ def data_audit(outcrop_json, sample_set):
                     missing_point_count_fracs.append(samp['sample_name'])
                 if 'point_counts' not in samp.keys() or len(samp['point_counts']) == 0:
                     missing_point_counts.append(samp['sample_name'])
+                if 'bag_of_words' not in samp.keys() or len(samp['bag_of_words']) == 0:
+                    missing_bow.append(samp['sample_name'])
 
     # before printing results, refine point count output.
     # the set difference between missing_point_counts and missing_point_count_fracs will give us 
@@ -652,4 +657,7 @@ def data_audit(outcrop_json, sample_set):
         print(name)
     print('The following samples are missing point count fractions, but have point counts:')
     for name in just_update:
+        print(name)
+    print('The following samples are missing bag of words data:')
+    for name in missing_bow:
         print(name)
