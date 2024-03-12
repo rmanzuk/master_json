@@ -550,6 +550,7 @@ def select_gridded_im_metrics(outcrop_json, desired_metrics=None, desired_scales
     out_df['wavelength'] = []
     out_df['metric_name'] = []
     out_df['scale'] = []
+    out_df['normalized'] = []
     out_df['value'] = []
 
     # now loop through all the strat data and grid data, and add the data to the dataframe
@@ -562,9 +563,9 @@ def select_gridded_im_metrics(outcrop_json, desired_metrics=None, desired_scales
                             if metric['metric'] in desired_metrics and metric['scale'] in desired_scales:
                                 # slitghly different case if the metric is percentile, because then we need the percentile value
                                 if metric['metric'] == 'percentile':
-                                    new_row = {'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'wavelength': im['wavelength'], 'metric_name': [metric['metric']+'_'+metric['percentile']], 'scale': metric['scale'], 'value': metric['value']}
+                                    new_row = {'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'wavelength': im['wavelength'], 'metric_name': [metric['metric']+'_'+metric['percentile']], 'scale': metric['scale'], 'normalized': metric['normalized'], 'value': metric['value']}
                                 else:
-                                    new_row = {'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'wavelength': im['wavelength'], 'metric_name': metric['metric'], 'scale': metric['scale'], 'value': metric['value']}
+                                    new_row = {'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'wavelength': im['wavelength'], 'metric_name': metric['metric'], 'scale': metric['scale'], 'normalized': metric['normalized'], 'value': metric['value']}
                                 new_df = pd.DataFrame(new_row, index=[0])
                                 out_df = pd.concat([out_df, new_df], ignore_index=True)
 
@@ -577,9 +578,9 @@ def select_gridded_im_metrics(outcrop_json, desired_metrics=None, desired_scales
                             if metric['metric'] in desired_metrics and metric['scale'] in desired_scales:
                                 # slitghly different case if the metric is percentile, because then we need the percentile value
                                 if metric['metric'] == 'percentile':
-                                    new_row = {'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'wavelength': im['wavelength'], 'metric_name': [metric['metric']+'_'+metric['percentile']], 'scale': metric['scale'], 'value': metric['value']}
+                                    new_row = {'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'wavelength': im['wavelength'], 'metric_name': [metric['metric']+'_'+metric['percentile']], 'scale': metric['scale'], 'normalized': metric['normalized'], 'value': metric['value']}
                                 else:
-                                    new_row = {'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'wavelength': im['wavelength'], 'metric_name': metric['metric'], 'scale': metric['scale'], 'value': metric['value']}
+                                    new_row = {'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'wavelength': im['wavelength'], 'metric_name': metric['metric'], 'scale': metric['scale'], 'normalized': metric['normalized'], 'value': metric['value']}
                                 new_df = pd.DataFrame(new_row, index=[0])
                                 out_df = pd.concat([out_df, new_df], ignore_index=True)
 

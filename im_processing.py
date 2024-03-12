@@ -22,7 +22,7 @@ import pdb # for debugging
 ##########################################################################################
 
 # ----------------------------------------------------------------------------------------
-def calc_fill_im_metric(sample_json, light_source, wavelengths, scales, metrics, to_mask=False):
+def calc_fill_im_metric(sample_json, light_source, wavelengths, scales, metrics, to_mask=False, to_normalize=False):
     """
     function to calculate an image metric for the sample and fill it in to the sample json
 
@@ -70,8 +70,18 @@ def calc_fill_im_metric(sample_json, light_source, wavelengths, scales, metrics,
         # otherwise, read in the image
         raw_im = io.imread(sample_json['path_to_ims'] + '/' + sample_json['images'][indices[0]]['file_name'])
 
-        # and normalize it between 0 and 1
-        normed_im = normalize_band(raw_im, '0to1')
+        # first make the image a float spread between 0 and 1
+        if raw_im.dtype == 'uint8':
+            raw_im = raw_im / 255
+        elif raw_im.dtype == 'uint16':
+            raw_im = raw_im / 65536
+        elif raw_im.dtype == 'float32':
+            raw_im = raw_im
+        elif raw_im.dtype == 'float64':
+            raw_im = raw_im
+        else:
+            print('Error: image dtype not recognized')
+            return sample_json
 
         # if we're masking, we need to do that here
         if to_mask:
@@ -87,11 +97,19 @@ def calc_fill_im_metric(sample_json, light_source, wavelengths, scales, metrics,
                 return sample_json
             # otherwise, read in the mask
             mask = io.imread(sample_json['path_to_ims'] + '/' + sample_json['images'][mask_index[0]]['file_name'], plugin='pil')
-            # make the mask a boolean
-            mask = mask > 0
-            # apply the mask
-            normed_im = normed_im * mask
+            # use the mask to get the indices of the pixels to set to nan
+            nan_indices = np.where(mask == 0)
+            # set the pixels to nan
+            raw_im[nan_indices] = np.nan
 
+        # if we're normalizing, we need to do that here
+        if to_normalize:
+            # normalize the image
+            normed_im = normalize_band(raw_im, '0to1')
+        else:
+            # if we're not normalizing, just set the normalized image to the raw image
+            normed_im = raw_im
+            
         # also, before looping, if this image entry doesn't have a metrics key, make it
         if 'metrics' not in sample_json['images'][indices[0]]:
             sample_json['images'][indices[0]]['metrics'] = []
@@ -115,8 +133,10 @@ def calc_fill_im_metric(sample_json, light_source, wavelengths, scales, metrics,
                 metric_match = [d for d in sample_json['images'][indices[0]]['metrics'] if d['metric'] == m]
                 # and then check if any of those matches have the same scale
                 scale_match = [d for d in metric_match if d['scale'] == s]
+                # and check check if any of those matches have the same normalization status
+                norm_match = [d for d in scale_match if d['normalized'] == to_normalize]
                 # if there is a match, we don't want to recalculate
-                if len(scale_match) > 0:
+                if len(norm_match) > 0:
                     print('Metric ' + m + ' already calculated at scale ' + str(s))
                     continue
 
@@ -127,7 +147,7 @@ def calc_fill_im_metric(sample_json, light_source, wavelengths, scales, metrics,
                     r, theta_r = grad_r(im_grad(scaled_im, 'sobel')[1], mag_im=im_grad(scaled_im, 'sobel')[0])
 
                     # now make a dictionary for this measurement that we can add to the sample json
-                    metric_dict = {'metric': m, 'value': r, 'scale': s, 'angle': theta_r}
+                    metric_dict = {'metric': m, 'value': r, 'scale': s, 'angle': theta_r, 'normalized': to_normalize}
 
                     # also add today's date to the dictionary, because that might be good metatdata to compare to code version
                     metric_dict['date_calculated'] = date.today().strftime("%m/%d/%Y")
@@ -141,7 +161,7 @@ def calc_fill_im_metric(sample_json, light_source, wavelengths, scales, metrics,
                     ent = skimage.measure.shannon_entropy(scaled_im)
 
                     # now make a dictionary for this measurement that we can add to the sample json
-                    metric_dict = {'metric': m, 'value': ent, 'scale': s}
+                    metric_dict = {'metric': m, 'value': ent, 'scale': s, 'normalized': to_normalize}
 
                     # also add today's date to the dictionary, because that might be good metatdata to compare to code version
                     metric_dict['date_calculated'] = date.today().strftime("%m/%d/%Y")
@@ -155,11 +175,11 @@ def calc_fill_im_metric(sample_json, light_source, wavelengths, scales, metrics,
                     percentiles = m.split('_')[1:]
 
                     # calculate the percentiles
-                    perc_vals = np.percentile(scaled_im, [int(i) for i in percentiles])
+                    perc_vals = np.nanpercentile(scaled_im, [int(i) for i in percentiles])
 
                     # make a dictionary for each percentile measurement that we can add to the sample json
                     for p, pv in zip(percentiles, perc_vals):
-                        metric_dict = {'metric': 'percentile', 'value': pv, 'scale': s, 'percentile': p}
+                        metric_dict = {'metric': 'percentile', 'value': pv, 'scale': s, 'percentile': p, 'normalized': to_normalize}
 
                         # also add today's date to the dictionary, because that might be good metatdata to compare to code version
                         metric_dict['date_calculated'] = date.today().strftime("%m/%d/%Y")
@@ -194,8 +214,8 @@ def normalize_band(band_im, method='0to1'):
     # 0to1 method just normalizes between 0 and 1
     if method == '0to1':
         # get the min and max
-        band_min = np.min(band_im)
-        band_max = np.max(band_im)
+        band_min = np.nanmin(band_im)
+        band_max = np.nanmax(band_im)
         # normalize
         normed_band = (band_im - band_min) / (band_max - band_min)
 
@@ -206,10 +226,10 @@ def normalize_band(band_im, method='0to1'):
     # 255 (or other max value) maps to 255/255
     elif method == 'std_stretch':
         # get the mean and std
-        band_mean = np.mean(band_im)
-        band_std = np.std(band_im)
-        band_min = np.min(band_im)
-        band_max = np.max(band_im)
+        band_mean = np.nanmean(band_im)
+        band_std = np.nanstd(band_im)
+        band_min = np.nanmin(band_im)
+        band_max = np.nanmax(band_im)
         # define the original band values, but first need to get dtype to know what the possible max is
         if band_im.dtype == 'uint8':
             possible_max = 255
@@ -222,8 +242,8 @@ def normalize_band(band_im, method='0to1'):
         else:
             print('Error: dtype not recognized')
             return
-        band_vals = np.array([0, np.max([band_min,1,band_mean - 2*band_std]), 
-                              np.min([band_mean + 2*band_std, band_max]), possible_max])
+        band_vals = np.array([0, np.nanmax([band_min,1,band_mean - 2*band_std]), 
+                              np.nanmin([band_mean + 2*band_std, band_max]), possible_max])
         transfer_vals = np.array([0, 1/255, 254/255, 255/255])
         transfer_func = interp1d(band_vals, transfer_vals)
         # apply the transfer function
