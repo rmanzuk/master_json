@@ -37,6 +37,7 @@ def calc_fill_im_metric(sample_json, light_source, wavelengths, scales, metrics,
         'percentile_n' -- the percentile of the image the n after the underscore should be 
         replaced with the desired percentile. multiple percentiles can be calculated, just
         list them all separated by underscores
+        'glcm_contrast' -- the contrast of the image, calculated from the GLCM
 
     Returns:
     sample_json -- the sample json with the metric filled in
@@ -186,6 +187,23 @@ def calc_fill_im_metric(sample_json, light_source, wavelengths, scales, metrics,
 
                         # add the metric to the image entry
                         sample_json['images'][indices[0]]['metrics'].append(metric_dict)
+
+                elif m == 'glcm_contrast':
+
+                    # calculate the GL co-occurence image
+                    glcm_im = gray_coimage(scaled_im, 'right', 16)
+
+                    # calculate the contrast
+                    contrast = calc_glcm_contrast(glcm_im, 16)
+
+                    # now make a dictionary for this measurement that we can add to the sample json
+                    metric_dict = {'metric': m, 'value': contrast, 'scale': s, 'normalized': to_normalize, 'n_levels': 16} 
+
+                    # also add today's date to the dictionary, because that might be good metatdata to compare to code version
+                    metric_dict['date_calculated'] = date.today().strftime("%m/%d/%Y")
+
+                    # add the metric to the image entry
+                    sample_json['images'][indices[0]]['metrics'].append(metric_dict)
 
 
                 # if the metric isn't recognized, throw an error
@@ -458,3 +476,87 @@ def grad_r(dir_im, mag_weights=None, mag_thresh=None, neigh_rad=None, mag_im=Non
         theta_r = np.arctan((sin_mean/r)/(cos_mean/r))
 
     return r, theta_r
+
+# ----------------------------------------------------------------------------------------
+def gray_coimage(input_im, direction, n_bins):
+    """
+    return a gray level co-occurence image for a given direction
+
+    Keyword arguments:
+    input_im -- the image to extract data from, should be normalized or scaled between 0 and 1
+    direction -- the direction to calculate the glcm for, either 
+    'left', 'right', 'up', or 'down'
+    n_bins -- the number of bins to use for the glcm
+
+    Returns:
+    glcm_im -- a gray level co-occurence image, where each pixel is the linear 
+    index of where that pixel would be in the glcm
+    """
+    # double check the image is normalized between 0 and 1
+
+    # bin the image
+    bins = np.linspace(0,1,n_bins+1)
+    binned_im = np.digitize(input_im,bins)
+
+    # make shift the image over in based on the direction input. The shift is opposite the direction of the input
+    # so that it's like we're looking at the pixel in that direction. Padding with ones
+    if direction == 'left':
+        shifted_im = np.hstack((np.ones((binned_im.shape[0],1)), binned_im[:,:-1]))
+    elif direction == 'right':
+        shifted_im = np.hstack((binned_im[:,1:], np.ones((binned_im.shape[0],1))))
+    elif direction == 'up':
+        shifted_im = np.vstack((np.ones((1,binned_im.shape[1])), binned_im[:-1,:]))
+    elif direction == 'down':
+        shifted_im = np.vstack((binned_im[1:,:], np.ones((1,binned_im.shape[1]))))
+
+    # now we flatten the image and shifted image an make into two column array. This array 
+    # actually is a list of all the possible pixel pairs in the image which are indices of the glcm
+    ind_mat = np.reshape(binned_im, (binned_im.shape[0]*binned_im.shape[1],1)), np.reshape(shifted_im, (shifted_im.shape[0]*shifted_im.shape[1],1))
+
+    # and for these to actually be indices, we need to subtract 1 from each element and make sure they're integers
+    ind_mat = np.array(ind_mat).astype(int)-1
+
+    # for the gray coimage, we'll just return these subindices as linear indices, reshaped into the image
+    # dimensions, giving nan if the indices are nan
+    glcm_inds = np.ravel
+    glcm_inds = np.ravel_multi_index(ind_mat, (n_bins,n_bins), mode='clip', order='C')
+    glcm_im = np.reshape(glcm_inds, (binned_im.shape[0],binned_im.shape[1]))    
+
+    return glcm_im
+
+# ----------------------------------------------------------------------------------------
+def calc_glcm_contrast(glcm_im, n_bins):
+    """
+    return the contrast of a gray level co-occurence image
+
+    Keyword arguments:
+    glcm_im -- the gray level co-occurence image
+    n_bins -- the number of bins to use for the glcm
+
+    Returns:
+    contrast -- the contrast of the glcm
+    """
+
+    # reshape the glcm_im into a 1D array
+    glcm_im = np.ravel(glcm_im)
+
+    # glcm_im is in linear indices, we need to turn it into 2 subindices
+    ind_mat = np.unravel_index(glcm_im, (n_bins,n_bins))
+
+    # now we can make the glcm
+    glcm = np.zeros((n_bins,n_bins))
+    for i in range(n_bins):
+        for j in range(n_bins):
+            glcm[i,j] = np.sum((ind_mat[0] == i) & (ind_mat[1] == j))
+
+    # calculate the contrast
+    i_mat = np.arange(n_bins)
+    i_mat = np.tile(i_mat,(n_bins,1))
+    j_mat = np.arange(n_bins)
+    j_mat = np.tile(j_mat,(n_bins,1)).T
+
+    ind_diff_mat = (i_mat - j_mat)**2
+    norm_prob_mat = glcm / np.sum(glcm)
+    contrast = np.sum(norm_prob_mat * ind_diff_mat)
+            
+    return contrast
