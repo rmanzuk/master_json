@@ -52,6 +52,12 @@ for csv_file in csv_files:
         # convert the csv to a dictionary
         csv_dict = jmicro_to_dict(csv_file, 14204*0.35277778, 10652*0.35277778, delimiter=';')
 
+        # and a small particularity, ooid might have a difference in case
+        # if it starts with a capital letter, change it to lower case
+        for point in csv_dict:
+            if point['class'] == 'Ooid':
+                point['class'] = 'ooid'
+
         # load in the json file
         with open(json_file[0], 'r') as f:
 
