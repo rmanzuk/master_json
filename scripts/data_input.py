@@ -8,6 +8,7 @@
 # %%
 import os # for file handling
 import json # for json handling
+import pandas as pd # for data handling
 
 #%%
 ##########################################################################################
@@ -124,3 +125,53 @@ for json_file in json_files:
         with open(out_file, 'w') as outfile:
             json.dump(data_copy, outfile,indent=4)
             
+# %% section to read in the presence/absence csv and add it to the jsons
+            
+# get a list of all the json files
+input_json_dir = '/Users/ryan/Dropbox (Princeton)/code/master_json/stewarts_mill_grid_samples/'
+json_files = get_file_list(input_json_dir, '*.json')
+
+# output directory for the json files (can be the same as the input)
+output_json_dir = input_json_dir
+
+# read in the csv
+presence_absence_csv = '/Users/ryan/Dropbox (Princeton)/reef_survey_project/nevada/data_spreadsheets/point_counts/presence_absence/shell_presence_absence.csv'
+presence_absence_data = pd.read_csv(presence_absence_csv)
+
+# iterate through the json files
+for json_file in json_files:
+
+    # load in the json file
+    with open(json_file, 'r') as f:
+
+        print('working on file: ',json_file)
+
+        original_data = json.load(f)
+
+        # make a copy of the data
+        data_copy = original_data.copy()
+
+        # get the sample name
+        sample_name = json_file.split('/')[-1].split('.')[0]
+
+        # get the presence absence data for that sample
+        sample_presence_absence = presence_absence_data[presence_absence_data['sample'] == sample_name]
+
+        # make a dict witht the presence absence data
+        pres_abs_dict = {}
+        dict_keys = list(sample_presence_absence.keys())[1:]
+        for key in dict_keys:
+            # add the data as a boolean
+            pres_abs_dict[key] = bool(sample_presence_absence[key].values[0])
+
+        # add the presence absence data to the json
+        data_copy['presence_absence'] = pres_abs_dict
+
+        # write the data_copy to a new json file
+        out_file = os.path.join(output_json_dir,json_file.split('/')[-1])
+        with open(out_file, 'w') as outfile:
+            json.dump(data_copy, outfile,indent=4)
+
+
+# %%
+
