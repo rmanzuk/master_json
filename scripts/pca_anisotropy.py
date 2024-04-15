@@ -9,8 +9,6 @@
 import json # for json handling
 import numpy as np # for array handling
 from sklearn.decomposition import PCA # for PCA
-import matplotlib # for color handling
-import matplotlib.pyplot as plt # for plotting
 import os # for file handling
 
 #%%
@@ -23,32 +21,6 @@ from json_processing import assemble_samples, select_gridded_im_metrics
 ##########################################################################################
 # script lines
 ##########################################################################################
-# %% set up some plotting stuff
-
-# define a default color order for plotting, from Paul Tol's "Colour Schemes"
-# https://personal.sron.nl/~pault/
-# and we'll use the same colors for the same things throughout the paper
-indigo = '#332288'
-cyan = '#88CCEE'
-teal = '#44AA99'
-green = '#117733'
-olive = '#999933'
-sand = '#DDCC77'
-rose = '#CC6677'
-wine = '#882255'
-purple = '#AA4499'
-
-muted_colors = [rose, indigo, sand, green, cyan, wine, teal, olive, purple]
-
-# set the muted colors as the default color cycle
-muted_cmap = matplotlib.colors.ListedColormap(muted_colors)
-plt.rcParams['axes.prop_cycle'] = plt.cycler(color=muted_cmap.colors)
-
-# and turn the grid on by default, with thin dotted lines
-plt.rcParams['axes.grid'] = True
-plt.rcParams['grid.linestyle'] = ':'
-plt.rcParams['grid.linewidth'] = 0.5
-
 # %% define paths, and read in the outcrop json, and assemble samples
 
 outcrop_json_file = '/Users/ryan/Dropbox (Princeton)/code/master_json/stewarts_mill.json'
@@ -127,71 +99,11 @@ for band_index in range(n_bands):
     anisotropy_scores[:,:,band_index] = pca_list[band_index].transform(anisotropy_spectra[:,:,band_index])
 
 # make an array to hold the explained variance
-explained_variance = np.zeros((n_bands, n_components))
+anisotropy_explained_variance = np.zeros((n_bands, n_components))
 for band_index in range(n_bands):
-    explained_variance[band_index,:] = pca_list[band_index].explained_variance_ratio_
+    anisotropy_explained_variance[band_index,:] = pca_list[band_index].explained_variance_ratio_
 
 # make an array to hold the loadings
-loadings = np.zeros((n_bands, n_components, n_scales))
+anisotropy_loadings = np.zeros((n_bands, n_components, n_scales))
 for band_index in range(n_bands):
-    loadings[band_index,:,:] = pca_list[band_index].components_
-
-# to associate these pc scores with things like field lithology and location, need to compare the sample names to the unique samples to get the indices
-# we need to know where unique_samples is in the sample_names list
-field_index = np.zeros(n_samples)
-for i in range(n_samples):
-    field_index[i] = np.where(np.array(field_names) == unique_samples[i])[0][0]
-
-# also give each row a lithology index
-lith_index = np.zeros(n_samples)
-for i in range(n_samples):
-    lith_index[i] = np.where(unique_liths == field_liths[int(field_index[i])])[0][0]
-
-# %%
-
-# make a bar chart for just the 1 band we have, with the first 3 components, with log scale
-    
-fig, ax = plt.subplots(1,1, figsize=(15,5))
-for component in range(3):
-    ax.bar(np.linspace(0,len(unique_scales),len(unique_scales))+(component*0.1), loadings[0,component,:], width = 0.1)
-
-ax.set_xlabel('Scale')
-ax.set_ylabel('Loading')
-ax.legend(['PC1', 'PC2', 'PC3'])
-
-# adjust the ticks to be the scale values, but evenly spaced
-ax.set_xticks(np.linspace(0,len(unique_scales),len(unique_scales)))
-ax.set_xticklabels(unique_scales)
-
-plt.show()
-# %% make a plot showing the spectra for the top 3 and bottom 3 samples for each component
-
-# make the figure
-fig, ax = plt.subplots(1,3, figsize=(15,5))
-
-# plot the highest and lowest scoring spectra for each component
-line_styles = ['-', '--', '-.']
-for i in range(3):
-    # get the highest and lowest scoring spectra for this component
-    pc_sort = np.argsort(anisotropy_scores[:,i,0])
-    
-    # plot the 3 highest and lowest scoring spectra for each component
-    for j in range(3):
-        ax[i].plot(unique_scales, original_anisotropy_spectra[pc_sort[-(j+1)],:,0], label='PC'+str(i+1)+' High', linestyle=line_styles[j], color='black')
-        ax[i].plot(unique_scales, original_anisotropy_spectra[pc_sort[j],:,0], label='PC'+str(i+1)+' Low', linestyle=line_styles[j], color='red')
-
-        # and label the spectra with their names
-        ax[i].text(unique_scales[-1], original_anisotropy_spectra[pc_sort[-(j+1)],-1,0], unique_samples[pc_sort[-(j+1)]], fontsize=8)
-        ax[i].text(unique_scales[-1], original_anisotropy_spectra[pc_sort[j],-1,0], unique_samples[pc_sort[j]], fontsize=8)
-
-    # label the plot
-    ax[i].set_title('PC'+str(i+1))
-    ax[i].set_xlabel('Scale')
-    ax[i].set_ylabel('Value')
-    ax[i].legend()
-
-    # make the x scale logarithmic
-    ax[i].set_xscale('log')
-
-plt.tight_layout()
-plt.show()
+    anisotropy_loadings[band_index,:,:] = pca_list[band_index].components_
