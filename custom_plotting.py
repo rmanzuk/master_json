@@ -17,13 +17,14 @@ from im_processing import sample_3channel
 ##########################################################################################
 
 # ----------------------------------------------------------------------------------------
-def display_point_counts(sample_dict, downscale_factor=5):
+def display_point_counts(sample_dict, downscale_factor=5, star_points=None):
     """
     A function to display the point counts on the image, at their x and y coordinates.
 
     Keyword arguments:
     sample_dict -- a dictionary containing the sample information
     downscale_factor -- the factor by which to downscale the image for display
+    star_points -- a list of point indices to mark with a star. They should be input as 1-indexed
 
     Returns:
     None
@@ -56,7 +57,18 @@ def display_point_counts(sample_dict, downscale_factor=5):
             i = 'none'
         # plot the points, multiplying by the size of the image to get the right coordinates
         ax.scatter(np.array(x)[indices]*downsized_rgb.shape[1], np.array(y)[indices]*downsized_rgb.shape[0], s=5, label=i)
+
+    # if we have star points, we'll plot them as well
+    if star_points:
+        for star in star_points:
+            # need to subtract 1 to make it 0-indexed
+            star = star - 1
+            ax.scatter(x[star]*downsized_rgb.shape[1], y[star]*downsized_rgb.shape[0], s=100, marker='*', color='black')
+            # and label the star with the point number
+            ax.text(x[star]*downsized_rgb.shape[1], y[star]*downsized_rgb.shape[0], str(star+1), fontsize=12, color='red')
     # turn off the axes
     ax.axis('off')
     # add the legend in the upper right, outside the plot
     ax.legend(loc='upper right', bbox_to_anchor=(1.2,1))
+
+    plt.show()
