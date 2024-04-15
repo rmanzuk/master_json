@@ -8,13 +8,13 @@
 # %%
 
 import json # for json handling
-
 #%%
 ##########################################################################################
 # local function imports
 ##########################################################################################
 # %% 
 from json_processing import assemble_samples, select_gridded_geochem, select_gridded_im_metrics, select_gridded_point_counts, data_audit
+from custom_plotting import display_point_counts
 # %% 
 ##########################################################################################
 # script lines
@@ -35,9 +35,24 @@ outcrop_data = assemble_samples(outcrop_data, sample_json_dir, data_type=['grid_
 # and audit the data, but just the grid samples
 data_audit(outcrop_data, 'grid_data')
 
-# %% select the gridded geochem data, im metrics, and point counts
-geochem_df = select_gridded_geochem(outcrop_data)
+# %% for a particular sample, display the point counts, and certain points to highlight
 
-im_metric_df =  select_gridded_im_metrics(outcrop_data)
+sample_set = "Stewart's Mill Grid"
+sample_name = 'smg_131'
+star_points = [154, 319]
 
-point_count_df = select_gridded_point_counts(outcrop_data)
+# put together a list of all sample names
+all_sample_sets = [outcrop_data['grid_data'][i]['name'] for i in range(len(outcrop_data['grid_data']))]
+
+# check if the sample set is in the list
+if sample_set in all_sample_sets:
+    # get the index of the sample set
+    sample_set_index = all_sample_sets.index(sample_set)
+    # get a list of the sample names
+    sample_names = [outcrop_data['grid_data'][sample_set_index]['samples'][i]['sample_name'] for i in range(len(outcrop_data['grid_data'][sample_set_index]['samples']))]
+    # get the sample
+    sample_index = sample_names.index(sample_name)
+    sample = outcrop_data['grid_data'][sample_set_index]['samples'][sample_index]
+    # display the point counts
+    display_point_counts(sample, star_points=star_points)
+
