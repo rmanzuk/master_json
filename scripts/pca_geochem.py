@@ -189,7 +189,7 @@ plt.show()
 
 # %% make a scatter plot of any pc against carbon isotopes, colored by phase
 
-pc_num = 1
+pc_num = 0
 
 # we may run out of colors before getting through phases, so list a few symbols to switch to once we run out of colors
 symbols = ['o', 's', 'D', 'v', '^', '<', '>', 'p', 'P', '*', 'X']
