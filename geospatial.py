@@ -8,6 +8,7 @@
 
 from pyproj import Proj # for converting utm to lat long
 import numpy as np # for array operations
+import pdb # for debugging
 
 ##########################################################################################
 # function definitions
@@ -70,6 +71,7 @@ def dip_correct_elev(x, y, z, dip, dip_dir):
     z_rotation_mat = np.array([[np.cos(dip_dir_rad), -np.sin(dip_dir_rad), 0],
                                  [np.sin(dip_dir_rad), np.cos(dip_dir_rad), 0],
                                  [0, 0, 1]])
+
     points_prime = np.dot(z_rotation_mat, for_rotation)
 
     # rotate the points to the x axis so that the dip points exactly horizontal
@@ -84,3 +86,24 @@ def dip_correct_elev(x, y, z, dip, dip_dir):
     y_corrected = points_double_prime[1]
 
     return x_corrected, y_corrected, z_corrected  
+
+# ----------------------------------------------------------------------------------------
+def im_grid(im_bounds, im_dims):
+    """ 
+    return a grid of x and y coordinates for each pixel in an image given the bounds and 
+    dimensions 
+    
+    Keyword arguments:
+    im_bounds -- a list of the utm boundary coordinates of the image in the form 
+    [im_left, im_right, im_bottom, im_top]
+    im_dims -- a list of dimensions of the image in the form [im_width, im_height]
+
+    Returns:
+    x_grid -- a grid of x coordinates for each pixel in the image
+    y_grid -- a grid of y coordinates for each pixel in the image
+    """
+
+    x_vec = np.linspace(im_bounds[0], im_bounds[1], im_dims[0]+1)
+    y_vec = np.linspace(im_bounds[3], im_bounds[2], im_dims[1]+1)
+    x_grid, y_grid = np.meshgrid(x_vec, y_vec)
+    return x_grid, y_grid
