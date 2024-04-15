@@ -19,6 +19,7 @@ import matplotlib.colors # for color handling
 ##########################################################################################
 # %% 
 from json_processing import assemble_samples, select_gridded_geochem
+from custom_plotting import pc_crossplot_vectors
 # %%
 ##########################################################################################
 # script lines
@@ -219,3 +220,20 @@ ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
 plt.tight_layout()
 
 plt.show()
+
+# %% make a pc crossplot to explore with vectors
+
+# input the pcs to use and a couple other things
+pc_nums = [1,2] # these are 1 indexed
+n_vectors = 2
+n_recon = 5
+
+# all we should need for prep is a list of the phase names for each sample
+phase_tags = geochem_phases
+sample_phase_names = [phase_names[phase_codes.index(x)] for x in phase_tags]
+
+# neet to turn geochem_measurements into a list of strings
+geochem_labels = [x for x in geochem_measurements]
+
+# run the function
+pc_crossplot_vectors(geochem_scores, geochem_loadings, pc_nums, variable_labels=geochem_labels, phase_tags=sample_phase_names, n_vectors=n_vectors, n_recon=n_recon)
