@@ -240,7 +240,7 @@ def get_point_count_fracs(point_counts_list):
 def select_gridded_geochem(outcrop_json, desired_metrics=None):
     """
     A function to go through an outcrop json and select only geochem data with gps coordinates, 
-    returning them in a datframe
+    returning them in a dataframe
 
     Keyword arguments:
     outcrop_json -- the json file to fill in, as a dictionary
@@ -316,6 +316,8 @@ def select_gridded_geochem(outcrop_json, desired_metrics=None):
     out_df['longitude'] = []
     out_df['msl'] = []
     out_df['phase'] = []
+    out_df['im_loc_y'] = []
+    out_df['im_loc_x'] = []
     for metric in desired_metrics:
         out_df[metric] = []
 
@@ -332,6 +334,10 @@ def select_gridded_geochem(outcrop_json, desired_metrics=None):
                     for sub_meas in samp['geochem_measurements']:
                         # make a new dataframe to hold the data
                         new_df = pd.DataFrame({'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'phase': sub_meas[0]['phase']}, index=[0])
+                        # if the sample has image locations, add them to the dataframe
+                        if 'im_loc' in sub_meas[0].keys() and len(sub_meas[0]['im_loc']) > 0:
+                            new_df['im_loc_y'] = sub_meas[0]['im_loc'][0]
+                            new_df['im_loc_x'] = sub_meas[0]['im_loc'][1]
                         for meas in sub_meas:
                             if meas['measurement_name'] in desired_metrics:
                                 # add the measurement to the dataframe
@@ -341,6 +347,10 @@ def select_gridded_geochem(outcrop_json, desired_metrics=None):
                 elif type(samp['geochem_measurements'][0]) == dict:
                     # make a new dataframe to hold the data
                     new_df = pd.DataFrame({'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'phase': samp['geochem_measurements'][0]['phase']}, index=[0])
+                    # if the sample has image locations, add them to the dataframe
+                    if 'im_loc' in samp['geochem_measurements'][0].keys() and len(samp['geochem_measurements'][0]['im_loc']) > 0:
+                        new_df['im_loc_y'] = samp['geochem_measurements'][0]['im_loc'][0]
+                        new_df['im_loc_x'] = samp['geochem_measurements'][0]['im_loc'][1]
                     for meas in samp['geochem_measurements']:
                         if meas['measurement_name'] in desired_metrics:
                             # add the measurement to the dataframe
@@ -359,6 +369,10 @@ def select_gridded_geochem(outcrop_json, desired_metrics=None):
                     for sub_meas in samp['geochem_measurements']:
                         # make a new dataframe to hold the data
                         new_df = pd.DataFrame({'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'phase': sub_meas[0]['phase']}, index=[0])
+                        # if the sample has image locations, add them to the dataframe
+                        if 'im_loc' in sub_meas[0].keys() and len(sub_meas[0]['im_loc']) > 0:
+                            new_df['im_loc_y'] = sub_meas[0]['im_loc'][0]
+                            new_df['im_loc_x'] = sub_meas[0]['im_loc'][1]
                         for meas in sub_meas:
                             if meas['measurement_name'] in desired_metrics:
                                 # add the measurement to the dataframe
@@ -368,6 +382,10 @@ def select_gridded_geochem(outcrop_json, desired_metrics=None):
                 elif type(samp['geochem_measurements'][0]) == dict:
                     # make a new dataframe to hold the data
                     new_df = pd.DataFrame({'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'phase': samp['geochem_measurements'][0]['phase']}, index=[0])
+                    # if the sample has image locations, add them to the dataframe
+                    if 'im_loc' in samp['geochem_measurements'][0].keys() and len(samp['geochem_measurements'][0]['im_loc']) > 0:
+                        new_df['im_loc_y'] = samp['geochem_measurements'][0]['im_loc'][0]
+                        new_df['im_loc_x'] = samp['geochem_measurements'][0]['im_loc'][1]
                     for meas in samp['geochem_measurements']:
                         if meas['measurement_name'] in desired_metrics:
                             # add the measurement to the dataframe
@@ -381,7 +399,7 @@ def select_gridded_geochem(outcrop_json, desired_metrics=None):
 def select_gridded_point_counts(outcrop_json):
     """
     A function to go through an outcrop json and select only point count percentages with gps coordinates,
-    returning them in a datframe
+    returning them in a dataframe
     
     Keyword arguments:
     outcrop_json -- the json file to fill in, as a dictionary
@@ -437,6 +455,79 @@ def select_gridded_point_counts(outcrop_json):
                 new_df = pd.DataFrame(new_row, index=[0])
                 out_df = pd.concat([out_df, new_df], ignore_index=True)
                 
+    # return the dataframe
+    return out_df
+
+# ----------------------------------------------------------------------------------------
+def select_gridded_pa(outcrop_json):
+    """
+    A function to go through an outcrop json and select presence/absence data with gps coordinates,
+    returning them in a dataframe.
+
+    Keyword arguments:
+    outcrop_json -- the json file to fill in, as a dictionary
+
+    Returns:
+    out_df -- a dataframe containing the presence/absence data
+    """
+
+    # first we need to know all the classes available to input
+    all_classes = []
+
+    # find them by looping through all samples, and if they have gps coordinates and presence/absence data,
+    # add new classes to the list
+    for strat in outcrop_json['strat_data']:
+        for samp in strat['samples']:
+            if 'latitude' in samp.keys() and 'presence_absence' in samp.keys():
+                for pa in samp['presence_absence'].keys():
+                    if pa not in all_classes:
+                        all_classes.append(pa)
+
+    for grid in outcrop_json['grid_data']:
+        for samp in grid['samples']:
+            if 'latitude' in samp.keys() and 'presence_absence' in samp.keys():
+                for pa in samp['presence_absence'].keys():
+                    if pa not in all_classes:
+                        all_classes.append(pa)
+
+    # set up an empty dataframe to catch the data with classes sample name, latitude, longitude, msl, and the classes
+    out_df = pd.DataFrame()
+    out_df['sample_name'] = []
+    out_df['latitude'] = []
+    out_df['longitude'] = []
+    out_df['msl'] = []
+    for class_name in all_classes:
+        out_df[class_name] = []
+
+    # now loop through all the strat data and grid data, and add the data to the dataframe
+    for strat in outcrop_json['strat_data']:
+        for samp in strat['samples']:
+            if 'latitude' in samp.keys() and 'presence_absence' in samp.keys():
+                new_row = {'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl']}
+                for pa in samp['presence_absence'].keys():
+                    new_row[pa] = samp['presence_absence'][pa]
+                # if any of the classes are missing, add them with a value of False
+                for cl in all_classes:
+                    if cl not in new_row.keys():
+                        new_row[cl] = False
+
+                new_df = pd.DataFrame(new_row, index=[0])
+                out_df = pd.concat([out_df, new_df], ignore_index=True)
+
+    for grid in outcrop_json['grid_data']:
+        for samp in grid['samples']:
+            if 'latitude' in samp.keys() and 'presence_absence' in samp.keys():
+                new_row = {'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl']}
+                for pa in samp['presence_absence'].keys():
+                    new_row[pa] = samp['presence_absence'][pa]
+                # if any of the classes are missing, add them with a value of False
+                for cl in all_classes:
+                    if cl not in new_row.keys():
+                        new_row[cl] = False
+
+                new_df = pd.DataFrame(new_row, index=[0])
+                out_df = pd.concat([out_df, new_df], ignore_index=True)
+
     # return the dataframe
     return out_df
 
