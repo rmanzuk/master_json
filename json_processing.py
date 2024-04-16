@@ -679,6 +679,45 @@ def select_gridded_im_metrics(outcrop_json, desired_metrics=None, desired_scales
     return out_df
 
 # ----------------------------------------------------------------------------------------
+def select_gridded_bow(outcrop_json):
+    """
+    A function to go through an outcrop json and select only bag of words data with gps coordinates,
+    returning them in a dataframe
+
+    Keyword arguments:
+    outcrop_json -- the json file to extract words from, as a dictionary
+
+    Returns:
+    out_df -- a dataframe containing the bag of words data
+    """
+
+    # set up an empty dataframe to catch the data with classes sample name, latitude, longitude, msl, and the values
+    out_df = pd.DataFrame()
+    out_df['sample_name'] = []
+    out_df['latitude'] = []
+    out_df['longitude'] = []
+    out_df['msl'] = []
+    out_df['bow'] = []
+
+    # now loop through all the strat data and grid data, and add the data to the dataframe
+    for strat in outcrop_json['strat_data']:
+        for samp in strat['samples']:
+            if 'latitude' in samp.keys() and 'bag_of_words' in samp.keys() and len(samp['bag_of_words']) > 0:
+                new_row = {'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'bow': samp['bag_of_words']}
+                new_df = pd.DataFrame([new_row], index=[0])
+                out_df = pd.concat([out_df, new_df], ignore_index=True)
+
+    for grid in outcrop_json['grid_data']:
+        for samp in grid['samples']:
+            if 'latitude' in samp.keys() and 'bag_of_words' in samp.keys() and len(samp['bag_of_words']) > 0:
+                new_row = {'sample_name': samp['sample_name'], 'latitude': samp['latitude'], 'longitude': samp['longitude'], 'msl': samp['msl'], 'bow': samp['bag_of_words']}
+                new_df = pd.DataFrame([new_row], index=[0])
+                out_df = pd.concat([out_df, new_df], ignore_index=True)
+
+    # return the dataframe
+    return out_df
+
+# ----------------------------------------------------------------------------------------
 def data_audit(outcrop_json, sample_set):
     """
     A simple function to go through the samples in an outcrop json and check for missing data
@@ -738,18 +777,18 @@ def data_audit(outcrop_json, sample_set):
         
 
     # print out the results, in a nice format
-    print('The following samples are missing images:')
+    print('The following samples are missing images (n = ' + str(len(missing_images)) + '):')
     for name in missing_images:
         print(name)
-    print('The following samples are missing geochem data:')
+    print('The following samples are missing geochem data (n = ' + str(len(missing_geochem)) + '):')
     for name in missing_geochem:
         print(name)
-    print('The following samples are missing point counts altogether:')
+    print('The following samples are missing point counts altogethe (n = ' + str(len(missing_point_counts)) + '):')
     for name in missing_point_counts:
         print(name)
-    print('The following samples are missing point count fractions, but have point counts:')
+    print('The following samples are missing point count fractions, but have point counts (n = ' + str(len(just_update)) + '):')
     for name in just_update:
         print(name)
-    print('The following samples are missing bag of words data:')
+    print('The following samples are missing bag of words data: (n = ' + str(len(missing_bow)) + '):')
     for name in missing_bow:
         print(name)
