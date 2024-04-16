@@ -746,10 +746,6 @@ for phase in phase_codes:
     
     count += 1
 
-
-
-
-
 ax.set_xlabel('Corrected Carbon Isotopes')
 ax.set_ylabel('Strat height (m)')
 # place the legend outside the plot
@@ -1255,77 +1251,7 @@ plt.tight_layout()
 plt.show()
 
 
-# %% look at any 2 variables cross plotted, color coded by if they were separated by the separator
 
-x_var = 'geochem_pc2'
-y_var = 'ooid'
-
-fig, ax = plt.subplots(figsize=(8,4))
-ax.scatter(facies_vector_df[x_var][is_below], facies_vector_df[y_var][is_below], color='gray', alpha=0.5, label='Below')
-ax.scatter(facies_vector_df[x_var][~is_below], facies_vector_df[y_var][~is_below], color=cyan, alpha=0.5, label='Above')
-
-ax.set_xlabel(x_var)
-ax.set_ylabel(y_var)
-ax.legend()
-plt.tight_layout()
-plt.show()
-
-# %% plot samples geographically, color coded by the separator
-
-fig, ax = plt.subplots(figsize=(8,6))
-ax.scatter(facies_vector_df.lon[~is_below], facies_vector_df.lat[~is_below], color=cyan, alpha=0.5, label='Above')
-ax.scatter(facies_vector_df.lon[is_below], facies_vector_df.lat[is_below], color='gray', alpha=0.5, label='Below')  
-
-
-ax.set_xlabel('Longitude')
-ax.set_ylabel('Latitude')
-ax.legend()
-plt.tight_layout()
-plt.show()
-
-
-# %% extract just the data ones and assemble a pairwise correlation matrix
-data_fields = facies_vector_fields[6:]
-
-for_correlation = facies_vector_df[data_fields].copy()
-
-# before looking, also set any 0.0 values to nan, because they are likely to be placeholders
-for_correlation = for_correlation.replace(0.0, np.nan)
-
-correlation_matrix = for_correlation.corr()
-
-# and we don't really care about correlations with the same field, so set those to nan
-for i in range(len(data_fields)):
-    correlation_matrix.iloc[i,i] = np.nan   
-
-# also set correlatoins from the same pca to nan
-geochem_inds = np.where(['geochem' in x for x in data_fields])[0]
-anisotropy_inds = np.where(['anisotropy' in x for x in data_fields])[0]
-pc_inds = np.where(['pc_' in x for x in data_fields])[0]
-percentile_inds = np.where(['percentile' in x for x in data_fields])[0]
-
-for i in geochem_inds:
-    correlation_matrix.iloc[i,geochem_inds] = np.nan
-
-for i in anisotropy_inds:
-    correlation_matrix.iloc[i,anisotropy_inds] = np.nan
-
-for i in pc_inds:
-    correlation_matrix.iloc[i,pc_inds] = np.nan
-
-for i in percentile_inds:
-    correlation_matrix.iloc[i,percentile_inds] = np.nan
-
-# %%
-plt.imshow(correlation_matrix, cmap='viridis')
-# label each pixel tick with the name of the field
-plt.xticks(np.arange(len(data_fields)), data_fields, rotation=90)
-plt.yticks(np.arange(len(data_fields)), data_fields)
-plt.colorbar(label='Correlation Coefficient')
-plt.title('Pairwise Correlation Matrix for Facies Vector Components')
-plt.show()
-
-# %% make any crossplot we want, color coded by phase
 x_var = 'geochem_pc1'
 y_var = 'geochem_pc2'
 
@@ -1351,55 +1277,5 @@ ax.set_xlabel(x_var)
 ax.set_ylabel(y_var)
 # put a legend off to the side
 ax.legend(bbox_to_anchor=(1.05, 1))
-plt.tight_layout()
-plt.show()
-
-
-
-
-# %% show original carbon isotopes and corrected carbon isotopes vs elevation
-
-fig, ax = plt.subplots(figsize=(8,4))
-ax.scatter(for_correlation.carbon_isotopes.astype(float), z_corrected, label='Original Carbon Isotopes')
-ax.scatter(corrected_carbon_isotopes, z_corrected, label='Corrected Carbon Isotopes')
-ax.set_xlabel('Elevation (m)')
-ax.set_ylabel('Carbon Isotopes')
-ax.legend()
-plt.tight_layout()
-plt.show()
-
-# %% make another, but with 2 subplots, one for corrected and one for original, color coded by phase
-
-fig, ax = plt.subplots(1,2, figsize=(12,4))
-for phase in unique_phases:
-    phase_inds = np.where(facies_vector_df.phase == phase)
-    # also get the correlation coefficient for just this phase 
-    x_plot = for_correlation.carbon_isotopes.iloc[phase_inds].to_numpy().astype(float)
-    y_plot = z_corrected[phase_inds]
-    n = len(~np.isnan(x_plot))
-    ax[0].scatter(x_plot, y_plot, label=phase_names[phase_codes.index(phase)]+ ' (n = ' + str(n) + ')') 
-
-    x_plot = corrected_carbon_isotopes.iloc[phase_inds].to_numpy().astype(float)
-    ax[1].scatter(x_plot, y_plot, label=phase_names[phase_codes.index(phase)]+ ' (n = ' + str(n) + ')')
-
-ax[0].set_xlabel('Original Carbon Isotopes')
-ax[0].set_ylabel('Elevation (m)')
-# make a legend off to the side of the first plot
-ax[0].legend(bbox_to_anchor=(1.05, 1))
-
-ax[1].set_xlabel('Corrected Carbon Isotopes')
-ax[1].set_ylabel('Elevation (m)')
-
-plt.tight_layout()
-plt.show()
-
-
-# %% make a crossplot of geochem pcs, color coded by carbbon isotopes
-
-fig, ax = plt.subplots(figsize=(8,4))
-sc = ax.scatter(for_correlation.geochem_pc1.astype(float), for_correlation.geochem_pc2.astype(float), c=for_correlation.carbon_isotopes.astype(float), cmap='viridis')
-plt.colorbar(sc, label='Carbon Isotopes')
-ax.set_xlabel('Geochem PC1')
-ax.set_ylabel('Geochem PC2')
 plt.tight_layout()
 plt.show()
