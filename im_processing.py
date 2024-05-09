@@ -414,7 +414,7 @@ def grad_r(dir_im, mag_weights=None, mag_thresh=None, neigh_rad=None, mag_im=Non
     # the gradient direction has a range from -pi to pi, but we want it to be from 0 to pi
     dir_im[dir_im < 0] = dir_im[dir_im < 0] + np.pi
 
-    #and then ddouble the gradient angles to redestribute them over the circle before taking the sine and cosine
+    #and then double the gradient angles to redestribute them over the circle before taking the sine and cosine
     sin_im = np.sin(2*dir_im)
     cos_im = np.cos(2*dir_im)
 
