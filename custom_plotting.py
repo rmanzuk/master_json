@@ -8,6 +8,7 @@
 from skimage.transform import downscale_local_mean
 import matplotlib.pyplot as plt # for plotting
 import numpy as np # for array handling and math
+import pdb
 ##########################################################################################
 # function imports from other files
 ##########################################################################################
@@ -178,4 +179,57 @@ def pc_crossplot_vectors(pc_scores, pc_loadings, pc_nums, variable_labels=None, 
     plt.show()
 
 
+# ----------------------------------------------------------------------------------------
+def rayleigh_r_visual(angles):
+    """
+    A function to show a population of angles around a unit circle, and the resulting 
+    Rayleigh R statistic
+
+    Keyword arguments:
+    angles -- an array of angles to plot, in radians
+
+    Returns:
+    None
+    """
+
+    # convert all angles from polar to cartesian coordinates
+    radii = np.ones_like(angles) 
+    # jitter the radii a bit, only making them larger
+    radii_jitter = np.abs(np.random.normal(1.2, 0.08, len(angles)))
+    # and jitter the angles a bit to make the plot look better
+    angles_jitter = np.random.normal(0, 0.1, len(angles))
+    x = radii * np.cos(angles)
+    y = radii * np.sin(angles)
+    x_jitter = np.cos(angles+angles_jitter) * radii_jitter
+    y_jitter = np.sin(angles+angles_jitter) * radii_jitter
+
+    # we can start plotting, first making a unit circle
+    fig, ax = plt.subplots(1,1, figsize=(5,5))
+    ax.set_xlim(-1.5, 1.5)
+    ax.set_ylim(-1.5, 1.5)
+    circle = plt.Circle((0,0), 1, color='black', fill=False)
+    ax.add_artist(circle)
+
+    # and then plot the points, as small, unfilled black circles, if we have
+    # greater than 1000 points, we'll plot a random subset of 1000
+    alph = 0.4
+    si = 10
+    if len(angles) > 1000:
+        inds = np.random.choice(len(angles), 1000, replace=False)
+        ax.scatter(x_jitter[inds], y_jitter[inds], color='black', alpha=alph, s=si)
+    else:
+        ax.scatter(x_jitter, y_jitter, color='black', alpha=alph, s=si)
+
+    # plot the mean position as a line from the center to the mean point
+    mean_x = np.mean(x)
+    mean_y = np.mean(y)
+    ax.plot([0, mean_x], [0, mean_y], color='black', linewidth=2)
+
+    # and scatter a point at the mean position
+    ax.scatter(mean_x, mean_y, color='black', s=100)
+
+    # turn axis off
+    ax.axis('off')
+
+    plt.tight_layout()
 
