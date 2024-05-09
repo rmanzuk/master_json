@@ -4678,9 +4678,14 @@
     ],
     "point_count_fracs": [
         {
-            "class": "UnID fos",
+            "class": "Intra",
             "unit": "fraction_points",
-            "value": 0.03142857142857143
+            "value": 0.002857142857142857
+        },
+        {
+            "class": "Spar",
+            "unit": "fraction_points",
+            "value": 0.04
         },
         {
             "class": "Mi",
@@ -4688,19 +4693,14 @@
             "value": 0.2
         },
         {
-            "class": "Dol",
+            "class": "UnID fos",
             "unit": "fraction_points",
-            "value": 0.08857142857142856
+            "value": 0.02857142857142857
         },
         {
             "class": "ooid",
             "unit": "fraction_points",
-            "value": 0.6228571428571429
-        },
-        {
-            "class": "Intra",
-            "unit": "fraction_points",
-            "value": 0.002857142857142857
+            "value": 0.62
         },
         {
             "class": null,
@@ -4708,14 +4708,19 @@
             "value": 0.008571428571428572
         },
         {
-            "class": "Arch",
+            "class": "Dol",
+            "unit": "fraction_points",
+            "value": 0.08857142857142856
+        },
+        {
+            "class": "echi",
             "unit": "fraction_points",
             "value": 0.005714285714285714
         },
         {
-            "class": "Spar",
+            "class": "Arch",
             "unit": "fraction_points",
-            "value": 0.04
+            "value": 0.005714285714285714
         }
     ]
 }
