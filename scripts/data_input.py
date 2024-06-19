@@ -43,7 +43,7 @@ for json_file in json_files:
         data_copy = original_data.copy()
 
         # check that it has point counts and not point count fractions
-        if 'point_counts' in data_copy.keys() and 'point_count_fracs' not in data_copy.keys():
+        if 'point_counts' in data_copy.keys():
 
             # then run functoin to convert to fractions
             point_count_fracs = get_point_count_fracs(data_copy['point_counts'])
@@ -72,13 +72,13 @@ with open(outcrop_json, 'r') as f:
     # iterate through all strat_data entries and the samples within
     for strat_data in data_copy['strat_data']:
         for sample in strat_data['samples']:
-            if 'point_counts' in sample.keys() and len(sample['point_counts']) > 0 and 'point_count_fracs' not in sample.keys():
+            if 'point_counts' in sample.keys() and len(sample['point_counts']) > 0:
                 sample['point_count_fracs'] = get_point_count_fracs(sample['point_counts'])
 
     # and iterate through grid_data
     for grid_data in data_copy['grid_data']:
         for sample in grid_data['samples']:
-            if 'point_counts' in sample.keys() and len(sample['point_counts']) > 0 and 'point_count_fracs' not in sample.keys():
+            if 'point_counts' in sample.keys() and len(sample['point_counts']) > 0:
                 sample['point_count_fracs'] = get_point_count_fracs(sample['point_counts'])
 
 
@@ -171,7 +171,4 @@ for json_file in json_files:
         out_file = os.path.join(output_json_dir,json_file.split('/')[-1])
         with open(out_file, 'w') as outfile:
             json.dump(data_copy, outfile,indent=4)
-
-
-# %%
 
