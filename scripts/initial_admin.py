@@ -13,7 +13,7 @@ import json # for json handling
 # local function imports
 ##########################################################################################
 # %% 
-from json_processing import assemble_samples, select_gridded_geochem, select_gridded_im_metrics, select_gridded_point_counts, data_audit
+from json_processing import assemble_samples, data_audit
 from custom_plotting import display_point_counts
 # %% 
 ##########################################################################################
@@ -38,8 +38,8 @@ data_audit(outcrop_data, 'grid_data')
 # %% for a particular sample, display the point counts, and certain points to highlight
 
 sample_set = "Stewart's Mill Grid"
-sample_name = 'smg_131'
-star_points = [154, 319]
+sample_name = 'smg_100'
+star_points = [195]
 
 # put together a list of all sample names
 all_sample_sets = [outcrop_data['grid_data'][i]['name'] for i in range(len(outcrop_data['grid_data']))]
