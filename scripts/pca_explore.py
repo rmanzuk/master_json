@@ -1041,4 +1041,3 @@ for i in range(3):
     # add a colorbar
     cbar = plt.colorbar(ax[i].scatter(geochem_lons, geochem_lats, c=geochem_scores[:,i]), ax=ax[i])
 plt.show()
-
