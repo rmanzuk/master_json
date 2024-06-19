@@ -18,7 +18,7 @@ from im_processing import sample_3channel
 ##########################################################################################
 
 # ----------------------------------------------------------------------------------------
-def display_point_counts(sample_dict, downscale_factor=5, star_points=None):
+def display_point_counts(sample_dict, downscale_factor=5, star_points=None, no_classes=False):
     """
     A function to display the point counts on the image, at their x and y coordinates.
 
@@ -26,6 +26,8 @@ def display_point_counts(sample_dict, downscale_factor=5, star_points=None):
     sample_dict -- a dictionary containing the sample information
     downscale_factor -- the factor by which to downscale the image for display
     star_points -- a list of point indices to mark with a star. They should be input as 1-indexed
+    no_classes -- a boolean to indicate whether to display the classes of the point counts, if False,
+    all points will be displayed as the same color
 
     Returns:
     None
@@ -50,14 +52,18 @@ def display_point_counts(sample_dict, downscale_factor=5, star_points=None):
     # should be ready to show the image and overlay each class
     fig, ax = plt.subplots(figsize=(10,10))
     ax.imshow(downsized_rgb)
-    for i in unique_classes:
-        # get the indices of the points that match the class
-        indices = [j for j, s in enumerate(pc_class) if i == s]
-        # to handle the label, if the class is none, we'll just call it 'none'
-        if i == None:
-            i = 'none'
-        # plot the points, multiplying by the size of the image to get the right coordinates
-        ax.scatter(np.array(x)[indices]*downsized_rgb.shape[1], np.array(y)[indices]*downsized_rgb.shape[0], s=5, label=i)
+    if no_classes:
+        # we'll make the faces white and the edges black
+        ax.scatter(np.array(x)*downsized_rgb.shape[1], np.array(y)*downsized_rgb.shape[0], s=15, facecolors='white', edgecolors='black')
+    else:
+        for i in unique_classes:
+            # get the indices of the points that match the class
+            indices = [j for j, s in enumerate(pc_class) if i == s]
+            # to handle the label, if the class is none, we'll just call it 'none'
+            if i == None:
+                i = 'none'
+            # plot the points, multiplying by the size of the image to get the right coordinates
+            ax.scatter(np.array(x)[indices]*downsized_rgb.shape[1], np.array(y)[indices]*downsized_rgb.shape[0], s=5, label=i)
 
     # if we have star points, we'll plot them as well
     if star_points:
