@@ -1250,32 +1250,3 @@ ax.legend(loc='upper left')
 plt.tight_layout()
 plt.show()
 
-
-
-x_var = 'geochem_pc1'
-y_var = 'geochem_pc2'
-
-# track where phase is nan, because we'll remove those
-good_phase_inds = []
-for i in range(len(entire_vector.phase)):
-    if not pd.isna(entire_vector.phase[i]):
-        good_phase_inds.append(i)
-
-unique_phases = np.unique(entire_vector.phase[good_phase_inds])
-
-fig, ax = plt.subplots(figsize=(8,4))
-for phase in unique_phases:
-    phase_inds = np.where(entire_vector.phase == phase)
-    # also get the correlation coefficient for just this phase 
-    x_plot = entire_vector[x_var].iloc[phase_inds].to_numpy().astype(float)
-    y_plot = entire_vector[y_var].iloc[phase_inds].to_numpy().astype(float)
-    n = len(~np.isnan(x_plot) & ~np.isnan(y_plot))
-    phase_corr = np.corrcoef(x_plot, y_plot)
-    ax.scatter(x_plot, y_plot, label=phase_names[phase_codes.index(phase)]+ ' (r = ' + str(np.round(phase_corr[0,1], 2)) + ', n = ' + str(n) + ')') 
-
-ax.set_xlabel(x_var)
-ax.set_ylabel(y_var)
-# put a legend off to the side
-ax.legend(bbox_to_anchor=(1.05, 1))
-plt.tight_layout()
-plt.show()
