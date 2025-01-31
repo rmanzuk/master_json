@@ -15,6 +15,7 @@ import os # for file handling
 import pandas as pd # for dataframes
 from scipy.cluster.hierarchy import dendrogram, linkage # for displaying clusters
 import rasterio # for reading geotiffs
+from sklearn import linear_model # for linear regression
 
 #%%
 ##########################################################################################
@@ -71,7 +72,7 @@ outcrop_data = assemble_samples(outcrop_data, sample_json_dir, data_type=['grid_
 # %% select the gridded geochem data, im metrics, and point counts
 geochem_df = select_gridded_geochem(outcrop_data, desired_metrics=['delta13c', 'delta18o', 'Li_Ca', 'Na_Ca', 'Mg_Ca', 'K_Ca', 'Mn_Ca', 'Fe_Ca', 'Sr_Ca'])
 
-im_metric_df =  select_gridded_im_metrics(outcrop_data, desired_metrics=['percentile', 'rayleigh_anisotropy', 'entropy'], desired_scales=[1,0.5, 0.25, 0.125, 0.0625, 0.03125, 0.015625, 0.0078125, 0.00390625, 0.001953125])
+im_metric_df =  select_gridded_im_metrics(outcrop_data, desired_metrics=['percentile', 'rayleigh_anisotropy', 'entropy', 'glcm_contrast'], desired_scales=[1,0.5, 0.25, 0.125, 0.0625, 0.03125, 0.015625, 0.0078125, 0.00390625, 0.001953125])
 
 point_count_df = select_gridded_point_counts(outcrop_data)
 
@@ -157,6 +158,73 @@ anisotropy_loadings = np.zeros((n_bands, n_components, n_scales))
 for band_index in range(n_bands):
     anisotropy_loadings[band_index,:,:] = pca_list[band_index].components_
 
+# %% do PCA to get glcm contrast components
+
+# first get all the unique scales that entropy was calculated at
+# get the index of all rows where the metric name is entropy
+all_metrics_contrast = im_metric_df.metric_name
+contrast_inds = [x for x in range(len(all_metrics_contrast)) if 'glcm_contrast' in all_metrics_contrast[x]]
+
+unique_scales_contrast = np.unique([im_metric_df.scale[x] for x in contrast_inds])
+
+# and the unique bands it was calculated at
+unique_bands_contrast = np.unique([im_metric_df.wavelength[x] for x in contrast_inds])
+
+unique_samples = im_metric_df.sample_name.unique()
+
+# make an array to hold the entropy spectra
+n_samples = len(unique_samples)
+n_scales = len(unique_scales_contrast)
+n_bands = len(unique_bands_contrast)
+
+contrast_spectra = np.zeros((n_samples, n_scales, n_bands))
+
+# and to hold the names of the samples
+contrast_names = []
+
+# iterate through all rows of the im_metric_df
+for index, row in im_metric_df.iterrows():
+    # first check if this metric is entropy, otherwise skip
+    if 'glcm_contrast' in row['metric_name']:
+        # get the sample index
+        sample_index = np.where(unique_samples == row['sample_name'])[0][0]
+        # get the scale index
+        scale_index = np.where(unique_scales_contrast == row['scale'])[0][0]
+        # get the band index
+        band_index = np.where(unique_bands_contrast == row['wavelength'])[0][0]
+        # put the value in the array
+        contrast_spectra[sample_index, scale_index, band_index] = row['value']
+        
+        # if this is the first time we've seen this sample, get the name
+        if row['sample_name'] not in contrast_names:
+            contrast_names.append(row['sample_name'])
+
+# normalize the spectra matrix to have a mean of 0 and a standard deviation of 1
+original_contrast_spectra = contrast_spectra.copy()
+contrast_spectra = (contrast_spectra - np.mean(contrast_spectra, axis=0))/np.std(contrast_spectra, axis=0)
+
+# now we can do a PCA on each band
+n_components = contrast_spectra.shape[1]
+pca_list = []
+for band_index in range(n_bands):
+    pca = PCA(n_components=n_components)
+    pca.fit(contrast_spectra[:,:,band_index])
+    pca_list.append(pca)
+
+# and make a new 3d array to hold the PCA reprojections
+contrast_scores = np.zeros((n_samples, n_components, n_bands))
+for band_index in range(n_bands):
+    contrast_scores[:,:,band_index] = pca_list[band_index].transform(contrast_spectra[:,:,band_index])
+
+# make an array to hold the explained variance
+contrast_explained_variance = np.zeros((n_bands, n_components))
+for band_index in range(n_bands):
+    contrast_explained_variance[band_index,:] = pca_list[band_index].explained_variance_ratio_
+
+# make an array to hold the loadings
+contrast_loadings = np.zeros((n_bands, n_components, n_scales))
+for band_index in range(n_bands):
+    contrast_loadings[band_index,:,:] = pca_list[band_index].components_
 
 # %% do PCA to get color components
     
@@ -312,7 +380,13 @@ pc_explained_variance = pca.explained_variance_ratio_
 
 # %% make the facies vector for 'whole rock' metrics
 
-whole_rock_fields = ['sample_name', 'field_lithology', 'lat', 'lon', 'msl', 'anisotropy_pc1', 'anisotropy_pc2', 'anisotropy_pc3', 'pc_pc1', 'pc_pc2', 'pc_pc3', 'pc_pc4', 'pc_pc5']
+whole_rock_fields = ['sample_name', 'field_lithology', 'lat', 'lon', 'msl', 'contrast_pc1', 'contrast_pc2', 'contrast_pc3', 'anisotropy_pc1', 'anisotropy_pc2', 'anisotropy_pc3', ]
+
+# and systematically add in the first 3 pcs for each of the percentile spectra
+band_strs = unique_bands_percentile.astype(int).astype(str)
+for i in range(3):
+    for band in band_strs:
+        whole_rock_fields.append(band + '_percentile_pc' + str(i+1))
 
 # and add in the original point count classes
 for pc_class in pc_classes:
@@ -322,18 +396,17 @@ for pc_class in pc_classes:
 for pa_class in presence_absence_df.columns[4:]:
     whole_rock_fields.append(pa_class)
 
-# and systematically add in the first 3 pcs for each of the percentile spectra
-band_strs = unique_bands_percentile.astype(int).astype(str)
-for i in range(3):
-    for band in band_strs:
-        whole_rock_fields.append(band + '_percentile_pc' + str(i+1))
-
 # we'll use anisotropy as the standard, and give the other pcs inds to match
+contrast_inds = []
 pc_inds = []
 pa_inds = []
 percentile_inds = []
 for i in range(len(anisotropy_names)):
     sample_name = anisotropy_names[i]
+    if sample_name in contrast_names:
+        contrast_inds.append(np.where(np.array(contrast_names) == sample_name)[0][0])
+    else:
+        contrast_inds.append(np.nan)
     if sample_name in pc_names:
         pc_inds.append(np.where(pc_names == sample_name)[0][0])
     else:
@@ -361,6 +434,10 @@ for i in range(len(pc_names)):
         pa_inds.append(np.where(presence_absence_df.sample_name == sample_name)[0][0])
     else:
         pa_inds.append(np.nan)
+    if sample_name in contrast_names:
+        contrast_inds.append(np.where(np.array(contrast_names) == sample_name)[0][0])
+    else:
+        contrast_inds.append(np.nan)
 
 for i in range(len(presence_absence_df.sample_name)):
     sample_name = presence_absence_df.sample_name[i]
@@ -375,6 +452,10 @@ for i in range(len(presence_absence_df.sample_name)):
             percentile_inds.append(np.where(np.array(percentile_names) == sample_name)[0][0])
         else:
             percentile_inds.append(np.nan)
+    if sample_name in contrast_names:
+        contrast_inds.append(np.where(np.array(contrast_names) == sample_name)[0][0])
+    else:
+        contrast_inds.append(np.nan)
 
 for i in range(len(percentile_names)):
     sample_name = percentile_names[i]
@@ -389,6 +470,28 @@ for i in range(len(percentile_names)):
             pa_inds.append(np.where(presence_absence_df.sample_name == sample_name)[0][0])
         else:
             pa_inds.append(np.nan)
+        if sample_name in contrast_names:
+            contrast_inds.append(np.where(np.array(contrast_names) == sample_name)[0][0])
+        else:
+            contrast_inds.append(np.nan)
+
+for i in range(len(contrast_names)):
+    sample_name = contrast_names[i]
+    if sample_name not in anisotropy_names:
+        contrast_inds.append(i)
+        anisotropy_names = np.append(anisotropy_names, [sample_name])
+        if sample_name in pc_names:
+            pc_inds.append(np.where(pc_names == sample_name)[0][0])
+        else:
+            pc_inds.append(np.nan)
+        if sample_name in presence_absence_df.sample_name:
+            pa_inds.append(np.where(presence_absence_df.sample_name == sample_name)[0][0])
+        else:
+            pa_inds.append(np.nan)
+        if sample_name in percentile_names:
+            percentile_inds.append(np.where(np.array(percentile_names) == sample_name)[0][0])
+        else:
+            percentile_inds.append(np.nan)
 
 # bring in field lithologies and locations for the vector
 field_liths = []
@@ -414,17 +517,24 @@ anisotropy_scores_full = np.squeeze(anisotropy_scores_full)
 # check if it is too short because we added samples from other metrics
 if anisotropy_scores_full.shape[0] < len(anisotropy_names):
     missing_rows = len(anisotropy_names) - anisotropy_scores_full.shape[0]
-    anisotropy_scores_full = np.append(anisotropy_scores_full, np.full((missing_rows, 3, n_bands), np.nan), axis=0)
+    anisotropy_scores_full = np.append(anisotropy_scores_full, np.full((missing_rows, 3), np.nan), axis=0)
+
+# assemble the contrast array from the first 3 pcs
+contrast_scores_full = contrast_scores[:,:3,:]
+# and squeeze it to get rid of the extra dimension
+contrast_scores_full = np.squeeze(contrast_scores_full)
+# check if it is too short because we added samples from other metrics
+if contrast_scores_full.shape[0] < len(anisotropy_names):
+    missing_rows = len(anisotropy_names) - contrast_scores_full.shape[0]
+    contrast_scores_full = np.append(contrast_scores_full, np.full((missing_rows, 3), np.nan), axis=0)
 
 # assemble the pc array from the first 5 pcs
-pc_scores_full = np.zeros((len(anisotropy_names), 5 + len(pc_classes)))
+pc_scores_full = np.zeros((len(anisotropy_names), len(pc_classes)))
 for i in range(len(anisotropy_names)):
     if not np.isnan(pc_inds[i]):
-        pc_scores_full[i,:5] = np.squeeze(pc_scores[int(pc_inds[i]),0:5])
-        pc_scores_full[i,5:] = pc_data_original[int(pc_inds[i]),:]
+        pc_scores_full[i,:] = pc_data_original[int(pc_inds[i]),:]
     else:
         pc_scores_full[i,:] = np.nan
-
 
 # assemble the presence absence array
 pa_scores_full = np.zeros((len(anisotropy_names), presence_absence_df.shape[1] - 4))
@@ -439,7 +549,7 @@ for i in range(len(anisotropy_names)):
         percentile_scores_full[i,:] = np.reshape(percentile_scores[int(percentile_inds[i]),0:3,:], (1,3*len(unique_bands_percentile)))
 
 # should be good to go to assemble the dataframe
-whole_rock_vector = np.column_stack((anisotropy_names, field_liths, field_locs, anisotropy_scores_full, pc_scores_full, pa_scores_full, percentile_scores_full))
+whole_rock_vector = np.column_stack((anisotropy_names, field_liths, field_locs, contrast_scores_full, anisotropy_scores_full, percentile_scores_full, pc_scores_full, pa_scores_full))
 whole_rock_vector = pd.DataFrame(whole_rock_vector, columns=whole_rock_fields)
 
 # combining the dataframe turned the floats back into strings, so convert them back
@@ -559,6 +669,201 @@ whole_rock_vector.msl = whole_rock_vector.msl.astype(float)
 x_corrected_whole, y_corrected_whole, z_corrected_whole = dip_correct_elev(x_whole, y_whole, whole_rock_vector.msl, regional_dip, regional_dip_dir)
 x_corrected_phase, y_corrected_phase, z_corrected_phase = dip_correct_elev(x_phase, y_phase, phase_vector.msl, regional_dip, regional_dip_dir)
 x_corrected_entire, y_corrected_entire, z_corrected_entire = dip_correct_elev(x_entire, y_entire, entire_vector.msl, regional_dip, regional_dip_dir)
+
+# add the z corrected to each df as a new column called 'strat_height'
+whole_rock_vector['strat_height'] = z_corrected_whole
+phase_vector['strat_height'] = z_corrected_phase
+entire_vector['strat_height'] = z_corrected_entire
+
+# %% First thing is a sort of cheeky visual of the dem as contours, with the samples plotted on top as 'barcodes'
+
+# load in the dem from the outcrop data
+dem_file = outcrop_data['dem_file']
+
+# get the boundaries of the dem to make a grid
+with rasterio.open(dem_file) as src:
+    bounds = src.bounds 
+    dem_im = src.read(1)
+
+# the bounds are in utm, so make 2 pairs that represent the corners and convert to lat long
+bound_lat = [bounds.bottom, bounds.top]
+bound_lon = [bounds.left, bounds.right]
+bound_x, bound_y = latlong_to_utm(bound_lat, bound_lon, zone=11, hemisphere='north')
+
+# make a grid of the dem
+im_bounds = (bound_x[0], bound_x[1], bound_y[0], bound_y[1])
+im_width = dem_im.shape[1]
+im_height = dem_im.shape[0]
+x_grid, y_grid = im_grid(im_bounds, [im_width, im_height])
+
+# get the max and min of the sample locations, and add a buffer if we want
+buffer_size = 125 # in meters
+x_min = np.min(x_entire) - buffer_size
+x_max = np.max(x_entire) + buffer_size
+y_min = np.min(y_entire) - buffer_size
+y_max = np.max(y_entire) + buffer_size
+
+# find the row and column inds in the dem that correspond to the max and min values
+x_min_ind = np.argmin(np.abs(x_grid[0,:] - x_min))
+x_max_ind = np.argmin(np.abs(x_grid[0,:] - x_max))
+y_min_ind = np.argmin(np.abs(y_grid[:,0] - y_min))
+y_max_ind = np.argmin(np.abs(y_grid[:,0] - y_max))
+
+# crop the dem to the max and min values
+dem_im_cropped = dem_im[y_max_ind:y_min_ind, x_min_ind:x_max_ind]
+x_grid_cropped = x_grid[y_max_ind:y_min_ind, x_min_ind:x_max_ind]
+y_grid_cropped = y_grid[y_max_ind:y_min_ind, x_min_ind:x_max_ind]
+
+# any vlues below 0 are nans
+dem_im_cropped[dem_im_cropped < 0] = np.nan
+
+# and we need the pixel indices of the sample locations
+im_scale = (x_grid[0,1] - x_grid[0,0])
+sample_x_inds = np.round((x_entire - x_grid_cropped[0,0])/im_scale).astype(int)
+sample_y_inds = np.round((y_entire - y_grid_cropped[0,0])/im_scale).astype(int)
+# make the y_inds the right way around
+sample_y_inds = np.abs(sample_y_inds)
+#sample_y_inds = dem_im_cropped.shape[0] - sample_y_inds
+
+# plot the dem, as contours of all the same color, but labeled with the elevation
+fig, ax = plt.subplots(figsize=(8,6))
+dem_show = plt.contour(x_grid_cropped, y_grid_cropped, dem_im_cropped, colors='k', levels=20)
+ax.set_xlabel('easting (m)')
+ax.set_ylabel('northing (m)')
+ax.clabel(dem_show, inline=True, fmt='%1.0f', fontsize=8)
+
+# make sure the aspect ratio is equal
+ax.set_aspect('equal')
+
+# now, to make barcodes, we'll just go through the entire vector, make an 'image' of its values, and plot it on top
+
+# start by subsampling the entire vector, so we only have 1 representative from each unique sample
+unique_samples = entire_vector.sample_name.unique()
+unique_inds = []
+for sample in unique_samples:
+    unique_inds.append(np.where(entire_vector.sample_name == sample)[0][0])
+
+# grab just those data from the vector and normalize the matrix
+# the data we want are in columns 10 through 47 and 53 onwards
+subsampled_data1 = entire_vector.iloc[unique_inds, 10:47].to_numpy()
+subsampled_data2 = entire_vector.iloc[unique_inds, 53:].to_numpy()
+subsampled_data = np.column_stack((subsampled_data1, subsampled_data2))
+
+# normalize the data between 0 and 1
+subsampled_data = (subsampled_data - np.nanmin(subsampled_data, axis=0))/(np.nanmax(subsampled_data, axis=0) - np.nanmin(subsampled_data, axis=0))
+
+# might as well grab the subsampled locations too
+subsampled_x = sample_x_inds[unique_inds]
+subsampled_y = sample_y_inds[unique_inds]
+
+# now we can loop through and put the barcodes on the plot
+for i in range(subsampled_data.shape[0]):
+    # get the data
+    data = subsampled_data[i,:]
+    # make a grid of the data, and make sure it's a float64
+    data_grid = np.tile(data, (10,1))
+    data_grid = data_grid.astype(np.float64)
+    # get the bottom left of this barcode location in the dem
+    x_loc = subsampled_x[i-5]/dem_im_cropped.shape[1]
+    y_loc = subsampled_y[i-5]/dem_im_cropped.shape[0]
+    y_loc = 1 - y_loc
+    # plot the data, need new axis for each one
+    new_ax = fig.add_axes([x_loc, y_loc, 0.03, 0.03])
+    new_ax.imshow(data_grid, cmap='gray')
+    new_ax.axis('off')
+    # put a thin black line around the barcode
+    new_ax.plot([0, 1], [0, 0], 'k')
+    
+plt.tight_layout()
+
+
+# export the figure
+export_path = '/Users/ryan/Dropbox (Princeton)/figures/reef_survey/barcode_result_overview/'
+plt.savefig(export_path + 'barcode_map.pdf', format='pdf')
+
+# and close the figure
+plt.close()
+
+# %% and we want to see how well vector componenets correlate with fossil occurrences and carbon isotopes
+
+# so we'll make a dataframe of predictor variables, and assemble their correlation coefficients with the response variables
+all_fields = entire_vector.columns
+null_fields = ['sample_name', 'field_lithology', 'lat', 'lon', 'msl', 'phase', 'im_x_loc', 'im_y_loc'] # fields that we aren't worried about as data
+response_fields = ['carbon_isotopes', 'trilobite', 'brachiopid', 'salterella', 'echinoderm','other_fossil'] 
+predictor_fields = [field for field in all_fields if field not in null_fields + response_fields]
+
+# get a correlation coefficient between all predictor fields and carbon isotopes
+carbon_corr = entire_vector[predictor_fields].corrwith(entire_vector['carbon_isotopes'])
+
+# for the fossil occurrences, we'll need to do logistic regressions
+# start with a binary matrix of just the fossils
+fossil_binary = entire_vector[['trilobite', 'brachiopid', 'salterella', 'echinoderm', 'other_fossil']].copy()
+fossil_binary = fossil_binary.astype(float)
+
+# and then we can do logistic regressions
+fossil_coefs = np.zeros((len(predictor_fields), len(fossil_binary.columns)))
+fossil_prob_diffs = np.zeros((len(predictor_fields), len(fossil_binary.columns)))
+for i in range(len(predictor_fields)):
+    for j in range(len(fossil_binary.columns)):
+        model = linear_model.LogisticRegression()
+        # drop any nans
+        inds = np.where(~np.isnan(entire_vector[predictor_fields[i]].astype(float)))[0]
+        # and need to even out the number of samples in each class
+        class_0_inds = np.where(fossil_binary.iloc[inds,j] == 0)[0]
+        class_1_inds = np.where(fossil_binary.iloc[inds,j] == 1)[0]
+        if len(class_0_inds) < len(class_1_inds):
+            class_1_inds = np.random.choice(class_1_inds, len(class_0_inds), replace=False)
+        elif len(class_1_inds) < len(class_0_inds):
+            class_0_inds = np.random.choice(class_0_inds, len(class_1_inds), replace=False)
+        inds = np.append(class_0_inds, class_1_inds)
+        model.fit(entire_vector[predictor_fields[i]].to_numpy()[inds].reshape(-1,1), fossil_binary.iloc[inds,j])
+        fossil_coefs[i,j] = model.coef_
+        # get the non-binary output of predict_proba
+        prob_preds = model.predict_proba(entire_vector[predictor_fields[i]].to_numpy()[inds].reshape(-1,1))
+        # we can use the mean difference of probabilities as a sort of effect size
+        raw_prob_diff = np.mean(np.abs(prob_preds[:,1] - prob_preds[:,0]))
+        # we want to give those a sign, so we'll see if the coefficient is positive or negative
+        if model.coef_ > 0:
+            fossil_prob_diffs[i,j] = raw_prob_diff
+        else:
+            fossil_prob_diffs[i,j] = -raw_prob_diff
+
+
+# we'll export each vector of correlation of probability difference as an image
+export_path = '/Users/ryan/Dropbox (Princeton)/figures/reef_survey/barcode_result_overview/'
+cmap = 'Spectral'
+
+# for setting the colormap on carbon correlations to be centered around 0
+max_corr = np.nanmax(carbon_corr)
+min_corr = np.nanmin(carbon_corr)
+if np.abs(max_corr) > np.abs(min_corr):
+    min_corr = -max_corr
+else:
+    max_corr = -min_corr
+
+
+# start by exporting the carbon correlation (need to add a dimensoin to make it an image)
+carbon_corr_image = np.expand_dims(carbon_corr.to_numpy(), axis=0)
+plt.imshow(carbon_corr_image, cmap=cmap, vmin=min_corr, vmax=max_corr)
+plt.axis('off')
+# export to an image
+plt.savefig(export_path + 'carbon_corr.pdf', format='pdf')
+
+# we want the colorbar to be centered around 0, so we'll see if the max or min is further from 0
+max_prob_diff = np.nanmax(fossil_prob_diffs)
+min_prob_diff = np.nanmin(fossil_prob_diffs)
+if np.abs(max_prob_diff) > np.abs(min_prob_diff):
+    min_prob_diff = -max_prob_diff
+else:
+    max_prob_diff = -min_prob_diff
+
+# and now run through each column of the fossil probability differences and export them
+for i in range(fossil_prob_diffs.shape[1]):
+    prob_diff_image = np.expand_dims(fossil_prob_diffs[:,i], axis=0)
+    plt.imshow(prob_diff_image, cmap=cmap, vmin=min_prob_diff, vmax=max_prob_diff)
+    plt.axis('off')
+    # export to an image
+    plt.savefig(export_path + fossil_binary.columns[i] + '_prob_diff.pdf', format='pdf')
 
 # %% make a plot of carbon isotopes vs elevation, in this case make all phases gray except for micrite
 

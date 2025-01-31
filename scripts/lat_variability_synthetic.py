@@ -11,8 +11,6 @@ import matplotlib.pyplot as plt # for plotting
 import numpy as np # for numerical operations
 import matplotlib # for custom color maps
 import cv2 # for image processing
-import os # for file operations
-from scipy import ndimage # for image processing
 #%%
 ##########################################################################################
 # local function imports
@@ -374,3 +372,80 @@ plt.tight_layout()
 
 # save the figure
 fig.savefig(general_path + 'signal_variability_over_time.pdf')
+#plt.show()
+
+# %% now we want to take experiment 3 and show the signal from 2 different locations over time, and alias those signals
+
+# set up the figure, we'll do 4 long skinny subplots
+
+# set up where we will sample the stacks
+sampled_row_ind1 = 25
+sampled_col_ind1 = 125
+sampled_row_ind2 = 25
+sampled_col_ind2 = 75
+
+# and set up a random sample for each signal where we sample the signal at a randomly selected 10% of the time steps
+sampled_times1 = np.random.choice(np.arange(n_steps), int(n_steps*0.1), replace=False)
+sampled_times2 = np.random.choice(np.arange(n_steps), int(n_steps*0.1), replace=False)
+
+# and arrange the time steps in order
+sampled_times1 = np.sort(sampled_times1)
+sampled_times2 = np.sort(sampled_times2)
+
+# set up the figure, we'll do 4 long skinny subplots
+fig, axs = plt.subplots(4, 1, figsize=(8, 4))
+
+# we'll just plot the experimental signals
+axs[0].plot(time, tiles_varied_exp2[sampled_row_ind1, sampled_col_ind1, :], label='Exp 2, Loc 1', linewidth=2)
+axs[1].plot(time, tiles_varied_exp2[sampled_row_ind2, sampled_col_ind2, :], label='Exp 2, Loc 2', linewidth=2)
+axs[2].plot(time[sampled_times1], tiles_varied_exp2[sampled_row_ind1, sampled_col_ind1, sampled_times1], label='Exp 2, Loc 1, aliased', linewidth=2)
+axs[3].plot(time[sampled_times2], tiles_varied_exp2[sampled_row_ind2, sampled_col_ind2, sampled_times2], label='Exp 2, Loc 2, aliased', linewidth=2)
+
+# set the y limits
+axs[0].set_ylim(all_signal_min, all_signal_max)
+axs[1].set_ylim(all_signal_min, all_signal_max)
+axs[2].set_ylim(all_signal_min, all_signal_max)
+axs[3].set_ylim(all_signal_min, all_signal_max)
+
+# set the x limits
+axs[0].set_xlim(0, n_steps)
+axs[1].set_xlim(0, n_steps)
+
+# and we can remove the x ticks on all
+axs[0].set_xticks([])
+axs[1].set_xticks([])
+axs[2].set_xticks([])
+axs[3].set_xticks([])
+axs[2].set_xticks([])
+
+# set the labels and titles
+axs[3].set_xlabel('Time')
+axs[0].set_ylabel('Signal Value')
+axs[1].set_ylabel('Signal Value')
+axs[2].set_ylabel('Signal Value')
+axs[3].set_ylabel('Signal Value')
+
+# legend
+axs[0].legend()
+axs[1].legend()
+axs[2].legend()
+axs[3].legend()
+
+plt.tight_layout()
+
+# save the figure
+save_path = '/Users/ryan/Dropbox (Princeton)/figures/reef_survey/lat_var_aliasing_correlation/'
+fig.savefig(save_path + 'aliasing_example.pdf')
+
+
+# %% show the tile that we're sampling adjacent sections on
+
+tile_to_show = tiles_varied_exp2[125,:,:]
+
+# transpose the tile so it looks like a stratigraphic section
+tile_to_show = np.transpose(tile_to_show)
+tile_to_show = np.flipud(tile_to_show)
+
+plt.figure()
+plt.imshow(tile_to_show, cmap=cmap, vmin=all_tile_min, vmax=all_tile_max)
+plt.show

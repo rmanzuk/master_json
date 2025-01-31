@@ -184,7 +184,6 @@ def pc_crossplot_vectors(pc_scores, pc_loadings, pc_nums, variable_labels=None, 
     plt.tight_layout()
     plt.show()
 
-
 # ----------------------------------------------------------------------------------------
 def rayleigh_r_visual(angles):
     """

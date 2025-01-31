@@ -10,6 +10,8 @@ import json # for json handling
 import numpy as np # for array handling
 from sklearn.decomposition import PCA # for PCA
 import os # for file handling
+import matplotlib.pyplot as plt # for plotting
+import matplotlib # for color handling
 
 #%%
 ##########################################################################################
@@ -21,6 +23,35 @@ from json_processing import assemble_samples, select_gridded_im_metrics
 ##########################################################################################
 # script lines
 ##########################################################################################
+
+# %% set up some plotting stuff
+
+# define a default color order for plotting, from Paul Tol's "Colour Schemes"
+# https://personal.sron.nl/~pault/
+# and we'll use the same colors for the same things throughout the paper
+indigo = '#332288'
+cyan = '#88CCEE'
+teal = '#44AA99'
+green = '#117733'
+olive = '#999933'
+sand = '#DDCC77'
+rose = '#CC6677'
+wine = '#882255'
+purple = '#AA4499'
+
+muted_colors = [rose, indigo, sand, green, cyan, wine, teal, olive, purple]
+
+# set the muted colors as the default color cycle
+muted_cmap = matplotlib.colors.ListedColormap(muted_colors)
+plt.rcParams['axes.prop_cycle'] = plt.cycler(color=muted_cmap.colors)
+
+# and turn the grid on by default, with thin dotted lines
+plt.rcParams['axes.grid'] = True
+plt.rcParams['grid.linestyle'] = ':'
+plt.rcParams['grid.linewidth'] = 0.5
+
+# make fonts work out for Adobe Illustrator
+plt.rcParams['pdf.fonttype'] = 42
 # %% define paths, and read in the outcrop json, and assemble samples
 
 outcrop_json_file = '/Users/ryan/Dropbox (Princeton)/code/master_json/stewarts_mill.json'
@@ -107,3 +138,66 @@ for band_index in range(n_bands):
 anisotropy_loadings = np.zeros((n_bands, n_components, n_scales))
 for band_index in range(n_bands):
     anisotropy_loadings[band_index,:,:] = pca_list[band_index].components_
+
+
+# %% plot the loadings and spectra of high/low scorers
+
+# make 2 subplots. On the left, plot the loadings for the first 3 PCs
+# on the right, plot the spectra of the samples with the highest and lowest scores for the first 3 PCs
+# make a figure
+fig, ax = plt.subplots(1,2, figsize=(6,2))
+
+# plot the loadings, on a bar plot with the x axis as the scales (log scale), and the different component bar charts slightly offset
+offset = 0.2
+bar_width = 0.2
+for pc_index in range(3):
+    for band_index in range(n_bands):
+        # we can just do it with an even scale on the x, and then label it like it's log
+        # put the % variance explained in the label, no need to put the band index
+        ax[0].bar(np.arange(n_scales) + offset*pc_index, anisotropy_loadings[band_index,pc_index,:], width=bar_width, label='PC %d, %.2f pct explained' % (pc_index+1, anisotropy_explained_variance[band_index,pc_index]*100))
+    ax[0].set_xlabel('Scale')
+    ax[0].set_ylabel('Loading')
+    ax[0].set_title('PC Loadings')
+    ax[0].legend()
+
+# set the x ticks as if they were log
+ax[0].set_xticks(np.arange(n_scales))
+ax[0].set_xticklabels(unique_scales)
+
+
+# plot the spectra of the high and low scorers
+# we'll need 3 line styles for the 3 PCs
+line_styles = ['-', '--', ':']
+for pc_index in range(3):
+    # get the indices of the high and low scorers
+    if pc_index == 1:
+        high_scorer = np.argsort(anisotropy_scores[:,pc_index,0])[-2]
+    else:
+        high_scorer = np.argmax(anisotropy_scores[:,pc_index,0])   
+    low_scorer = np.argmin(anisotropy_scores[:,pc_index,0])
+    # plot the high scorer on a log scale as a black line of the appropriate style
+    ax[1].plot(unique_scales, anisotropy_spectra[high_scorer,:,0], color='k', linestyle=line_styles[pc_index], label='PC %d High Scorer' % (pc_index+1))
+    # plot the low scorer on a log scale as a gray dashed line of the appropriate style
+    ax[1].plot(unique_scales, anisotropy_spectra[low_scorer,:,0], color='gray', linestyle=line_styles[pc_index], label='PC %d Low Scorer' % (pc_index+1))
+    ax[1].set_xlabel('Scale')
+    ax[1].set_ylabel('Anisotropy')
+    ax[1].set_title('High and Low Scorer Spectra')
+    ax[1].legend()
+    # set the x axis to log
+    ax[1].set_xscale('log')
+
+plt.tight_layout()
+
+
+# # save the figure
+export_path = '/Users/ryan/Dropbox (Princeton)/figures/reef_survey/pca_result_anisotropy/'
+plt.savefig(export_path + 'pca_anisotropy_plots.pdf', dpi=300)
+
+# print out the sample numbers of the 3 high and low scorers
+print('High Scorer PC1: %s' % unique_samples[np.argmax(anisotropy_scores[:,0,0])])
+print('High Scorer PC2: %s' % unique_samples[np.argmax(anisotropy_scores[:,1,0])])
+print('High Scorer PC3: %s' % unique_samples[np.argmax(anisotropy_scores[:,2,0])])
+print('Low Scorer PC1: %s' % unique_samples[np.argmin(anisotropy_scores[:,0,0])])
+print('Low Scorer PC2: %s' % unique_samples[np.argmin(anisotropy_scores[:,1,0])])
+print('Low Scorer PC3: %s' % unique_samples[np.argmin(anisotropy_scores[:,2,0])])
+

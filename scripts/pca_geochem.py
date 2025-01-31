@@ -123,74 +123,85 @@ original_means = np.mean(geochem_data_original, axis=0)
 original_stds = np.std(geochem_data_original, axis=0)
 original_mins = np.min(geochem_data_original, axis=0)
 original_maxs = np.max(geochem_data_original, axis=0)
-# %% plot end member geochem spectra for the first 4
 
-# store the max and min values for each pc scores
-pc_maxs = np.max(geochem_scores, axis=0)
-pc_mins = np.min(geochem_scores, axis=0)
+# %% get the min and max scores for pcs 1 and 2, but in the unnormalized space
 
-# make endmember spectra by multiplying the max and min scores by the loadings
-max_endmembers = geochem_loadings*pc_maxs
-min_endmembers = geochem_loadings*pc_mins
+# to avoid a few outliers, we'll just hand select the min and max scores
+min_score_1 = -1.8
+max_score_1 = 11
+min_score_2 = -3
+max_score_2 = 4.5
 
-# make the figure
+min_score_1_reproj = min_score_1*geochem_loadings[0,:]*original_stds + original_means
+max_score_1_reproj = max_score_1*geochem_loadings[0,:]*original_stds + original_means
+min_score_2_reproj = min_score_2*geochem_loadings[1,:]*original_stds + original_means
+max_score_2_reproj = max_score_2*geochem_loadings[1,:]*original_stds + original_means
+
+# we'll make a subplot for each of the geochem measurements, and plot arrows from the min to the max score for each pc
+fig, axs = plt.subplots(1, len(min_score_1_reproj), figsize=(15, 5))
+for i in range(len(min_score_1_reproj)):
+    axs[i].arrow(1, min_score_1_reproj[i], 0, max_score_1_reproj[i]-min_score_1_reproj[i], head_width=0.1, head_length=0.1, fc='black', ec='black')
+    axs[i].arrow(2, min_score_2_reproj[i], 0, max_score_2_reproj[i]-min_score_2_reproj[i], head_width=0.1, head_length=0.1, fc='black', ec='black')
+    axs[i].set_title(geochem_measurements[i])
+
+plt.tight_layout()
+
+# save the figure
+out_path = '/Users/ryan/Dropbox (Princeton)/figures/reef_survey/pca_result_geochem/'
+plt.savefig(out_path+'geochem_pc_arrows.pdf', dpi=300)
+
+# %% cross plot the first two pcs, colored by phase
+
+# but we'll group archaeocyaths together, microbial with calcimicrobes, and coralomorphs with shells
+grouped_codes = geochem_phases.copy()
+grouped_codes[np.isin(grouped_codes, ['F', 'G'])] = 'F'
+grouped_codes[np.isin(grouped_codes, ['H', 'J'])] = 'J'
+grouped_codes[np.isin(grouped_codes, ['I', 'K'])] = 'I'
+
 fig, ax = plt.subplots(1,1, figsize=(5,5))
 
-# plot the end member spectra
-for i in range(4):
-    ax.plot(np.linspace(0,len(geochem_measurements),len(geochem_measurements)), max_endmembers[i,:], label='PC'+str(i+1), linewidth=2)   
+new_unique_codes = np.unique(grouped_codes)
 
-# make the x ticks the string names of the classes
-ax.set_xticks(np.linspace(0,len(geochem_measurements),len(geochem_measurements)))
-ax.set_xticklabels(geochem_measurements)
+for point in range(geochem_scores.shape[0]):
+    ax.scatter(geochem_scores[point,0], geochem_scores[point,1], color=muted_colors[np.where(new_unique_codes == grouped_codes[point])[0][0]], label=phase_names[phase_codes.index(grouped_codes[point])])
+# scramble up the zorder so that the points don't overlap weirdly
 
-# label the plot
-ax.set_xlabel('Measurement')
-ax.set_ylabel('Relative value')
+ax.set_xlabel('PC1')
+ax.set_ylabel('PC2')
 ax.legend()
+
+# set x and y limits
+ax.set_xlim([-2,12])
+ax.set_ylim([-4,6])
+
+plt.tight_layout()
+
+# save the figure
+out_path = '/Users/ryan/Dropbox (Princeton)/figures/reef_survey/pca_result_geochem/'
+#plt.savefig(out_path+'geochem_pc_crossplot.pdf', dpi=300)
 
 plt.show()
 
-# %% for a given pc, plot the reconstructed spectrum ranging from the highest to lowest score
+# %% make box and whisker plots of the first two pcs, divided by phase
 
-# parameters to set
-pc_num = 0
-num_spectra = 5
+fig, axs = plt.subplots(1,2, figsize=(10,5))
 
-# get the scores spaced out
-score_range = np.linspace(min(geochem_scores[:,pc_num]), max(geochem_scores[:,pc_num]), num_spectra)
+# box plots, but don't show outliers, and orient them horizontally
+axs[0].boxplot([geochem_scores[grouped_codes == x, 0] for x in new_unique_codes], labels=[phase_names[phase_codes.index(x)] for x in new_unique_codes], showfliers=False, vert=False)
+axs[0].set_ylabel('PC1')
+axs[0].set_title('PC1 by Phase')
 
-# make a sequential colormap to pull from for each line, but cut off the first few colors because they are too light
-cmap = plt.get_cmap('PuBuGn')
-colors = [cmap(i) for i in np.linspace(0.1, 1, num_spectra)]
-
-# make the figure
-fig, ax = plt.subplots(1,1, figsize=(5,3))
-
-
-
-# plot the end member spectra
-for i in range(num_spectra):
-    ax.plot(np.linspace(0,len(geochem_measurements),len(geochem_measurements)), geochem_loadings[pc_num,:]*score_range[i], label='PC'+str(i+1), linewidth=2, color=colors[i])  
-
-# make the x ticks the string names of the classes
-ax.set_xticks(np.linspace(0,len(geochem_measurements),len(geochem_measurements)))
-# if the geochem measurement has an underscore, replace it with a /
-geochem_labels = [x.replace('_', '/') for x in geochem_measurements]
-# and if the label is delta18o, replace it with the delta symbol, and superscript the 18, capitalizing the O
-geochem_labels = [x.replace('delta18o', '$\delta^{18}$O') for x in geochem_labels]
-ax.set_xticklabels(geochem_labels)
-
-# label the plot
-ax.set_xlabel('Measurement')
-ax.set_ylabel('Relative value')
+axs[1].boxplot([geochem_scores[grouped_codes == x, 1] for x in new_unique_codes], labels=[phase_names[phase_codes.index(x)] for x in new_unique_codes], showfliers=False, vert=False)
+axs[1].set_ylabel('PC2')
+axs[1].set_title('PC2 by Phase')
 
 plt.tight_layout()
+
 plt.show()
 
 # %% make a scatter plot of any pc against carbon isotopes, colored by phase
 
-pc_num = 0
+pc_num = 1
 
 # we may run out of colors before getting through phases, so list a few symbols to switch to once we run out of colors
 symbols = ['o', 's', 'D', 'v', '^', '<', '>', 'p', 'P', '*', 'X']

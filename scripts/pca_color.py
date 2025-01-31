@@ -10,6 +10,8 @@ import json # for json handling
 import numpy as np # for array handling
 from sklearn.decomposition import PCA # for PCA
 import os # for file handling
+import matplotlib.pyplot as plt # for plotting
+import matplotlib # for color handling
 
 #%%
 ##########################################################################################
@@ -21,6 +23,34 @@ from json_processing import assemble_samples, select_gridded_im_metrics
 ##########################################################################################
 # script lines
 ##########################################################################################
+# %% set up some plotting stuff
+
+# define a default color order for plotting, from Paul Tol's "Colour Schemes"
+# https://personal.sron.nl/~pault/
+# and we'll use the same colors for the same things throughout the paper
+indigo = '#332288'
+cyan = '#88CCEE'
+teal = '#44AA99'
+green = '#117733'
+olive = '#999933'
+sand = '#DDCC77'
+rose = '#CC6677'
+wine = '#882255'
+purple = '#AA4499'
+
+muted_colors = [rose, indigo, sand, green, cyan, wine, teal, olive, purple]
+
+# set the muted colors as the default color cycle
+muted_cmap = matplotlib.colors.ListedColormap(muted_colors)
+plt.rcParams['axes.prop_cycle'] = plt.cycler(color=muted_cmap.colors)
+
+# and turn the grid on by default, with thin dotted lines
+plt.rcParams['axes.grid'] = True
+plt.rcParams['grid.linestyle'] = ':'
+plt.rcParams['grid.linewidth'] = 0.5
+
+# make fonts work out for Adobe Illustrator
+plt.rcParams['pdf.fonttype'] = 42
 
 # %% define paths, and read in the outcrop json, and assemble samples
 
@@ -103,6 +133,9 @@ for index, row in im_metric_df.iterrows():
 
 # there should be no variance in the 100th percentile, so we can remove it
 percentile_spectra = percentile_spectra[:,:-1,:]
+# but then adjust the unique percentiles and n_percentiles
+unique_percentiles = unique_percentiles[:-1]
+n_percentiles = len(unique_percentiles)
 
 # now we can do a PCA on each band
 n_components = percentile_spectra.shape[1]
@@ -127,3 +160,60 @@ percentile_loadings = np.zeros((n_bands, n_components, n_components))
 for band_index in range(n_bands):
     percentile_loadings[band_index,:,:] = pca_list[band_index].components_
 
+# %% plot the loadings and spectra of high/low scorers for 590nm as an example
+
+
+
+# which means band index 4
+band_index = 4
+
+# make 2 subplots. On the left, plot the loadings for the first 3 PCs
+# on the right, plot the spectra of the samples with the highest and lowest scores for the first 3 PCs
+# make a figure
+fig, ax = plt.subplots(1,2, figsize=(6,2))
+
+# plot the loadings, on a bar plot with the x axis as the percentiles
+offset = 0.2
+bar_width = 0.2
+for pc_index in range(3):
+    ax[0].bar(np.arange(n_percentiles) + offset*pc_index, percentile_loadings[band_index,pc_index,:], width=bar_width, label='PC %d, %.2f pct explained' % (pc_index+1, percentile_explained_variance[band_index,pc_index]*100))
+ax[0].set_xlabel('Scale')
+ax[0].set_ylabel('Loading')
+ax[0].set_title('PC Loadings')
+ax[0].legend()
+
+
+# plot the spectra of the high and low scorers
+# we'll need 3 line styles for the 3 PCs
+line_styles = ['-', '--', ':']
+for pc_index in range(3):
+    # get the indices of the high and low scorers
+    high_scorer = np.argmax(percentile_scores[:,pc_index,band_index])
+    low_scorer = np.argmin(percentile_scores[:,pc_index,band_index])
+    # plot the high scorer on a log scale as a black line of the appropriate style
+    ax[1].plot(unique_percentiles, percentile_spectra[high_scorer,:,0], color='k', linestyle=line_styles[pc_index], label='PC %d High Scorer' % (pc_index+1))
+    # plot the low scorer on a log scale as a gray dashed line of the appropriate style
+    ax[1].plot(unique_percentiles, percentile_spectra[low_scorer,:,0], color='gray', linestyle=line_styles[pc_index], label='PC %d Low Scorer' % (pc_index+1))
+    ax[1].set_xlabel('Scale')
+    ax[1].set_ylabel('GLCM Contrast')
+    ax[1].set_title('High and Low Scorer Spectra')
+    ax[1].legend()
+    # set the x axis to log
+
+plt.tight_layout()
+
+
+# # save the figure
+export_path = '/Users/ryan/Dropbox (Princeton)/figures/reef_survey/pca_result_color/'
+plt.savefig(export_path + 'pca_color_plots.pdf', dpi=300)
+
+# print out the sample numbers of the 3 high and low scorers
+print('High Scorer PC1: %s' % unique_samples[np.argmax(percentile_scores[:,0,band_index])])
+print('High Scorer PC2: %s' % unique_samples[np.argmax(percentile_scores[:,1,band_index])])
+print('High Scorer PC3: %s' % unique_samples[np.argmax(percentile_scores[:,2,band_index])])
+print('Low Scorer PC1: %s' % unique_samples[np.argmin(percentile_scores[:,0,band_index])])
+print('Low Scorer PC2: %s' % unique_samples[np.argmin(percentile_scores[:,1,band_index])])
+print('Low Scorer PC3: %s' % unique_samples[np.argmin(percentile_scores[:,2,band_index])])
+
+# what is the second highest scorer for PC1?
+print('Second Highest Scorer PC1: %s' % unique_samples[np.argsort(percentile_scores[:,0,band_index])[-2]])
