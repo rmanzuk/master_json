@@ -11,6 +11,7 @@ import numpy as np # for array handling
 from sklearn.decomposition import PCA # for PCA
 import os # for file handling
 import matplotlib.pyplot as plt # for plotting
+import matplotlib # for color handling
 
 #%%
 ##########################################################################################
@@ -22,6 +23,34 @@ from json_processing import assemble_samples, select_gridded_im_metrics
 ##########################################################################################
 # script lines
 ##########################################################################################
+# %% set up some plotting stuff
+
+# define a default color order for plotting, from Paul Tol's "Colour Schemes"
+# https://personal.sron.nl/~pault/
+# and we'll use the same colors for the same things throughout the paper
+indigo = '#332288'
+cyan = '#88CCEE'
+teal = '#44AA99'
+green = '#117733'
+olive = '#999933'
+sand = '#DDCC77'
+rose = '#CC6677'
+wine = '#882255'
+purple = '#AA4499'
+
+muted_colors = [rose, indigo, sand, green, cyan, wine, teal, olive, purple]
+
+# set the muted colors as the default color cycle
+muted_cmap = matplotlib.colors.ListedColormap(muted_colors)
+plt.rcParams['axes.prop_cycle'] = plt.cycler(color=muted_cmap.colors)
+
+# and turn the grid on by default, with thin dotted lines
+plt.rcParams['axes.grid'] = True
+plt.rcParams['grid.linestyle'] = ':'
+plt.rcParams['grid.linewidth'] = 0.5
+
+# make fonts work out for Adobe Illustrator
+plt.rcParams['pdf.fonttype'] = 42
 # %% define paths, and read in the outcrop json, and assemble samples
 
 outcrop_json_file = '/Users/ryan/Dropbox (Princeton)/code/master_json/stewarts_mill.json'
@@ -115,7 +144,7 @@ for band_index in range(n_bands):
 # make 2 subplots. On the left, plot the loadings for the first 3 PCs
 # on the right, plot the spectra of the samples with the highest and lowest scores for the first 3 PCs
 # make a figure
-fig, ax = plt.subplots(1,2, figsize=(10,3))
+fig, ax = plt.subplots(1,2, figsize=(6,2))
 
 # plot the loadings, on a bar plot with the x axis as the scales (log scale), and the different component bar charts slightly offset
 offset = 0.2
@@ -129,6 +158,10 @@ for pc_index in range(3):
     ax[0].set_ylabel('Loading')
     ax[0].set_title('PC Loadings')
     ax[0].legend()
+
+# set the x ticks as if they were log
+ax[0].set_xticks(np.arange(n_scales))
+ax[0].set_xticklabels(unique_scales)
 
 
 # plot the spectra of the high and low scorers
@@ -150,7 +183,11 @@ for pc_index in range(3):
     ax[1].set_xscale('log')
 
 plt.tight_layout()
-plt.show()
+
+
+# # save the figure
+export_path = '/Users/ryan/Dropbox (Princeton)/figures/reef_survey/pca_result_contrast/'
+plt.savefig(export_path + 'pca_contrast_plots.pdf', dpi=300)
 
 # print out the sample numbers of the 3 high and low scorers
 print('High Scorer PC1: %s' % unique_samples[np.argmax(contrast_scores[:,0,0])])
@@ -160,3 +197,6 @@ print('Low Scorer PC1: %s' % unique_samples[np.argmin(contrast_scores[:,0,0])])
 print('Low Scorer PC2: %s' % unique_samples[np.argmin(contrast_scores[:,1,0])])
 print('Low Scorer PC3: %s' % unique_samples[np.argmin(contrast_scores[:,2,0])])
 
+#%% print out second highest scorer in pc2
+
+print('Second Highest Scorer PC2: %s' % unique_samples[np.argsort(contrast_scores[:,1,0])[-16]])
